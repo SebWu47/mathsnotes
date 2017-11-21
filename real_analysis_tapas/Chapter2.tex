@@ -1,0 +1,1388 @@
+\chapter{Integration}
+\section{Definition of Measurable Functions}
+\begin{pro}%1
+	Let $(X,\ma{K},\mu)$ be a measure space and let $Y$ be a measurable set. Denote by $\ma{K}_Y$ the class of all the measurable sets that are subsets of $Y$, and denote by $\mu_Y$ the restriction of $\mu$ to $\ma{K}_Y$. Prove that $(Y,\ma{K}_Y,\mu_Y)$ is a measurable space. It is called a measure subspace of $(X,\ma{K},\mu)$.
+\end{pro}
+\begin{proof}
+	Easy to prove that $\ma{K}_Y$ is a $\sigma$-algebra with the ``whole'' set $Y$ in it and since $\mu_Y$ is just kind of $\mu$, it will hold all properties that $\mu$ holds, which makes it to be a measure on $\ma{K}_Y$.
+\end{proof}
+
+\begin{pro}%2
+	Let $Z$ be a subset of a space $X$, and let $(Z,\ma{B},\nu)$ be a measure space. Denote by $\ma{A}$ the class of all sets $E\subset X$ such that $E\cap Z$ is in $\ma{B}$, and define a set function $\mu$ by $\mu(E)=\nu(E\cap Z)$. Then $(X,\ma{A},\mu)$ is a measure space and $(Z,\ma{B},\nu)$ coincides with $(Z,\ma{A}_Z,\mu_Z)$.
+\end{pro}
+\begin{proof}
+	Easy to show that $\ma{A}$ is a $\sigma$-algebra, and notice that
+	\begin{align*}
+		\mu(\cup_n E_n)&=\nu(\cup_n (E_n\cap Z))\\
+		&=\sum_n \nu(E_n\cap Z)\\
+		&=\sum_n \mu(E_n),
+	\end{align*}
+	where $E_n\in \ma{A}$ and mutually disjoint, so $\mu$ is a measure on $\ma{A}$. And the last part is trivial.
+\end{proof}
+
+\begin{pro}%3
+	A function $f$ defined on a measurable set $Y$ of a measure space $(X,\ma{K},\mu)$ is measurable if and only if it is measurable as a function on $Y$ considered as a set in the measure space $(Y,\ma{K}_Y,\mu_Y)$.
+\end{pro}
+\begin{proof}
+	For any $M\subset[-\infty,\infty]$, notice that
+	\[f^{-1}(M)\in \ma{K}\Leftrightarrow f^{-1}(M)\in\ma{K},\subset Y\Leftrightarrow f^{-1}(M)\in\ma{K}_Y,\]
+	and thus finish our proof.
+\end{proof}
+
+\begin{pro}%4
+	Prove that a function is measurable if and only if: (i) the sets $f^{-1}(-\infty,c]$ are measurable for all real numbers $c$, and (ii) the sets $f^(\infty)$, $f^{-1}(-\infty)$ are measurable.
+\end{pro}
+\begin{proof}
+	Notice that for any $c$, $(-\infty,c)=\cup_n (-\infty,c-1/n]$ and $(-\infty,c]=\cap_n (-\infty,c+1/n)$.
+\end{proof}
+
+\begin{pro}%5
+	Prove that a function is measurable if and only if: (i) the sets $f^{-1}(c,\infty)$ or $f^{-1}[c,\infty)$ are measurable for all real numbers $c$, and (ii) the sets $f^{-1}(\infty)$, $f^{-1}(-\infty)$ are measurable.
+\end{pro}
+\begin{proof}
+	Notice that for any $c$, $(c,\infty)=\m{R}\ba(-\infty,c]$ and $[c,\infty)=\m{R}\ba(-\infty,c)$.
+\end{proof}
+
+\begin{pro}%6
+	The characteristic function of a set $E$ is the function $\chi_E$ defined by
+	\[\chi_E(x)=\begin{cases}1,&\mbox{if}\;x\in E,\\0,&\mbox{if}\;x\notin E.\end{cases}\]
+	Prove that the set $E$ is measurable if and only if the function $\chi_E$ is measurable.
+\end{pro}
+\begin{proof}
+	Suppose $E$ is measurable, then for any $c$,
+	\[\chi_E^{-1}(-\infty,c)=
+	\begin{cases}
+		\emptyset,&\mbox{if}\;c\leq 0,\\
+		X\ba E,&\mbox{if}\;0<c\leq 1,\\
+		X,&\mbox{if}\;c\geq 1.
+	\end{cases}\]thus $\chi_E$ is measurable. Vise visa, notice that $E=\chi_E^{-1}(1)$.
+\end{proof}
+
+\begin{pro}%7
+	Let $\{E_n\}$ be a sequence of sets and let $E=\limsup_n E_n$. Prove that
+	\[\chi_E(x)=\limsup_n \chi_{E_n}(x).\]
+\end{pro}
+\begin{proof}
+	For any $x\in E$, there are infinitely many $n$, such that $x\in E_n$, thus the sequence $\{\chi_{E_n}(X)\}_{n=1}^\infty$ has infinitely many $1$ and then the limit sup is $1$. Otherwise, $x\notin E$, $x\notin E_n$ except for finite many $n$, thus the sequence above has infinitely many $0$ except for finite many $1$ and then the limit sup is $0$.
+\end{proof}
+
+\begin{pro}%8
+	The positive part $f^+$ of a function $f$ is defined by $f^+(x)=\max\{f(x),0\}$, similarly, the negative part $f^-(x)=\max\{-f(x),0\}$. Prove that $f$ is measurable if and only if $f^{\pm}$ are measurable.
+\end{pro}
+\begin{proof}
+	Assume $f$ is measurable,then
+	\[\{x\colon f^+(x)<c\}=
+	\begin{cases}
+		\emptyset,&\mbox{if}\;c\leq 0,\\
+		\{x\colon f(x)<c\},&\mbox{if}\;c>0.
+	\end{cases}
+	\]
+	Similarly
+	\[\{x\colon f^-(x)<c\}=
+	\begin{cases}
+		\emptyset,&\mbox{if}\;c\leq 0,\\
+		\{x\colon f(x)>-c\},&\mbox{if}\;c>0.
+	\end{cases}\] thus $f^{\pm}$ are measurable. Vise versa, 
+	\[\{x\colon f(x)<c\}=
+	\begin{cases}
+		\{x\colon f^-(x)>-c\},&\mbox{if}\;c\leq 0,\\
+		\{x\colon f^+(x)<c\},&\mbox{if}\;c>0.
+	\end{cases}\] thus $f$ is measurable.
+\end{proof}
+
+\begin{pro}%9
+	If $f$ is measurable, then $|f|$ and $f^2$ are measurable.
+\end{pro}
+\begin{proof}
+	For any $c$, we have
+	\[\{x\colon |f(x)|<c\}=\begin{cases}
+	\emptyset,&\mbox{if}\;c\leq 0,\\
+	\{x\colon -c<f(x)<c\},&\mbox{if}\;c>0.\end{cases}\]
+	and
+	\[\{x\colon f^2(x)<c\}=\begin{cases}
+	\emptyset,&\mbox{if}\;c\leq 0,\\
+	\{x\colon -\sqrt{c}<f(x)<\sqrt{c}\},&\mbox{if}\;c>0.\end{cases}
+	\]
+	which finish our proof.
+\end{proof}
+
+\begin{pro}%10
+	A monotone extended real valued function defined on the real line is Lebesgue measurable.
+\end{pro}
+\begin{proof}
+	First we assume $f$ is real valued. Similar to the proof of Problem $1.9.14$, suppose $f$ is increasing, we know for any $a<b$ in real line , there are at most countably many uncontinuous points in $E=\{x\colon a<f(x)<b\}$. Call these points $F$, then for any point $x\in E\ba F$, there exists some $\delta>0$, such that $f(x-\delta,x+\delta)\subset(a,b)$, thus $E\ba F$ is an open set. The situation for decreasing function is similar, thus finally, we know that $E$ is a union of an open set and a countable set, thus is a Borel set.
+	Now consider $f$ is extended real valued and increasing function, easy to know there must be some $-\infty\leq a\leq b\leq \infty$, such that
+	$f(\infty,a)=-\infty$ and $f(b,\infty)=+\infty$ and $f(a,b)\in\m{R}$. Similarly to the real valued function, for any $c<d$ in real line, the set $E=\{x\colon c<f(x)<d\}$ is a union of an open set and a countable set.(Here, we put $a$(or $b$) also in $F$ if $a$(or $b$) is in $E$.) And since $f^{-1}(-\infty)=(-\infty,a)\;\mbox{or}\;(-\infty,a]$ and $f^{-1}(\infty)=(b,\infty)\;\mbox{or}\;[b,\infty)$, we finally know $f$ is measurable.
+\end{proof}
+
+\begin{pro}%11
+	A function $f$, defined in a metric space $X$, is said to be upper-semi-continuous (lower-semi-continuous) if for any point $x\in X$,
+	\[\limsup_{y\to x} f(y)\leq f(x)\quad\bigg(\liminf_{y\to x} f(y)\geq f(x)\bigg).\]
+	Prove that upper (or lower) semi-continuous function in a metric measure space as in as in Theorem $2.1.2$ are measurable.
+\end{pro}
+\begin{proof}
+	Suppose $f$ is upper-semi-continuous, give any $c$ and $x$, such that $f(x)$, there must be some $\delta>0$, such that
+	\[\sup f\big((B(x,\delta)\ba \{x\}\big)=\limsup_{y\to x} f(y)\leq f(x)<c.\]
+	Thus $f^{-1}(-\infty,c)$ is an open set. Similarly for lower-semi-continuous, $f^{-1}(c,\infty)$ is an open set.
+	Since the given outer measure $\mu^*$ is a metric outer measure, so every Borel set is $\mu^*$-measurable, thus is $\mu$-measurable.
+\end{proof}
+
+\begin{pro}%12
+	A complex-valued function $f$ is said to be measurable if, for any open set $M$ in the complex plane, $f^{-1}(M)$ is a measurable set. Prove that $f$ is measurable if and only if both its real and imaginary parts are measurable real valued functions.
+\end{pro}
+\begin{proof}
+	Easy to know the open set in $\m{C}$ is same of the open set in $\m{R}^2$, thus can be the union of countable many open intervals.
+	Given any $a_1<a_2$, $b_1<b_2$, let
+	\[(a,b)=\{z\in\m{C}\colon \mbox{Re}(z)\in(a_1,a_2),\;\mbox{Im}(z)\in(b_1,b_2)\},\]
+	then it remains to prove $f^{-1}(a,b)$ is measurable.
+	Write $f=f_r+if_g$, where $f_r$ and $f_g$ are real and imaginary parts of $f$, then
+	\[f^{-1}(a,b)=f_r^{-1}(a_1,a_2)\cap f_g^{-1}(b_1,b_2)\] is indeed a measurable set if $f_r$ and $f_g$ are both measurable functions. Vise versa, suppose $f$ is measurable, then for any $a_1<a_2$, easy to know
+	\[\{x\colon a_1<f_r(x)<a_2\}=\bigcup_n \{x\colon f(x)\in (a,b(n))\},\]
+	where $(a,b(n))$ is a open interval in $\m{C}$ defined by
+	\[(a,b(n))=\{z\in\m{C}\colon \mbox{Re}(z)\in(a_1,a_2),\;\mbox{Im}(z)\in(-n,n)\}.\]
+	Thus $f_r$ is measurable. Similarly $f_g$ is measurable.
+\end{proof}
+
+\section{Operations on Measurable Functions}
+\begin{pro}%1
+	If $g$ is an extended real valued Borel-measurable function on the real line and if $f$ is a real valued measurable function on a measure space $X$, then the composite function $h(x)=g[f(x)]$ is a measurable function on $X$.
+\end{pro}
+\begin{proof}
+	 For any open set or just $\{\infty\}$ or $\{-\infty\}$, $M$ in real line $g^{-1}(M)$ is a Borel set, thus $h^{-1}=f^{-1}(g^{-1}(M))$ is a measurable set.
+\end{proof}
+
+\begin{pro}%2
+	Let $g(\seq{u}{1}{n}$ be a continuous function in $\m{R}^n$, and let $\seq{\varphi}{1}{n}$ be measurable functions. Prove that the composite function $h(x)=g[\varphi_1(x),\ldots,\varphi_n(x)]$ is a measurable function. Note that as a special case we may conclude that
+	\[\max\{\seq{\varphi}{1}{n}\}\;\mbox{and}\;\min\{\seq{\varphi}{1}{n}\}\]
+	are measurable functions.
+\end{pro}
+\begin{proof}
+	Just notice that every open set in $\m{R}^n$ can be rewrite in the form of countably many open intervals.
+\end{proof}
+
+\begin{pro}%3
+	Let $f(x)$ be a real valued measurable function and define
+	\[g(x)=\begin{cases}1/f(x),&\mbox{if}\;f(x)\neq 0,\\0,&\mbox{if}\;f(x)=0.\end{cases}\]
+	Prove that $g$ is measurable.
+\end{pro}
+\begin{proof}
+	Give any real number $c$, we have
+	\[\{x\colon g(x)<c\}=\begin{cases}
+	\{x\colon 1/c<f(x)<0\},&\mbox{if}\;c<0,\\
+	\{x\colon f(x)<0\},&\mbox{if}\;c=0,\\
+	\{x\colon f(x)\leq 0\}\cup\{x\colon f(x)>1/c\},&\mbox{if}\;c>0.\end{cases}
+	\] Thus $g$ is measurable.
+\end{proof}
+
+\begin{pro}%4
+	The $n$th Baire Class $\ma{B}_n$ is a class of functions $f$ defined as follows: $f\in\ma{B}_n$ if and only if $f$ is the pointwise limit everywhere of a sequence of functions belonging to $\ma{B}_{n-1}$, and $\ma{B}_0$ is the class of all continuous functions. Prove that all the functions of $\ma{B}_n$ are measurable.
+\end{pro}
+\begin{proof}
+	Easy to know from Theorem $2.2.3$.
+\end{proof}
+
+\begin{pro}%5
+	Show that the characteristic function of the set of rational numbers in $\m{R}$ belongs to $\ma{B}_2$ defined by Problem $2.2.4$.
+\end{pro}
+\begin{proof}
+	Denote $f$ by
+	\[f(x)=\begin{cases} 1,&\mbox{if}\;x=p/q,\\0,&\mbox{if}\;x\notin\m{Q}.\end{cases}\]
+	here $p\in\m{Z},q\in\m{N}^+$ and $(|p|,q)=1$ if $p\neq 0$ and $q=1$ if $p=0$.
+	For any $n\geq 1$, let 
+	\[f_n(x)=\begin{cases} 1,&\mbox{if}\;x=p/q,1\leq q\leq n,\\0,&\mbox{otherwise}.\end{cases}\]
+	then $f_n\to f$ pointwise and $\min\{|x-y|\colon f_n(x)=f_n(y)=1\}=1/n$. For every fixed $f_n$, we define
+    \[g_m(x)=\begin{cases} 1-2m|x-x_0|,&\mbox{if}\;x\in(x_0-1/(2m),x_0+1/(2m))\;\mbox{for some}\;f_n(x_0)=1\\0,&\mbox{otherwise}.\end{cases}\]
+    here $m\geq n+1$. It's easy to know every $g_m$ is a well defined continuous function and $\{g_m\}_{m=n+1}^\infty$ converges to $f_n$ pointwise. Thus we finally conclude that $f$ belongs to $\ma{B}_2$.
+\end{proof}
+
+\begin{pro}%6
+	Let $f$ be a real valued measurable function, and define
+	\[g(x)=\begin{cases} 0,&\mbox{if}\;f(x)\in\m{Q},\\1,&\mbox{if}\;f(x)\notin\m{Q}.\end{cases}\]
+	Prove that $g$ is measurable.
+\end{pro}
+\begin{proof}
+	Notice that $g=1-\chi_E$, where $E=\{x\colon f(x)\in\m{Q}\}=\cup_n \{x\colon f(x)=r_n\}$ is measurable. 
+\end{proof}
+
+\begin{pro}%7
+	A measurable function is the pointwise limit everywhere of a sequence of simple functions.
+\end{pro}
+\begin{proof}
+	Notice that $f=f^+-f^-$ and there are simple sequences $\{f_n^{\pm}\}\to f^{\pm}$, thus $f_n=f_n^+-f_n^-$(easy to prove is also a simple function ) converges to $f$ pointwise.
+\end{proof}
+
+\begin{pro}%8
+	If $f$ is bounded measurable function, then $f$ is the uniform limit of a sequence of simple functions.
+\end{pro}
+\begin{proof}
+	For any bounded nonnegative function, let $M=\sup\{f(x)\}<\infty$ and 
+	\[f_n(x)=\begin{cases} (k-1)M/n,&\mbox{if}\;(k-1)M/n\leq f(x)<kM/n,k=1,\ldots,n,\\
+	M,&\mbox{if}\;f(x)=M.\end{cases}\] 
+	Then $\sup_x\{|f(x)-f_n(x)|\}\leq 1/n$. Now notice that $f=f^+-f^-$ and use triangle inequality, we know $f$ is the  uniform limit of $\{f_n=f^+_n-f^-_n\}$.
+\end{proof}
+
+\section{Egoroff's Theorem}
+\begin{pro}%1
+	Let $X$ be the Lebesgue measure space on the real line and let $f_n$ be the characteristic function of $(n,\infty)$. Show that $\{f_n\}$ is convergent to zero a.e., but not almost uniformly.
+\end{pro}
+\begin{proof}
+	Easy to know $f_n$ converges to zero pointwise. For any Lebesgue set $E$, where $\mu(E)<1$, it's easy to know there must be a point sequence $\{x_m\}$ such that $x_m\to +\infty$ and $x_m\notin E$, thus $\sup_{\m{R}\ba E} |f_n(x)|=1$ for all $n$. Then we know $f_n$ is not convergent to zero almost uniformly.
+\end{proof}
+
+\begin{pro}%2
+	Let $\{f_n\}$ be a sequence of measurable functions  in a finite measure space $X$. Suppose that for almost every $x$, $\{f_n(x)\}$ is a bounded set. Then for any $\ep>0$ there exist a positive number $c$ and a measurable set $E$ with $\mu(X-E)<\ep$, such that $|f_n(x)|\leq c$ for all $x\in E$, $n=1,2,\ldots$.
+\end{pro}
+\begin{proof}
+	For any $x\in X$, we define $c(x)=\sup_n |f_n(x)|$, then $c(x)$ is an extended nonnegative measurable function. Let $F=\{x\in X\colon  c(x)=+\infty\}$, then $\mu(F)=0$. Now we want to prove that for any $\ep>0$, there exists some real number $c>0$, such that $\mu\{x\in F^c\colon c(x)>c\}<\ep$. Assume this is not true, then there is some $\ep>0$, such that for any real number $c>0$, $\mu\{x\in F^c\colon c(x)>c\}\geq \ep$. For this fixed $\ep$, we define
+	\[G_m=\{x\in F^c\colon c(x)>m\},\] then for all $m\in\m{N}^+$, $\mu(G_m)\geq \ep$. Easy to know $E_{m+1}\subset E_{m}$, thus if we let
+	$G=\cap_m E_m=\lim_m E_m$, we have 
+	\[G=\{x\in F^c\colon c(x)=+\infty\}=\emptyset,\]and
+	\[\mu(G)=\mu(\lim_m G_m)\geq \limsup_m \mu(G_m)\geq \ep,\]since $X$ is a finite measure space, which is a contradiction.
+	Thus for any $\ep>0$, there is some real number $c>0$ and $E=\{x\in F^c\colon c(x)>c\}$, such that $\mu(E)<\ep$. Finally for any $x\in (E\cup F)^c$ and for all $n$, $|f_n(x)|\leq c(x)\leq c$ and $\mu(E\cup F)=\mu(F)+\mu(E)<\ep$.
+\end{proof}
+
+\section{Convergence in Measure}
+\begin{pro}%1
+ 	Let $X$ be a finite measure space. Let $\{f_n\}$ be a sequence of a.e. real valued, measurable functions that is convergent a.e. to $f$, and let $f\neq 0$ a.e., $f_n\neq 0$ a.e. for all $n$. For any $\ep>0$ there is a positive number $b$ and a measurable set $E_n$ such that $|f_n(x)|\geq b$ on $E_n$, and $\mu(X\ba E_n)<\ep$.
+ \end{pro}
+
+ \begin{pro}%2
+	Let $X$ be a finite measure space. Let $\{f_n\}$ and $\{g_n\}$ be sequences of a.e. real, measurable functions functions that converge in measure to $f$ and $g$, respectively. Let $a$ and $b$ be any real numbers. Then:
+	\begin{description}
+	\item[(a)] $\{af_n+bg_n\}$ converges in measure to $af+bg$.
+	\item[(b)] $\{|f_n|\}$ converges in measure to $|f|$.
+	\item[(c)] $\{f_n g\}$ converges in measure to $fg$.
+	\item[(d)] $\{f_ng_n\}$ converges in measure to $fg$.
+	\item[(e)] If $f_n\neq 0$ a.e. and if $f\neq 0$ a.e., then $\{1/f_n\}$ converges in measure to $1/f$.
+	\end{description}
+\end{pro}
+\begin{proof}
+	\begin{description}
+	\item[(a)] First we prove that $f_n+g_n$ converges in measure to $f+g$. Notice that
+	\[|(f_n-f)+(g_n-g)|\leq |f_n-f|+|g_n-g|,\]
+	we have for any $\ep>0$,
+	\[E_n=\{x\colon |(f_n-f)+(g_n-g)|\geq\ep\}\subset\{x\colon |f_n-f|\geq\ep/2\}\cup\{x\colon |g_n-g|\geq\ep/2\}.\]
+	Then $\mu(E_n)\to 0$. Now we prove that $af_n$ converges in measure to $af$ when $a$ is a real number.
+	It's trivial when $a=0$, assume $a\neq 0$, then since
+	\[F_n=\{x\colon |a(f_n-f)|\geq \ep\}=\{x\colon |f_n-f|\geq \ep/|a|\},\]
+	we know $\mu(f_n)\to af$. Finally we get the conclusion.
+	\item[(b)] Just notice that $||f_n|-|f||\leq|f_n-f|$.
+	\item[(c)] First we prove that for any $\delta>0$, there is some real number $c>0$, such that 
+	\[E=\{x\colon |g(x)|\leq c\}\;\mbox{and}\;\mu(X\ba E)\leq \delta.\] Assume this is not true, then there some $\delta>0$, such that if $G_m=\{x\colon |g(x)|>m\}$, then $\mu(G_m)\geq \delta$ for all $m$, thus let $G=\cap_m G_m$, easy to know $G=\{x\colon g(x)=\pm\infty\}$(thus $\mu(G)=0$) and $\mu(G)\geq\limsup_m \mu(G_m)\geq \delta$ since $X$ is a finite measure space, which is a contradiction. Then for any $\delta>0$ and $\ep>0$, there is some real number $c>0$, such that $\mu(X\ba E)\leq\delta/2$. Since
+	\[F_n=\{x\colon |g(f_n-f)|\geq \ep\}\subset \{x\colon |f_n-f|\geq \ep/c\}\cup (X\ba E),\]
+	we know $\mu(F_n)\leq \delta$ for all $n$ large enough.
+	\item[(d)] Notice that $f_ng_n=(f_n-f)(g_n-g)+f(g_n-g)+f_ng$, we just need to prove that if $f_n\to 0$ and $g_n\to 0$ in measure, then $f_n g_n\to 0$ in measure. For any $\ep>0$, let $E_n=\{x\colon |f_ng_n|\geq \ep\}$ and $F_n=\{x\colon |f_n|\geq \ep\}$, then
+	\[E_n\subset F_n\cup \{x\colon |g_n|\geq 1\},\]
+	which leads to that $\mu(E_n)\to 0$.
+	\end{description}
+\end{proof}
+
+\begin{pro}%3
+	Prove the following result (which immediately yields another proof of Corollary $2.4.2$): Let $f_n$ ($n=1,2,\ldots$) and $f$ be a.e. real valued measurable functions in a finite measure space. For any $\ep>0,\;n\geq 1$, let
+	\[E_n(\ep)=\{x\colon |f_n(x)-f(x)|\geq \ep\}.\]
+	Then $\{f_n\}$ converges a.e. to $f$ is and only if
+	\[\lim_n \mu\bigg(\bigcup_{m=n}^\infty E_m(\ep)\bigg)=0,\qquad \mbox{for any}\;\ep>0.\]
+\end{pro}
+\begin{proof}
+	First we notice that for any $\ep>0$, if we let
+	\[E(\ep)=\bigcap_{n=1}^\infty \bigcup_{m=n}^\infty E_m(\ep)=\limsup_n E_n(\ep),\]
+	then 
+	\[\bigcup_{m=n+1}^\infty E_m(\ep)\subset\bigcup_{m=n}^\infty E_m(\ep)\;\mbox{and}\;E(\ep)=\lim_n \bigcup_{m=n}^\infty E_m(\ep).\]
+	Thus since $X$ is finite, we know 
+	\[\mu(E(\ep))=\lim_n \mu\bigg(\bigcup_{m=n}^\infty E_m(\ep)\bigg).\]
+    Now let $F=\{x\colon f_n(x)\not\to f(x)\}$, suppose $f_n\to f$ a.e., then $\mu(E(\ep))=0$ for any $\ep>0$ since
+    \[E(\ep)=\{x\colon \;\mbox{there are infinite}\;n,\;|f_n(x)-f(x)|\geq\ep\}\subset F.\]
+    Vise versa, suppose the last equation given by the problem is true, then $\mu(E(\ep))=0$ for any $\ep>0$. Notice that
+    \[F=\bigcup_{k=1}^\infty E(1/k),\]
+    we know $\mu(F)=0$ and thus $f_n$ converges to $f$ a.e..
+\end{proof}
+
+\begin{pro}%4
+	Let $X$ be the set of all positive integers, $\ma{K}$ the class of all subsets of $X$, and $\mu(E)$ (for any $E\in\ma{K}$) the number of points in $E$. Prove that in this measure space, convergence in measure is equivalent to uniform convergence.
+\end{pro}
+\begin{proof}
+	Suppose convergence in measure is true. For any $\ep>0$, since $\mu(E_n(\ep))\to 0\;(n\to\infty)$, we know $E_n(\ep)=\emptyset$ for all $n$ large enough. Thus $\sup_x |f_n(x)-f(x)|\leq\ep$ for $n$ large enough, which is to say uniform convergence is true.
+\end{proof}
+
+\begin{pro}%5
+	Define functions $f_m^n(x)$ on $[0,1)$ by $f_m^n(x)=1$ if $x\in[(m-1)/n,m/n)$ and $f_m^n(x)=0$ otherwise. enumerate the $f_m^n$ in any way, and call the sequence thus obtained $\{\varphi_j\}$. For instance, $\varphi_1=f_1^1,\varphi_2=f_2^1,\varphi_3=f_1^2,\varphi_4=f_3^1,\ldots$. Prove that $\{\varphi_j\}$ converges in Lebesgue measure to zero, but $\lim_{j} \varphi_j(x)$ does not exist for any $x\in[0,1)$.
+\end{pro}
+\begin{proof}
+	For any $n$, let 
+	\[j_n=\max\bigg\{j\colon \mu\Big(\{x\colon \varphi_j(x)\geq 1/n\}\Big)\bigg\}<\infty,\]
+	then $j_{n+1}\geq j_n$. Thus
+	\[\mu\{x\colon \varphi_k(x)=1\}<1/n\quad\mbox{for all}\;k>j_n,\] which is to say convergence in measure. For any $x\in[0,1)$, easy to know there must be infinite $j$, such that $\varphi_j(x)=1$.
+\end{proof}
+
+\begin{pro}%6
+	If $\{f_n\}$ is a sequence of a.e. real valued measurable functions in $X$, and if $\mu(X)<\infty$, then there exist positve constants $\la_n$ such that $\{f_n/\la_n\}$ converges a.e. to zero.
+\end{pro}
+\begin{proof}
+	Since $f_n$ is an a.e. real valued measurable function in finite measure space for all $n$, similar to the proof of Problem $2.4.2$ (c), we know for any $\ep_n>0$, there are real numbers $c_n>0$, such that for all $n$,
+	\[E_n=\{x\colon |f_n(x)|\leq c_n\}\;\mbox{and}\;\mu(X\ba E_n)< \ep_n.\]
+	Now given any $\ep>0$, let $\ep_n=2^{-n}\ep$, then there are real numbers $\la_n/n$ (where $\la_n>0$), such that
+	\[E_n=\{x\colon |f_n(x)|/\la_n\leq 1/n\}\;\mbox{and}\;\mu(X\ba E_n)< 2^{-n}\ep.\]
+	Let
+	\[E=\bigcap_n E_n=\{x\colon |f_n(x)|/\la_n\leq 1/n,\;\mbox{for all}\;n\},\]
+	then $\mu(X\ba E)=\mu(\cup_n E_n)<\sum_n 2^{-n}\ep=\ep$ and
+	\[\sup_{x\in E}\{|f_n(x)|/\la_n\}\leq 1/n.\]
+	Thus for any $\ep>0$, $f_n/\la_n$ converges to zero uniformly on $E$ with $\mu(X\ba E)<\ep$, which is to say the convergence is almost uniform and thus a.e..
+\end{proof}
+
+\section{Integrals of Simple Functions}
+\begin{pro}%1
+	If $f$ and $g$ are integrable simple functions, then $fg$ is  also an integrable simple function.
+\end{pro}
+\begin{proof}
+	Suppose $f=\sum_{i=1}^n a_i\chi(E_i)$ and $g=\sum_{j=1}^m b_j\chi(F_j)$, then
+	\begin{align*}
+		fg&=\bigg(\sum_ia_i\sum_j\chi(E_i\cap F_j)\bigg)
+		    \bigg(\sum_jb_j\sum_i\chi(E_i\cap F_j)\bigg)\\
+		  &=\sum_{i,j}a_ib_j\chi(E_i\cap F_j)
+	\end{align*} is a simple function.
+	For any $\mu(E_i\cap F_j)=\infty$, we know $a_i=0$ and $b_j=0$ since both $f$ and $g$ are integrable, thus $fg$ is integrable.
+\end{proof}
+
+\begin{pro}%2
+	An integrable simple function $f$ is equal a.e. to zero if and only if $\int_E f\,d\mu=0$ for any measurable set $E$.
+\end{pro}
+\begin{proof}
+	We only prove the sufficiency, let $f=\sum_i a_i\chi(E_i)$, then $\int_{E_i} f\,d\mu=a_i\mu(E_i)=0$. Thus for any $\mu(E_i)>0$, we have $a_i=0$.
+\end{proof}
+
+\begin{pro}%3
+	If $f$ is a nonnegative integrable simple function and if $\int f\,d\mu=0$ then $f=0$ a.e..
+\end{pro}
+\begin{proof}
+	Let $f$ has the form like problem $2.5.2$, then just notice that $\sum_i a_i\mu(E_i)\geq a_i\mu(E_i)$.
+\end{proof}
+
+\section{Definition of The Integral}
+\begin{pro}%1
+	If $f$ is integrable and if $g$ is measurable and $g=f$ a.e., then $g$ is integrable and $f$ and $g$ have the simple integration value on $X$.
+\end{pro}
+\begin{proof}
+	Easy to know from if $f_n\to f$ a.e. and $f=g$ a.e., then $f_n\to g$ a.e..
+\end{proof}
+
+\begin{pro}%2
+	If $f$ is integrable, then the set $N(f)=\{x\colon f(x)\neq 0\}$ is $\sigma$-finite.
+\end{pro}
+\begin{proof}
+	Let $f_n$ be a sequence satisfying the definition of integration. Now let $N(f_n)=\{x\colon f_n(x)\neq 0\}$, then
+	$N(f_n)$ is finite w.r.t $\mu$ for all $n$. Easy to know $N(f)\subset\cup_n N(f_n)$.
+\end{proof}
+
+\begin{pro}%3
+	Let $f$ be a measurable function. Prove that $f$ is integrable if and only if $f^+$ and $f^-$ are integrable, or if and only if $|f|$ is integrable.
+\end{pro}
+\begin{proof}
+	Suppose $f$ is integrable, then $f^+=\chi(\{x\colon f(x)>0\})f$ and $f^-=-\chi(\{x\colon f(x)<0\})f$ are both integrable. Notice that $|f_n|$ converges to $|f|$ a.e. and is also Cauchy in mean, thus $|f|$ is also integrable. Now assume $f^{\pm}$ are integrable, then $f_n=f^+_n-f^-_n\to f$ a.e. and is also Cauchy in mean, thus $f$ is integrable. Assume $|f|$ is integrable, then there is a sequence $g_n\to |f|$ a.e. and Cauchy in mean. Let
+	\[f_n(x)=\begin{cases}g_n(x),&\mbox{if}\;f(x)\geq 0,\\-g_n(x),&\mbox{if}\;f(x)<0.\end{cases}\]
+	Then easy to know $f_n$ is simple integrable function for all $n$ and $f_n\to f$ a.e. and
+	\[|f_n(x)-f_m(x)|=|g_n(x)-g_m(x)|,\]
+	thus $\{f_n\}$ is Cauchy in mean, which yields that $f$ is integrable.
+\end{proof}
+
+\begin{pro}%4
+	Let $X$ be the measure space described in Problem $2.4.4$. Then $f$ is integrable if and only if the series $\sum_{n=1}^\infty |f(n)|$ is convergent. If $f$ is integrable, then
+	\[\int f\,d\mu=\sum_{n=1}^\infty f(n).\]
+\end{pro}
+\begin{proof}
+	Assume $f$ is integrable, denote $f_n$ by
+	\[f_n(k)=\begin{cases}
+	f(k),&\mbox{if}\;k\leq n,\\
+	0,&\mbox{if}\;k>n.\end{cases}
+	\]
+	Then $\{|f_n|\}$ is an increasing simple integrable sequence with $|f_n|\to|f|$ pointwise, thus by M.C.T., 
+	\[\int |f|\,d\mu=\lim_n\int |f_n|\,d\mu=\sum_{n=1}^\infty |f(n)|,\]
+	since $|f|$ is integrable, we know this sum of absolute values converges. Now we notice that for any $n>m$,
+	\[\int |f_n-f_m|\,d\mu=\sum_{k=m+1}^n |f(k)|,\]
+	thus we know $\{f_n\}$ is indeed Cauchy in mean and converges to $f$ pointwise, then
+	\[\int f\,d\mu=\lim_n \int f_n\,d\mu=\sum_{n=1}^\infty f(n).\]
+	Vise versa, suppose the sum of absolute valued converges, then we still define $f_n$ as above, then $f_n\to f$ pointwise. Easy to know $\{f_n\}$ is still Cauchy in mean now, thus $f$ is integrable.
+\end{proof}
+
+\begin{pro}%5
+	A function $\varphi$ on a real interval $(a,b)$ is called a step function if there exist points $x_i(i=1,\ldots,n)$ and real numbers $c_i(i=1,\ldots,n)$ such that $a=x_0<x_1<\cdots<x_{n-1}<x_n=b$ and $\varphi(x)=c_i$ if $x_{i-1}<x<x_i$ for $i=1,\ldots,n$. Prove that if $f$ is Lebesgue integrable over a bounded interval $(a,b)$, then there exists a sequence $\{\varphi_m\}$ of step functions such that $\int |f-\varphi_m|\,d\mu\to 0$ as $m\to\infty$, and $\varphi_m$ converges to $f$ a.e..
+\end{pro}
+\begin{proof}
+\begin{description}
+	\item[(1)] 
+	First we prove the conclusion is true for a simple integrable. Suppose $E$ is any Lebesgue measurable set with finite measure, then by Problem $1.9.7$ and its proof, we know for any $\ep>0$, there is a sequence of bounded open interval $\{I_n=(a_n,b_n)\}$, such that
+	\[E\subset \bigcup_n I_n\;\mbox{and}\; \mu\bigg(\bigcup_n I_n\ba E\bigg)<\ep/2.\]
+	And it's easy to know there are some large enough $n$, such that (resorted the sequence)
+	\[\mu\bigg(\bigcup_{k=1}^n I_k \ba E\bigg)<\ep/2,\]
+	where $I_k$s are mutually disjoint bounded open interval. Thus we $\mu(E\triangle \cup_{k=1}^n I_k)<\ep$.
+	Now assume $f=\sum_{i=1}^n a_i\chi(E_i)$, where $a_i$ is a real number and $\{E_i\}$ is a measurable partition of $(a,b)$. For any $m\geq 1$ and every $E_i$, we can find an open set $F_i^m\subset (a,b)$ (which is a union of finite mutually disjoint open bounded intervals), such that
+	\[\mu(E_i \triangle F_i^m)<1/(an2^{n+m+1}),\] where $a=\max\{1,|a_i|(i=1,\ldots,n)\}$. Thus 
+	\[\mu\bigg((a,b)\ba\bigcup_{i=1}^n F_i^m\bigg)\leq \sum_{i=1}^n \mu(E_i\triangle F_i^m)<1/(a2^{n+m+1}).\]
+	Now define
+	\[\varphi_m(x)=\begin{cases}
+	a_i,&\mbox{if}\;x\in F_i^m\;\mbox{and for all}\;j\neq i,x\notin F_j^m,\\
+	0,&\mbox{otherwise}.\end{cases}\]
+	Easy to know $\varphi_m$ is a step function for all $m$.
+
+
+	Now we define $G_m=\{x\in (a,b)\colon \varphi_m(x)\neq f(x)\}$, for any $x\in G_m$, we know there is a unique $i$, such that $x\in E_i$. Also $x\notin F_i^m$ or $x\in F_i\cap F_j$ (for some $j\neq i$). Thus
+	\[G_m\subset \bigg((a,b)\ba \bigcup_{i=1}^n F_i^m\bigg)\cup \bigg(\bigcup_{i<j}(F_i^m\cap F_j^m)\bigg).\]
+	For any $i<j$, we have $F_i^m\cap F_j^m=\cup_{k=1}^n F_i\cap F_j\cap E_k$.
+	If $k=i$, then $F_i\cap F_j\cap E_i\subset F_i\cap F_j\cap E_j^c\subset E_j\triangle F_j$. If $k\neq i$, then $F_i\cap F_j\cap E_i\subset F_i\cap F_j\cap E_i^c\subset E_i\triangle F_i$. Thus
+	\[\mu\bigg(\bigcup_{i<j}(F_i^m\cap F_j^m)\bigg)\leq \binom{n}{2}n/(an2^{n+m+1})<1/(a2^{m+1}).\]
+	So $\mu(G_m)\leq 1/(a2^m)$. Thus
+	\[\mu\bigg(\bigcup_{n=m}^\infty G_m\bigg)\leq 1/(a 2^{m-1})\to 0,\quad (m\to\infty),\]
+	and by Problem $2.4.3$, we know $\varphi_m$ converges to $f$ a.e. Also notice that
+	\[\int |\varphi_m-f|\,d\mu\leq a\mu(G_m)\leq 1/(2^m)\to 0\] as $m\to \infty$, thus we finish the proof when $f$ is a simple integrable function. 
+	\item[(2)] 
+	Now Assume $f$ is an  integrable function, then there is a sequence of simple integrable functions $f_n$, such that 
+	$f_n\to f$ a.e. and by Lemma $2.8.1$, $\int |f_n-f|\,d\mu\to 0\;(n\to\infty)$.
+	Thus, for any $\ep>0$, we define $E_n(\ep)=\{x\colon |f_n-f|\geq \ep\}$, we have (by Problem $2.4.3$)
+	\[\mu\bigg(\bigcup_{m=n}^\infty E_m(\ep)\bigg)\to 0,\quad (n\to\infty).\]
+	Now for every $n$, let $a_n=\max\{1,|f_n(x)|(a<x<b)\}$, then by (1) we know there is a step function $\varphi_n$, such that
+	\[F_n=\{x\in (a,b)\colon \varphi_n(x)\neq f_n(x)\}\;\mbox{and}\;\mu(F_n)\leq 1/(a_n 2^n).\]
+	Thus for any $\ep>0$, we define $G_n(\ep)=\{x\colon |\varphi_n-f|\geq \ep\}\subset E_n(\ep/2)\cup G_n$, then
+	\[\bigcup_{m=n}^\infty G_m(\ep)\subset \bigcup_{m=n}^\infty E_m(\ep/2)\cup \bigcup_{m=n}^\infty F_m.\]
+	Thus
+	\[\mu\bigg(\bigcup_{m=n}^\infty G_m(\ep)\bigg)\leq \mu\bigg(\bigcup_{m=n}^\infty E_m(\ep/2)\bigg)+\sum_{m=n}^\infty 1/(2^m)\to 0,\quad (n\to \infty)\]
+	and by Problem $2.4.3$, $\varphi_n\to f$ a.e.. Also notice that
+	\[\int |\varphi_n-f|\,d\mu\leq \int |\varphi_n-f_n|\,d\mu+\int |f_n-f|\,d\mu\]
+	and 
+	\[\int |\varphi_n-f_n|\,d\mu\leq a_n/\mu(F_n)\leq 1/(2^n),\]
+	we finally know
+	\[\int |\varphi_n-f|\,d\mu\to 0,\quad(n\to \infty)\] and finish our proof.
+\end{description}
+\end{proof}
+
+\begin{pro}%6
+	Let $f$ be a Lebesgue integrable function over a bounded interval $(a,b)$. Prove that for any $\ep>0,\delta>0$, there exists a continuous function $g$ in $[a,b]$ such that $|g(x)-f(x)|<\ep$ for all $x$ in a subset $E$ of $(a,b)$, and $\mu\Big((a,b)\ba E\Big)<\delta$.
+\end{pro}
+\begin{proof}
+	From Problem $2.6.5$, we know there is a sequence of step function converging to $f$ a.e., i.e. a.u.. Thus for any $\ep>0$, $\delta>0$, there is some step function $g$ and a measurable set $E$ with $\mu(E)<\delta/2$, such that $|g-f|<\ep$ on $(a,b)\ba E$. However  $g$ could be uncontinuous, with finite many uncontinuous points, say $x_i,\;i=1,\ldots,n$, where $a=x_0<x_1<\cdots<x_n<x_{n+1}=b$. Suppose $g(x)=c_i$ if $x_{i-1}<x<x_i$ where $i=1,\ldots,n+1$, thus we define
+	\[h(x)=\begin{cases}
+	\dfrac{c_{i+1}-c_i}{\delta/2n}(x-x_i)+\dfrac{c_{i+1}+c_i}{2},&\mbox{if}\;x_i-\dfrac{\delta}{4n}<x<x_i+\dfrac{\delta}{4n},\\ 
+	g(x),&\mbox{otherwise}.\end{cases}\]
+	 and $F=\cup_{i=1}^n (x_i-\frac{\delta}{4n},x_i+\frac{\delta}{4n})$. Then $|h-f|<\ep$ on $(a,b)\ba(E\cup F)$ and $\mu(E\cup F)<\delta$.
+\end{proof}
+
+\begin{pro}%7
+	A complex valued function $f$ is said to be simple if it has the form $\sum_{j=1}^n c_j \chi(E_j)$, where $\{E_j\}$ is a measurable partition of $X$ and $c_j$s are complex numbers. $f$ is then said to be integrable if $\mu(E_j)<\
+	infty$ for any $j$ for which $c_j\neq 0$. The integral of $f$ is defined by $\sum_{j=1}^n c_j\mu(E_j)$. Now let $f$ be any measurable complex valued function. $f$ is said to be integrable if there exists a sequence $\{f_m\}$ of complex valued, integrable simple functions, such that (a) and (b) in Definition $2.6.1$ hold. Prove that $f=f_1+if_2$ ($f_1,f_2$ are real and imaginary parts of $f$) is integrable if and only if $f_1$ and $f_2$ are integrable and $\int f\,d\mu=\int f_1\,d\mu+\int f_2\,d\mu$.
+\end{pro}
+\begin{proof}
+	Suppose $f=f^r+if^g$ is integrable, then there is a sequence of complex valued simple integrable function $f_m=f_m^r+if_m^g$ which converges to $f$ a.e. and is Cauchy in mean. Notice that $\mu(\{x\colon f_m^r\not\to f^r\})\leq \mu(\{x\colon f_m\not\to f\})$, thus $f_m^r\to f$ a.e. Also notice that $|f_m^r-f_n^r|\leq |f_m-f_n|$ for any $m>n$, thus $f_m^r$ is Cauchy in mean and thus $f^r$ is integrable. Similarly we know $f^g$ is also integrable. Now suppose $f$ is a complex valued simple integrable function with form $f=\sum_{j} c_j\chi(E_j)$, then $f=\sum_j c_j^r\chi(E_j)+ic_j^g \chi(E_j)$, thus $f^r=\sum_j c_j^r\chi(E_j)$ and $f^g=\sum_j c_j^g\chi(E_j)$ and
+	\begin{align*}
+		\int f\,d\mu&=\sum_j c_j\mu(E_j)\\
+		&=\sum_j c_j^r\mu(E_j)+i\sum_j c_j^g\mu(E_j)\\
+		&=\int f^r\,d\mu+i\int f^g\,d\mu.
+	\end{align*}
+	Thus we know for any complex valued integrable function $f$,
+	\begin{align*}
+		\int f\,d\mu&=\lim_m \int f_m\,d\mu\\
+		&=\lim_m \bigg(\int f_m^r\,d\mu+i\int f_m^g\,d\mu\bigg)\\
+		&=\int f^r\,d\mu+i\int f^g\,d\mu.
+	\end{align*}
+	Vise versa, suppose $f^r$ and $f^g$ are both integrable, then there are $f_m^r$ and $f_m^g$ satisfying (a) and (b), then let $f_m=f_m^r+if_m^g$. Notice that $\{x\colon f_m\not\to f\}\subset \{x\colon f_m^r\not\to f^r\}\cup\{x\colon f_m^g\not\to f^g\}$, thus $f_m\to f$ a.e.. Also notice that $|f_m-f_n|\leq |f_m^r-f_n^r|+|f_m^g-f_n^g|$ for any $m>n$, we know $f_m$ is Cauchy in mean. Finally we know $f$ is integrable.
+\end{proof}
+
+\section{Elementary Properties of Integrals}
+\begin{pro}%1
+	Let $(X,\ma{K},\mu_1)$ and $(X,\ma{K},\mu_2)$ be two measurable spaces, and $\mu=\mu_1+\mu_2$. Then
+	\begin{description}
+	\item[(a)] $(X,\ma{K},\mu)$ is a measure space.
+	\item[(b)] A simple function $f$ is $\mu_i$-integrable (that is, integrable with respect to $\mu_i$) for $i=1$ and $i=2$ if and only if $f$ is $\mu$-integrable, and we then have
+	\[\int f\,\mu=\int f\,d\mu_1+\int f\,d\mu_2.\tag{1}\]
+	\item[(c)] A measurable function $f$ is $\mu_i$-integrable for $i=1$ and $i=2$ if and only if $f$ is $\mu$-integrable, and then $(1)$ holds.
+	\end{description}
+\end{pro}
+\begin{proof}
+	\begin{description}
+	\item[(a)] Routine.
+	\item[(b)] For any $E\in\ma{K}$, we know $\mu(E)=\infty$ if and only if $\mu_1(E)=\infty$ or $\mu_2(E)=\infty$, thus we know $f$ is $\mu$-integrable if and only if $\mu_1$ and $\mu_2$-integrable. And the $(1)$ is easy to be shown.
+	\item[(c)] Suppose $f$ is $\mu$-integrable, then there is some simple $\mu$-integrable sequence $\{f_n\}$, such that $f_n\to f$ a.e. $[\mu]$ (thus $[\mu_1]$ and $[\mu_2]$.) and Cauchy in mean $[\mu]$. Notice that by $(a)$ we know $f_n$ is $\mu_i$-integrable and
+	\[\int |f_n-f_m|\,d\mu_i\leq \int |f_n-f_m|\,d\mu,\]thus $f_n$ Cauchy in mean $[\mu_i]$ and then $f$ is $\mu_i$-integrable. Also, we know
+	\begin{align*}
+	\int f\,d\mu&=\lim_n \int f_n\,d\mu\\
+				&=\lim_n \int f_n\,d\mu_1+\lim_n \int f_n\,d\mu_2\\
+				&=\int f\,d\mu_1+\int f\,d\mu_2.
+	\end{align*}
+	Conversely, we first assume $f\geq 0$ and integrable to $\mu_1,\mu_2$. Then there exists a monotone-increasing sequence $\{f_n\}$ of simple function, such that $\{f_n\}$ converges to $f$ pointwise and $0\leq f_n\leq f$ for all $n$. By Problem $2.7.2$, we know $f_n$ is integrable both to $\mu_1$ and $\mu_2$ for all $n$. Thus by $(b)$, $f_n$ is also integrable to $\mu$ (Here we need the condition that $f_n$ is a simple function) for all $n$.
+	Now by MCT, we know
+	\begin{align*}
+	\int f\,d\mu&=\lim_n \int f_n\,d\mu\\
+	&=\lim_n \int f_n\,d\mu_1+\lim_n \int f_n\,d\mu_2\\
+	&=\int f\,d\mu_1+\int f\,d\mu_2\\
+	&<+\infty.
+	\end{align*}
+	Thus $f$ is integrable to $\mu$. Now for any $f$ (may not be non-negative) integrable to $\mu_1,\mu_2$, we notice $f=f^+-f^-$, and know $f^+$ and $f^-$ are both integrable to $\mu$ by the proof above. Thus $f$ is integrable to $\mu$. Moreover, we know from the proof above that if a measurable $f\geq 0$, then
+	\[\int f\,d\mu+\int f\,d\mu_1+\int f\,d\mu_2\]
+	whether $f$ is integrable to $\mu$ or not.
+	\end{description}
+\end{proof}
+
+\begin{pro}%2
+	If $f$ is an integrable function, $g$ is a simple function, and $|g(x)|\leq |f(x)|$, then $g$ is also integrable.
+\end{pro}
+\begin{proof}
+	Assume $g=\sum_{i=1}^n a_i\chi(E_i)$ with $a_i\neq 0$, then $0<|a_i|\leq |f|$ on $E_i$. Since $f$ is integrable on $X$, we know $|f|$ is integrable on $E_i$, thus $\mu(E_i)<\infty$ for all $i$. So we have $|a_i|\mu(E_i)\leq \int_{E_i} f\,d\mu$, and by simple sum, $\int |g|\,d\mu\leq\int |f|\,d\mu<\infty$. Thus $g$ is integrable.
+\end{proof}
+
+\begin{pro}%3
+	Let $f$ be an integrable function. Prove
+	\begin{description}
+	\item[(a)] If $\int_E f\,d\mu\geq 0$ for all measurable sets $E$, then $f\geq 0$ a.e.
+	\item[(b)] If $\mu(X)<\infty$ and if $\int_E f\,d\mu\leq \mu(E)$ for all measurable $E$, then $f\leq 1$ a.e.
+	\end{description}
+\end{pro}
+\begin{proof}
+	\begin{description}
+	\item[(a)] Let $E=\{x\colon f<0\}$, then $\int_E f\,d\mu\leq 0$, thus $\int_E f\,d\mu=0$. By Theorem $2.7.5$, we know $\mu(E)=0$.
+	\item[(b)] Since $\mu(E)<\infty$ for all $E$, we have $\int_E (1-f)\,d\mu\geq 0$ for all $E$. By $(a)$, $f\leq 1$ a.e.
+	\end{description}
+\end{proof}
+
+\begin{pro}%4
+	Show that the function $f(x)=\sin x+\cos x$ is not Lebesgue integrable on the real line.
+\end{pro}
+\begin{proof}
+	Notice that $|f|=\sqrt{2}|\sin(x+\pi/4)|$, and let $E=\{x\colon |f(x)|\geq 1\}$, then
+	\[E=\bigcup_{n=-\infty}^{\infty} \bigg[n\pi,\Big(n+\frac{1}{2}\Big)\pi\bigg].\]
+	Assume $f$ is integrable on the real line, so is $|f|$ on $E$, thus $\mu(E)<\infty$, which is a contradiction.
+\end{proof}
+
+\begin{pro}%5
+	Show that the function $f(x)=(\sin x)/x$ is not Lebesgue integrable over the interval $(1,\infty)$.
+\end{pro}
+\begin{proof}
+	Suppose $f$ is integrable, then so is $|f|$. For all $n\geq 1$, let
+	\[E_n=\bigg[\Big(n+\frac{1}{6}\Big)\pi,\Big(n+\frac{5}{6}\Big)\pi\bigg],\]
+	then easy to know $|f|\geq 1/[2(n+\frac{5}{6})\pi]>1/(4n\pi)$. Since $\mu(E_n)=2\pi/3$, we know
+	\[\int_{E_n} |f|\,d\mu>\frac{1}{4n\pi}\mu(E_n)=\frac{1}{6n}.\]
+	Thus $\int |f|\,d\mu> (\sum_{n=1}^\infty 1/n)/6=+\infty$, which is a contradiction.
+\end{proof}
+
+\begin{pro}%6
+	Show that the function $f(x)=1/x$ is not Lebesgue integrable in the interval $(0,1)$.
+\end{pro}
+\begin{proof}
+	For all $n\geq 1$, we fix $n$ and let $E_j=((j-1)/n,j/n)$ for $1\leq j\leq n$.
+	Thus $f\geq n/j$ on $E_j$ for all $j$ and $\mu(E_j)=1/n$. Assume $f$ is integrable, then 
+	\[\int f\,d\mu=\sum_{j=1}^n \int_{E_j}f\,d\mu\geq \sum_{j=1}^n 1/j,\]
+	thus $\int f\,d\mu\geq \sum_{n=1}^\infty 1/n=\infty$, which is a contradiction.
+\end{proof}
+
+\begin{pro}%7
+	Prove that Theorem $2.7.1(h)$ is valid for any measurable set $E$, provided $m>0$.
+\end{pro}
+\begin{proof}
+	For any measurable set $E$ with $\mu(E)=\infty$, if $m>0$, then $M\geq m>0$, thus the LHS and RHS are both $+\infty$.
+	Consider the middle one, suppose $\int_E f\,d\mu<\infty$, then by Problem $2.7.2$, $m$ is also integrable on $E$, which is a contradiction, thus the middle one is also $+\infty$.
+\end{proof}
+
+\section{Sequences of Integrable Functions}
+\begin{pro}%1
+	A measurable function $f$ is called a null function if $f=0$ a.e.. We shall say that $f\sim g$ if $f-g$ is a null function. Denote by $[f]$ the class of all measurable functions that are equivalent to $f$. We denote by $L^1(X,\ma{K},\mu)$, or, more briefly, by $L^1(X,\mu)$, the set of all classes $[f]$ for which $f$ is integrable, and define on it the function
+	\[\rho([f],[g])=\rho(f,g)=\int|f-g|\,d\mu.\]
+	Prove that $L^1(X,\mu)$ is a complete metric space with the metric $\rho$.
+\end{pro}
+\begin{proof}
+	Easy to know $\rho$ is well defined and indeed a metric on $L^1$. Given any Cauchy sequence $\{[f_n]\}$ in $L^1$, i.e. $\{f_n\}$ is Cauchy in mean by $\mu$. Thus there is an integrable function $f$ such that $\{f_n\}$ converges in mean to $f$, i.e. $f_n\to f$ by $\rho$. Assume $[g_n]=[f_n]$ for all $n$, then $g_n\sim f_n$ for all $n$, thus there is a integrable function $g$, such that $g_n\to g$ by $\rho$. Notice that 
+	\[\int |f-g|\,d\mu=\lim_n \int |f_n-g_n|\,d\mu=0,\]
+	thus $f\sim g$ and so $[f]=[g]\in L^1$.
+\end{proof}
+
+\begin{pro}
+	For any Lebesgue integrable function $g(y)$ on a bounded interval $(a,b)$, the function
+	\[f(x)=\int_{(a,x)} g(y)\,dy\]is absolutely continuous.
+\end{pro}
+\begin{proof}
+	For a mutually disjoint sequence $(a_n,b_n)$ in $(a,b)$, easy to know 
+	\[\sum_{n} |f(b_n)-f(a_n)|\leq \int_{E} |g(y)|\,dy\]
+	where $E=\cup_n [a_n,b_n)$. Since $g$ is integrable on $(a,b)$, there is some simple integrable $\{g_n\}$, such that
+	$g_n\to g$ a.e. and $\int |g_n-g|\,dy\to 0$. Thus for any $\ep>0$, there is some $n_0$, such that $\int |g_{n_0}-g|\,dy<\ep/2$. Let $c=\max\{|g_{n_0}|,1\}$, then $\int_E |g_{n_0}|\,dy\leq c\mu(E)$ for $\mu(E)<\infty$. Thus for any $E$ such that $\mu(E)<\ep/(2c)$, we have
+	\begin{align*}
+	\int_{E} |g(y)|\,dy&\leq \int_{E} |g_{n_0}|\,dy+\int |g-g_{n_0}|\,dy\\
+	&<c\mu(E)+\ep/2\\
+	&=\ep,
+	\end{align*}
+	and $f$ is absolutely continuous.
+\end{proof}
+
+\begin{pro}%3
+	A function $f$ is of bounded variation in a bounded interval $(a,b)$ if and only if it is the difference $g-h$ of monotone increasing function $g_1,g_2$. If $f$ is also continuous, then $g$ and $h$ can be taken to be continuous monotone increasing functions.
+\end{pro}
+\begin{proof}
+	For any $x\in[a,b]$, let $g(x)=P_a^x (f)$ and $h(x)=N_a^x (f)-f(a)$, then $g$ and $h$ are both increasing and we have $f=g-h$ since $P_a^x-N_a^x=f(x)-f(a)$. Now consider $f$ is continuous, then since $g$ is increasing, the uncontinuous points of $g$ can only be jump points and are at most countable many, see $\{x_n\}$, so we know the uncontinuous points of $h$ are also $\{x_n\}$. Suppose $x_{n}<x_{n+1}$ for all $n$. Since $f$ is continuous at $x_{n}$, we have
+	\[g(x_n)-g(x_n^{\pm})=h(x_n)-h(x_n^{\pm})\] and define this to be $c_n^{\pm}$. Thus for $x\in(x_n,x_{n+1})$, we define 
+	\[c(x)=\frac{c_{n+1}^--c_n^+}{x_{n+1}-x_n}x+\frac{x_{n+1}c_n^+-x_nc_{n+1}^-}{x_{n+1}-x_n},\]
+	then $c(x)$ is increasing on $(x_n,x_{n+1})$.
+	Also let $c(x_n)=0$ for all $n$. Now we have $f=(g+c)-(h+c)$ where $g+c$ and $h+c$ are both continuous monotone increasing functions on $(a,b)$.
+\end{proof}
+
+\begin{pro}%4
+	If $f$ is absolutely continuous, then it is of bounded variation.
+\end{pro}
+\begin{proof}
+	Since $f$ is absolutely continuous, then there is some $\delta>0$, such that for any $[a,b]$ with $b-a<\delta$ and 
+	for all $n$ and any partition $a=x_1<x_2<\cdots<x_n=b$,
+	\[\sum_{i=1}^{n-1} |f(x_{i+1})-f(x_{i})|<1.\]
+	Thus for any partition of any bounded interval $[a,b]$ and its partition $\{x_i\}$ ($1\leq i\leq n$), we can choose some large enough $m$, such that $(b-a)/m<\delta$ and let $y_{j}=a+j(b-a)/m$ for $1\leq j<m$. Thus we know
+	\[\sum_{i=1}^{n-1} |f(x_{i+1})-f(x_{i})|<m\]
+	and $f$ is of bounded variation.
+\end{proof}
+
+\begin{pro}%5
+	Prove that the function $f(x)=x\sin(1/x)$, for $0<x<1$, is not uniformly continuous but not of bounded variation.
+\end{pro}
+\begin{proof}
+	Extend $f$ by $f(0)=0$ and $f(1)=\sin(1)$, then $f$ is uniformly continuous on $[0,1]$. Let
+	\[x_n=\frac{2}{(2n+1)\pi},\quad y_n=\frac{1}{n\pi}\]
+	and let $\{x_n,y_n\}\cup\{0,1\}$ be all partition points, we know
+	\begin{align*}
+	T_0^1(f)&\geq \sum_{n=0}^{\infty} \frac{2}{(2n+1)\pi}\bigg|\sin\Big(\frac{(2n+1)\pi}{2}\Big)\bigg|\\
+	&=\frac{2}{\pi}\bigg(\sum_{n=0}^{\infty} \frac{1}{2n+1}\bigg)\\
+	&=+\infty,
+	\end{align*}meaning $f$ is not of bounded variation.
+\end{proof}
+
+\begin{pro}%6
+	If $f$ is not integrable, then the absolute continuity of $\la(E)$ in Theorem $2.8.4$ can still be proved, provided $f$ is integrable on sets $E$ of finite measure. However, the same extension does not hold for the property of complete additivity. Give an example.
+\end{pro}
+\begin{proof}
+	For any finite measure set $E$, let $|\la|(E)=\int_E |f|\,d\mu<\infty$, then if $\mu(E)=0$, we have $|\la|(E)=0$.
+	We need to prove that for any $\ep>0$, there is some $\delta>0$, such that for any $\mu(E)<\delta$, we have $|\la|(E)<\ep$. Assume this is not true, then there is some $\ep>0$, for all $n$, there is some $E_n$ such that $\mu(E_n)<1/(2^n)$ and $|\la|(E)\geq \ep$. Now let $F_n=\cup_{k\geq n}E_k$, then $\mu(F_n)\leq 1/(2^{n-1})$ and $|\la|(F_n)\geq \ep$.
+	Let $F=\cap_{n} F_n$, then $F_n\downarrow F$, thus $\mu(F)=0$ and
+	\[|\la|(F)=\lim_n|\la|(F_n)\geq \ep\]
+	which is a contradiction. So $|\la(E)|<|\la|(E)<\ep$ with all $\mu(E)<\delta$.
+	Assume $f(n)=2/(n+1)$ if $n$ is odd and $f(n)=-2/n$ if $n$ is even, the measure is counting measure, then $f$ is not integrable on $\m{N}^+$. Now let $E_n=\{n\}$, then $\la(E_n)=f(n)$ and $\m{N}^+=\cup_n E_n$. But 
+	\[\sum_{n=1}^\infty \la(E_n)=f(1)+f(2)+\cdots=0,\] meaning the additivity does not hold.
+\end{proof}
+
+\section{Lebesgue's Bounded Convergence Theorem}
+\begin{pro}%1
+	Let $f_n(x)=n$ if $0\leq x<1/n$, $f_n(x)=0$ if $1/n\leq x\leq 1$. Then $\lim_n f_n=0$ a.e. on $[0,1]$, but $\lim_n \int f_n\,d\mu=1$ where $\mu$ is Lebesgue measure. This example shows that the boundedness condition $|f_n|\leq g$ in Theorem $2.9.1$ is essential.
+\end{pro}
+
+\begin{pro}%2
+	Let $(X,\ma{K},\mu)$ be the measure space introduced in Problem $2.4.4$, let $f_n(k)=1/n$ if $1\leq k\leq n$, $f_n(k)=0$ if $k>n$. Then $\{f_n\}$ is a sequence of integrable functions that converges uniformly to $f=0$, but the integration does not converges. 
+\end{pro}
+
+\begin{pro}%3
+	Let $(X,\ma{K},\mu)$ be the measure space introduced in Problem $2.4.4$, let $f_n(k)=\chi([1,n])/k$, and $f(k)=1/k$ for all $k\geq 1$. Then $\{f_n\}$ is a sequence of integrable functions that converges uniformly to $f$, but $f$ is not integrable.
+\end{pro}
+
+\begin{pro}%4
+	If $\mu(X)<\infty$ and if $\{f_n\}$ is a sequence of integrable functions that converges uniformly to a function $f$, then $f$ is integrable and $\lim_n \int f_n\,d\mu=\int f\,d\mu$.
+\end{pro}
+\begin{proof}
+	Since $\{f_n\}$ converges uniformly to $f$, we know for any $\ep>0$, $\sup_{X}|f_n-f|<\ep/2$ for large enough $n$. Thus $\sup_{X}|f_m-f_n|<\ep$ and since $\mu(X)<\infty$,
+	\[\int |f_m-f_n|\,d\mu\leq \ep\mu(X),\]
+	which means $\{f_n\}$ is Cauchy in mean. Thus by definition of integration, we get the conclusion.
+\end{proof}
+
+\section{Applications of Lebesgue's Bounded Convergence Theorem}
+\begin{pro}%1
+	Let $f$ and $g$ be measurable functions. Prove: (a) $f$ and $g$ are integrable if $(f^2+g^2)^{1/2}$ is integrable. (b): If $f^2$ and $g^2$ are integrable, then $fg$ is integrable.
+\end{pro}
+\begin{proof}
+	(a): $|f|,|g|\leq (f^2+g^2)^{1/2}$. (b): $2|fg|\leq f^2+g^2$.
+\end{proof}
+
+\begin{pro}%2
+	Derive the Lebesgue monotone convergence theorem from Fatou's lemma.
+\end{pro}
+\begin{proof}
+	Since $0\leq f_n\uparrow f$, we know $\int f_n\,d\mu\leq \int f\,d\mu$ and by Fatou's lemma, we know
+	\[\int f\,d\mu=\lim_n \int f_n\,d\mu.\]
+\end{proof}
+
+\begin{pro}%3
+	In a finite measure space, a sequence $\{f_n\}$ of a.e. real valued measurable functions is convergent in measure to zero if and only if 
+	\[\int \frac{|f_n|}{1+|f_n|}\,d\mu\to 0\quad\mbox{as}\;n\to\infty.\tag{1}\]
+\end{pro}
+\begin{proof}
+	Let $E_m^n=\{x\colon |f_n|\geq 1/m\}$, then for any $m$, $\mu(E_m^n)\to 0$. Thus
+	\[\int \frac{|f_n|}{1+|f_n|}\,d\mu\leq \frac{1}{1+m}\mu(X)+\mu(E_m^n).\]
+	Let $n\to \infty$, then $m\to \infty$, and $(1)$ is true. Conversely, suppose there is some $\ep>0,\delta>0$, such that for any $N$, there is some $n>N$, $\mu(\{x\colon |f_n|\geq \ep\})\geq \delta$. Thus
+	\[\liminf_n \int \frac{|f_n|}{1+|f_n|}\,d\mu\geq \frac{\ep}{1+\ep}\delta,\]
+	which is a contradiction.
+\end{proof}
+
+\begin{pro}%4
+	Denote by $Z$ the space of all classes $[f]$ of a.e. real valued measurable functions $f$ on a finite measure space $(X,\ma{K},\mu)$, with $[f]=[g]$ if and only if $f=g$ a.e. Define, on $Z$,
+	\[\rho([f],[g])=\rho(f,g)=\int \frac{|f-g|}{1+|f-g|}\,d\mu.\]
+	Prove that $Z$ is a complete metric space with the metric $\rho$.
+\end{pro}
+\begin{proof}
+	Given any $\rho$-Cauchy sequence $\{[f_n]\}$, by Problem $2.10.3$, we know $\{f_n\}$ is Cauchy in measure, thus by Corollary $2.4.4$, there is an a.e. real valued, measurable function $f$, such that $f_n\to f$ in measure. Then by Problem $2.10.3$, $f_n\to f$ in $\rho$. Suppose $[g_n]=[f_n]$ by all $n$, then $g_n=f_n$ a.e., thus the function $g$ is also the limit of $\{f_n\}$ in measure. Thus $f=g$ a.e.. So $[f]$ is unique.
+\end{proof}
+
+\begin{pro}%5
+	Let $\mu(X)<\infty$ and let $f(x,t)$ be a function of $x\in X,t\in(a,b)$. Assume that for each fixed $t$, $f(x,t)$ is integrable, and that the partial derivative $\partial f(x,t)/\partial t$ and is uniformly bounded for $x\in X,t\in(a,b)$. Then, for each $t\in(a,b)$, $\partial f(x,t)/\partial t$ is integrable, $\int f(x,t)\,d\mu(x)$ is differentiable, and
+	\[\frac{d}{dt}\int f(x,t)\,d\mu(x)=\int \frac{\partial}{\partial t} f(x,t)\,d\mu(x).\tag{1}\]
+\end{pro}
+\begin{proof}
+	Suppose $\partial f(x,t)/\partial t<c<\infty$ for all $x$ and $t$, since $c$ is integrable on $X$, we know the partial derivative function is also integrable. For any $x,t$ and $\Delta t\neq 0$, easy to know
+	\[\frac{f(x+\Delta t)-f(x,t)}{\Delta t}\]
+	is integrable. Now for a fixed $t$ and for all $n\geq 1$, we let
+	\[g_n(x)=n(f(x,t+1/n)-f(x,t)),\;g(x)=\frac{\partial}{\partial t} f(x,t),\]
+	then $g_n\to g$ pointwise on $X$ by definition of partial derivative and $g_n,g$ are all integrable. For any measurable set $E$, let $\la(E)=\int_E |g_n-g|\,d\mu\geq 0$, then by Theorem $2.8.4$, $\la$ is absolutely continuous, i.e.
+	for any $\ep>0$, there is some $\delta>0$, such that for any $E$ with $\mu(E)<\delta$, we have $\la(E)<\ep$.
+	Since $g_n\to g$ pointwise on $X$ with $\mu(X)<\infty$, we know $g_n\to g$ almost uniformly, thus, for the $\delta$ above, there is some $E$ with $\mu(E)<\delta$, such that for any $\eta>0$, there is some $N$, for all $n>N$, we have
+	$\sup_{x\in X\ba E}|g_n-g|<\eta$. Thus for all $n>N$,
+	\begin{align*}
+		\bigg|\int g_n\,d\mu-\int g\,d\mu\bigg|
+		&\leq \int |g_n-g|\,d\mu\\
+		&=\int_{X\ba E} |g_n-g|\,d\mu+\la(E)\\
+		&\leq \eta\mu(X)+\ep.
+	\end{align*}
+	Since $\ep$ and $\eta$ are both arbitrary, we know $\int g_n\,d\mu\to \int g\,d\mu$. So far, we have known the situation with $\Delta t>0$, as for $\Delta t<0$, we similarly let $h_n(x)=-n(f(x,t-1/n)-f(x,t))$, then we can also know $h_n\to g$ pointwise, $h_n$ is integrable and $\int h_n\,d\mu\to\int g\,d\mu$. Thus we know
+	\[\lim_{\Delta t\to 0} \int \frac{f(x,t+\Delta t)-f(x,t)}{\Delta t}\,d\mu=\int \frac{\partial}{\partial t} f(x,t)\,d\mu,\]
+	and thus $\int f(x,t)\,d\mu$ is differentiable and $(1)$ is proved.
+\end{proof}
+
+\begin{pro}%6
+	Let $f(x)$ be a nonnegative function and Lebesgue measurable on the real line. Suppose $f$ is integrable on $(0,\infty)$, prove that the function
+	\[g(t)=\int_{(0,\infty)} \exp(-tx) f(x)\,dx\quad(0<t<\infty)\]
+	is differentiable, and $g'(t)=-\int_{(0,\infty)} x\exp(-tx)f(x)\,dx$.
+\end{pro}
+\begin{proof}
+	Since $0\leq\exp(-tx)f(x)\leq f(x)$, $\exp(-tx)f(x)$ is integrable. For a fixed $t$ and $m\geq 1$, easy to know there is some $x_0$, such that for $x>x_0$, $\exp(-tx)<1/(tx)^m$, thus $x^m \exp(-tx)f(x)<f(x)/t^m$ and is integrable. Now for all $n\geq 1$, let
+	\begin{align*}
+	g_n(t)&=\int_{(0,n)} \exp(-tx)f(x)\,dx,\\
+	h_n(t)&=\int_{(0,n)} x\exp(-tx)f(x)\,dx,\\
+	h(t)&=\int_{(0,\infty)} x\exp(-tx)f(x)\,dx.
+	\end{align*}
+	By Monotone Convergence Theorem, $g_n\to g$, $h_n\uparrow h$ pointwise. For a fixed $t$, similarly to Problem $2.10.5$, we know $g_n'(t)=-h_n(t)$ for all $n$. Now let $\Delta t>0$, We try to prove $h(t)$ is continuous:
+	\begin{description}
+	\item[(a)] Let $p(x)=1-\exp(-x)-x$ for all $x\geq 0$, then $p(0)=0$ and $p'(x)=\exp(-x)-1\leq 0$ ($=$ is true iff $x=0$), thus $0<1-\exp(-x)<x$ for all $x>0$. Notice that
+	\begin{align*}
+	|h(t+\Delta t)-h(t)|&=\int_{(0,\infty)} x\exp(-tx)f(x)(1-\exp(-\Delta tx))\,dx\\
+	&\leq \int_{(0,\infty)} x\exp(-tx)f(x)\Delta tx\,dx\\
+	&=\Delta t\int_{(0,\infty)} x^2\exp(-tx)f(x)\,dx,
+	\end{align*}
+	and the integration at last is finite. So $h(t)$ is right continuous on $(0,\infty)$.
+	\item[(b)] Let for a fixed $t>0$, let $0<\Delta t<t/2$, and now also fix $\Delta t$, and let $q(x)=\exp(\Delta tx)-1-\Delta tx\exp(tx/2)$ for all $x\geq 0$. Then $q(0)=0$ and
+	\begin{align*} 
+	q'(x)&=\Delta t(\exp(\Delta tx)-(1+tx/2)\exp(tx/2))\\
+	&\leq \Delta t(\exp(\Delta tx)-\exp(tx/2))\\
+	&\leq 0,
+	\end{align*}
+	(= is true iff $x$=0) thus $\exp(\Delta tx)-1<\Delta tx\exp(tx/2)$ for all $t>0,0<\Delta t<t/2, x>0$.
+	Now notice that
+	\begin{align*}
+	|h(t-\Delta t)-h(t)|&=\int_{(0,\infty)} x\exp(-tx)f(x)(\exp(\Delta tx)-1)\,dx\\
+	&\leq \int_{(0,\infty)} x\exp(-tx)f(x)\Delta tx\exp(tx/2)\,dx\\
+	&=\Delta t\int_{(0,\infty)} x^2\exp(-tx/2)f(x)\,dx,
+	\end{align*}
+	and the last integration is also finite, so $h(t)$ is left continuous and thus continuous on $(0,\infty)$.
+	\end{description}
+	Similarly, we know for all $n\geq 1$, $h_n(t)$ is continuous on $(0,\infty)$. Now for a fixed $n$ and $t$, there is some $0<\ep<t$, such that $h_n,h$ are both continuous (thus bounded and Riemann integrable) on $[\ep,t]$, so we know
+	\[\int_{\ep}^t -h_n(u)\,du=g_n(t)-g_n(\ep).\]
+	Since that every proper Riemann integration is equal to its Lebesgue integration, so
+	\[\int_{[\ep,t]} -h_n(u)\,du=g_n(t)-g_n(\ep).\]
+	Notice that $h_n\uparrow h$ and $g_n\to g$, thus by MCT, $\int_{[\ep,t]} -h(u)\,du=g(t)-g(\ep)$. Since $h$ is bounded and Riemann integrable on $[\ep,t]$, we finally know
+	\[\int_{\ep}^t -h(u)\,du=g(t)-g(\ep).\]
+	Notice $h$ is continuous, thus $g$ is differentiable and $g'(t)=-h(t)$ by Fundamental Theorem of Calculus.
+\end{proof}
+
+\begin{pro}%7
+	Let $\{f_n\}$ be a sequence of integrable functions. Prove that if $\sum_{n=1}^\infty \int |f_n|\,d\mu<\infty$, then the series $\sum_{n=1}^\infty f_n(x)$ is convergent a.e. to an integrable function $f(x)$ and
+	\[\int f\,d\mu=\sum_{n=1}^\infty \int f_n\,d\mu.\tag{1}\]
+	Give an example that $\sum_{n=1}^{\infty} f_n(x)$ does not converge pointwise.
+\end{pro}
+\begin{proof}
+	For all $n$ and any $x$, let $g_n(x)=\sum_{i=1}^n |f_i(x)|\colon X\to[0,\infty]$ and $g(x)=\sum_{n=1}^{\infty} |f_n(x)|\colon X\to [0,\infty]$, since $g_n\uparrow g$, by MCT we know $\int g\,d\mu=\lim_n \int g_n\,d\mu<\infty$. Thus $\mu(\{x\colon g(x)=\infty\})=0$. Now let $E=\{x\colon \sum_{n=1}^{\infty} f_n(x)\;\mbox{diverges}\}$ and $h_n=\sum_{i=1}^n f_i(x)$ and
+	\[f(x)=\begin{cases}
+	\sum_{n=1}^{\infty} f_n(x),&\mbox{if}\;x\in X\ba E,\\
+	0,&\mbox{if}\; x\in E.\end{cases}\]
+	Then $\mu(E)=0$ and $h_n\to f$ a.e.. Notice that for all $m>n$,
+	\[\int |h_m-h_n|\,d\mu\leq \sum_{i=n+1}^m \int |f_i|\,d\mu\]
+	thus $\{h_n\}$ is Cauchy in mean. So $f$ is integrable and $(1)$ is true. The example is as follows. Let $X=[0,\infty]$, the measure is Lebesgue measure and for all $n$, $f_n(x)=(-1)^{n+1}$ if $x=0$ and $f_n(x)=\exp(-x)/2^n$ if $x>0$. Then $\int f_n(x)\,d\mu=\int |f_n(x)|\,d\mu=1/2^n$. And $f=0$ if $x=0$, $f=\exp(-x)$ if $x>0$. Thus all properties hold but $\sum_{n=1}^\infty f_n(0)$ diverges.
+\end{proof}
+
+\begin{pro}%8
+	Let $\{f_n\}$ be a sequence of nonnegative integrable functions. If the series $f(x)=\sum_n f_n(x)\in[0,\infty]$ is an integrable function, then $\sum_n\int f_n\,d\mu<+\infty$, where both $n$ are from $1$ to $+\infty$.
+\end{pro}
+\begin{proof}
+	Let $g_n=\sum_{i=1}^n f_i$, then $0\leq g_n\uparrow f$, then use MCT.
+\end{proof}
+
+\begin{pro}%9
+	Let $f$ and $f_n$ be integrable functions such that $0\leq f_n(x)\leq f(x)$ a.e.. Then
+	\[\int(\limsup_n f_n)\,d\mu\geq \limsup_n \int f_n\,d\mu\geq \liminf_n \int f_n\,d\mu\geq \int(\liminf_n f_n)\,d\mu.\]
+\end{pro}
+\begin{proof}
+	For all $n$, let $g_n(x)=\sup_{j\geq n}f_j(x)$, easy to know 
+	\[0\leq f_n,\;g_n,\;\limsup_n f_n,\;\liminf_n f_n\leq f(x)\quad \mbox{a.e.},\]
+	thus are all integrable. The middle and the last inequality has been proved by definition and Fatou's Lemma, we only need to prove the first one. Easy to know $0\leq f_n\leq g_n$, so $\int g_n\,d\mu\geq \int f_n\,d\mu$. Notice that $\{g_n\}$ is decreasing, so $\{\int g_n\,d\mu\}$ is also decreasing and bounded by $0$, so the integration sequence is convergent, thus is a Cauchy sequence, so $\{g_n\}$ is Cauchy in mean. Since $\lim_n g_n=\limsup_n f_n$, we know
+	\[\int (\limsup_n f_n)\,d\mu=\lim_n \int g_n\,d\mu\geq \limsup_n \int f_n\,d\mu.\]
+\end{proof}
+
+\begin{pro}%10
+	Extend the result of Problem $2.10.9$ to the case where $|f_n(x)|\leq f(x)$ a.e..
+\end{pro}
+\begin{proof}
+	All inequality still hold in the new case. Let
+	\begin{align*}
+	g_n(x)=\sup_{j\geq n}f_j(x),&\quad g(x)=\limsup_n f_n(x),\\
+	h_n(x)=\inf_{j\geq n}f_j(x),&\quad h(x)=\liminf_n f_n(x),
+	\end{align*} then $f_n,g_n,g,h_n,h$ are all integrable, thus we know the middle inequality holds.
+	\begin{description}
+	\item[(a)] Notice that $g_n\downarrow g$ and 
+	\[+\infty>\int g_n\,d\mu\geq \int g\,d\mu>-\infty,\]
+	thus $\{\int g_n\,d\mu\}$ is a decreasing Cauchy sequence and $\{g_n\}$ is Cauchy in mean. Since $g_n\geq f_n$ for all $n$,
+	\[\int g\,d\mu=\lim_n \int g_n\,d\mu \geq \limsup_n \int f_n\,d\mu.\]
+	\item[(b)] Notice that $h_n\uparrow h$ and
+	\[-\infty<\int h_n\,d\mu\leq \int h\,d\mu<+\infty,\]
+	thus $\{\int h_n\,d\mu\}$ is an increasing Cauchy sequence and $\{h_n\}$ is Cauchy in mean. Since $h_n\leq f_n$ for all $n$,
+	\[\int h\,d\mu=\lim_n \int h_n\,d\mu \leq \liminf_n \int f_n\,d\mu.\]
+	\end{description}
+\end{proof}
+
+\begin{pro}%11
+	Let $X=\cup_{n=1}^\infty E_n$, $E_n\subset E_{n+1}$ for all $n$. Let $f$ be a nonnegative measurable function. Prove that
+	\[\int f\,d\mu=\lim_n \int_{E_n} f\,d\mu.\]
+\end{pro}
+\begin{proof}
+	Let $f_n=\chi(E_n)f$, then $0\leq f_n\leq f$ and $\{f_n\}$ is increasing. Suppose for all $n$, $f_n$ is integrable, then by MCT, $f$ is also integrable and the equality holds. Assume there is some $n$ that $f_n$ is not integrable, then $f$ is also not integrable. Easy to know this equality also holds with $\infty=\infty$.
+\end{proof}
+
+\begin{pro}%12
+	Let $f$ be a nonnegative measurable function and let
+	\[f_n(x)=\begin{cases}f(x),&\mbox{if}\;f(x)\leq n,\\
+	n,&\mbox{if}\;f(x)>n.\end{cases}\]
+	Prove that $\lim_n\int f_n\,d\mu=\int f\,d\mu$.
+\end{pro}
+\begin{proof}
+	Notice that $0\leq f_n\uparrow f$, so $\int f_n\,d\mu\leq f\,d\mu$. Suppose for all $n$, $f_n$ is integrable, then by MCT, $f$ is also integrable and the equality holds. Otherwise, if there is some $n$, such that $f_n$ is not integrable, then the equality also holds with $\infty=\infty$.
+\end{proof}
+
+\begin{pro}%13
+	If $f_1,f_2,\ldots,f_n$ are integrable functions, then $f=\max\{f_1,\ldots,f_n\}$ is also an integrable function.
+\end{pro}
+\begin{proof}
+	Let $E_1=\{x\colon f_1(x)\geq f_i(x),1\leq i\leq n\}$, $E_2=\{x\colon f_2(x)\geq f_i(x),1\leq i\leq n\}\ba E_1$,and so on until $E_n=\{x\colon f_n(x)\geq f_i(x),1\leq i\leq n\}\ba\cup_{i=1}^{n-1} E_i$, then $E_1,\ldots,E_n$ are a measurable partition of $X$ and
+	\[f=f_1\chi(E_1)+f_2\chi(E_2)+\cdots+f_n\chi(E_n).\]
+	Since $f_i\;(1\leq i\leq n)$ is integrable, there is some integrable simple sequence $\{f_i^m\}$ converges to $f_i$ a.e. and Cauchy in mean.
+	Let $f^m=f_1^m \chi(E_i)+\cdots+f_n^m\chi(E_n)$, easy to know $\{f^m\}$ converges to $f$ a.e. and also Cauchy in mean by Theorem $2.7.1(a)$.
+\end{proof}
+
+\begin{pro}%14
+	Give an example where Fatou's lemma holds with strict inequality.
+\end{pro}
+\begin{proof}
+	Let $f_n=\chi([n,n+1])$, then $\int f_n\,d\mu=1$ and $f_n\to 0$ pointwise.
+\end{proof}
+
+\begin{pro}%15
+	Let $f$ be a real valued measurable function in a finite measure space. For all $n$, let
+	\[s_n=\sum_{k=-\infty}^{\infty} \frac{k}{2^n}\mu\bigg(\Big\{x\colon \frac{k}{2^n}\leq f(x)<\frac{k+1}{2^n}\Big\}\bigg).\]
+	If $f$ is integrable, then each series $s_n$ is absolutely convergent and
+	\[\int f\,d\mu=\lim_n s_n.\tag{1}\]Conversely, if one of the series $s_n$ is absolutely convergent, then $f$ is integrable and $(1)$ holds.
+\end{pro}
+\begin{proof}
+	First we suppose $f\geq 0$. For all $n\geq 1,k\geq 0$, let
+	\[E_n^k=\bigg\{x\colon \frac{k}{2^n}\leq f(x)<\frac{k+1}{2^n}\bigg\},\quad f_n=\frac{k}{2^n}\chi(E_n^k).\]
+	Then $0\leq f_n\uparrow f$ pointwise. Suppose $s_n$ is (absolutely) convergent for all $n$, let $F_n^m=\cup_{k=0}^m E_n^k$, then $F_n^m\uparrow X$ by $m$. Thus by Problem $2.10.11$, 
+	\begin{align*}
+	\int f_n\,d\mu&=\lim_m\int_{F_n^m} f_n\,d\mu\\
+	&=\lim_m\bigg(\sum_{k=0}^m \frac{k}{2^n}\mu(E_n^k)\bigg)\\
+	&=s_n.
+	\end{align*}
+	Thus $f_n$ is integrable for all $n$. By MCT, $f$ is integrable and $(1)$ holds. Conversely, suppose $s_n$ is (absolutely) convergent for some $n$. Then by the definition of $f_n$, we know $f(x)<f_n(x)+1/2^n$. Easy to know $s_n=\int f_n\,d\mu$, so $\int f\,d\mu\leq s_n+\mu(X)/2^n<\infty$.
+
+	Now consider $f$ is any integrable function. Then $|f|$ is integrable, extend all $k$ and $m$ to $\m{Z}$. Notice that $|f_n|\leq |f|+1/2^n$, then $|f_n|$ is integrable for all $n$. Let $s_n'=\sum_{k=-\infty}^{\infty} |k|/2^n\mu(E_n^k)$.
+	Easy to know $s_n'=\int |f_n|\,d\mu<\infty$, thus $s_n$ is absolutely convergent for all $n$. Similar to Problem $2.10.11$, we can prove that $s_n=\int f_n\,d\mu$. Also notice $f_n\leq f<f_n+1/2^n$. so $s_n\leq \int f\,d\mu\leq s_n+\mu(X)/2^n$ and thus $(1)$ holds by taking $n\to\infty$ both sides. Conversely, suppose $s_n'$ converges for some $n$, and notice that $|f|\leq |f_n|+1/2^n$, so $|f|$ and $f$ is integrable.
+\end{proof}
+
+\begin{pro}%16
+	With the notation of Problem $2.8.1$, we denote by $L^{\infty}(X,\ma{K},\mu)$ or, more briefly, $L^{\infty}$, the space of all classes $[f]$ of measurable and essentially bounded functions $f$. Prove that $L^{\infty}$ is a complete metric space with the metric
+	\[\rho([f],[g])=\rho(f,g)=\esssup_{x\in X}|f(x)-g(x)|.\]
+\end{pro}
+\begin{proof}
+	Suppose $\{f_n\}$ is a Cauchy sequence in $\rho$. Give any $k\geq 1$, there is some $N_k$, such that for all $m>n>N_k$, there is some $E_{mn}^k$ with $\mu(E_{mn}^k)=0$ and $\sup_{X\ba E_{mn}^k}|f_m-f_n|<1/k$. Now let
+	\[E^k=\bigcup_{m>n>N_k} E_{mn}^k,\quad E=\bigcup_{k\geq 1} E^k,\]
+	then $\mu(E)=0$ and easy to know $\{f_n\}$ is uniformly Cauchy in $X\ba E$,
+	\[\sup_{X\ba E}|f_n-f_m|\leq \sup_{X\ba E_{mn}^k} |f_n-f_m|<\frac{1}{k}.\]
+	Now we proof a lemma
+	\begin{lem}
+		Suppose $X$ is complete, then uniformly Cauchy on $X$ if and only if uniformly converges on $X$.
+	\end{lem} 
+	\begin{proof}
+		Suppose $f_n\to f$ uniformly on $X$, then since
+		\[\sup_X|f_n-f_m|\leq \sup_X|f_n-f|+\sup_X|f_m-f|<2\ep,\]
+		we know $f_n$ uniformly Cauchy. Conversely, suppose that for any $\ep>0$, there are some $N$, such that for all $n>m>N$, we have
+		\[|f_n(x)-f_m(x)|<\ep/2,\quad \forall x\in X.\]
+		Since $X$ is complete, then there is some $f$ defined on $X$ such that $f_n\to f$ pointwise, notice that for all $x\in X$, 
+		\[|f_n(x)-f(x)|=\lim_m|f_n(x)-f_m(x)|,\]
+		thus for $n>N$
+		\[|f_n(x)-f(x)|\leq \ep/2<\ep,\quad \forall x\in X.\]
+		this means $f_n\to f$ uniformly on $X$.
+	\end{proof}
+	Thus there is some bounded (Since $f_n$ is essentially bounded on $X$) $f$ defined on $X\ba E$, such that $f_n\to f$ uniformly on $X\ba E$. Extend $f$ on $E$ with $f=0$, easy to know $f$ is essentially bounded and measurable on $X$ and
+	\[\esssup_{x\in X}|f_n-f|=\sup_{x\in X\ba E}|f_n-f|\to 0\quad(n\to\infty).\]
+	Thus $L^{\infty}$ is complete.
+\end{proof}
+
+\section{The Riemann Integral}
+\begin{pro}%1
+	Prove the following theorem of Darboux: Let $f(x)$ be a bounded function in a bounded interval $[a,b]$. Then there is a number $S$ such that for any sequence $\pi_m$ of partitions of $[a,b]$ with $|\pi_m|\to 0$, we have $S_{\pi_m}\to S$.
+\end{pro}
+\begin{proof}
+	See ``Mathematical Analysis (1)'' 2nd edition. Page 279, Lemma $7.1.3$. ChenJixiu, YuChonghua, Jinlu. High Education Press, China. 
+\end{proof}
+
+\begin{pro}%2
+	Prove that a bounded monotone function can have at most a countable number of points of discontinuity.
+\end{pro}
+\begin{proof}
+	Has been proved in Problem $1.9.13$.
+\end{proof}
+
+\begin{pro}%3
+	The function $f(x)=\sin(x)/x$ is Riemann integrable over the interval $(1,\infty)$.
+\end{pro}
+\begin{proof}
+	First we prove a lemma
+	\begin{lem}[Dirichlet]
+		Fixed some real number $a$, suppose $f$ is Riemann integrable on all bounded interval $[a,A]$ with $A\geq a$. Let $F(A)=\int_{a}^{A} f(x)\,dx$. If $F$ is bounded on $[a,\infty)$ and $g$ is monotone on $[a,\infty)$ with $\lim_{x\to+\infty}g(x)=0$, then $fg$ is Riemann integrable on $[a,\infty)$.
+	\end{lem}
+	\begin{proof}
+		Suppose $|F(A)|<M<\infty$ for all $A\geq a$, then for any $A,B\geq a$, we have
+		\[\bigg|\int_{A}^{B} f(x)\,dx\bigg|<2M.\]
+		For any $\ep>0$, since $g\to 0\;(x\to+\infty)$, there is some $a\leq A_0<\infty$, such that for all $x>A_0$,
+		\[|g(x)|<\frac{\ep}{4M}.\]
+		Thus, for all $B>A\geq A_0$, by \emph{Second Mean Value Theorem for Definite Integrals}, there is some $C\in[A,B]$, such that
+		\begin{align*}
+		\bigg|\int_{A}^{B} fg\,dx\bigg|& \leq |g(A)|\cdot\bigg|\int_A^C f\,dx\bigg|+|g(B)|\cdot\bigg|\int_C^B f\,dx\bigg|\\
+		&\leq 2M(|g(A)|+|g(B)|)\\
+		&\leq \ep.
+		\end{align*}
+		This proves the lemma.
+	\end{proof}
+	Now go back to the problem. Notice that $\int_1^A \sin(x)\,dx$ is obviously bounded on $[1,\infty)$ and $1/x$ is decreasing to $0$. So $\sin(x)/x$ is integrable on $(1,\infty)$.
+\end{proof}
+
+\begin{pro}%4
+	Construct a sequence $\{f_n\}$ of Riemann integrable functions on $[0,1]$, such that $|f_n(x)|\leq 1$ for all $x$ and $n$ and there is some $f$ with $f_n\to f$ pointwise on $[0,1]$, but $f$ is not Riemann integrable on $[0,1]$.
+\end{pro}
+\begin{proof}
+	For $x\in[0,1]$, let
+	\[f_n(x)=\begin{cases}
+	1,&\mbox{if}\;x\cdot n!\in\m{N},\\
+	0,&\mbox{otherwise}.\end{cases}\]
+	Easy to know for all $n$, there are at most finite uncontinuous points in $[0,1]$, thus $f_n$ is Riemann integrable. Notice that for $x$ is an irrational number, $f_n(x)=0$ for all $n$, for $x$ is a rational number with the form $q/p$ where $p\in\m{N^+},q\in\m{N},q\leq p$, for all $n>p$, $f_n(x)=1$. Thus we know $f=\chi([0,1]\cap\m{Q})$ and $f_n\to f$ pointwise. But $f$ is not Riemann integrable.
+\end{proof}
+
+\begin{pro}%5
+	Let $f,f_n$ be bounded Riemann-integrable functions on the interval $[0,1]$. Assume that there is a constant $K$ such that $|f_n(x)|\leq K$ for all $x$ and $n$. Show that if $lim_n f_n=f$ a.e., then 
+	\[\lim_n \int_0^1 f_n(x)\,dx=\int_0^1 f(x)\,dx.\]
+\end{pro}
+\begin{proof}
+	By Theorem $2.11.2$ and Lebesgue dominated Theory.
+\end{proof}
+
+\begin{pro}%6
+	Let $f$ be a bounded Riemann integrable function on bounded intervals of the real line. Assume that the limit of $\int_{-n}^n |f(x)|\,dx$ exists and is finite. Prove that $f$ is Lebesgue integrable on $(-\infty,\infty)$ and 
+	\[\int_{(-\infty,\infty)} f(x)\,dx=\int_{-\infty}^\infty f(x)\,dx.\]
+\end{pro}
+\begin{proof}
+	First we prove that $|f|$ is Riemann-integrable on $\m{R}$. For all $A>0$ (large enough), there is some $n$, such that 
+	\[\int_0^n |f|\,dx\leq \int_0^A |f|\,dx<\int_0^{n+1} |f|\,dx\]
+	thus $|f|$ is R-i on $[0,\infty)$, similarly, $|f|$ is R-i on $(-\infty,0]$, thus is R-i on $\m{R}$. By Problem $2.10.11$, 
+	\[\int_{(-\infty,\infty)} |f|\,dx=\lim_n \int_{[-n,n]} |f|\,dx=\lim_n\int_{-n}^n |f|\,dx<\infty,\]
+	thus $|f|$ and $f$ is Lebesgue-integrable on $\m{R}$. Easy to know $f$ is also R-i on $\m{R}$. Now by Lebesgue dominated Theory, we know
+	\[\int_{(-\infty,\infty)} f\,dx=\lim_n \int_{[-n,n]}f\,dx=\lim_n \int_{-n}^n f\,dx=\int_{-\infty}^\infty f\,dx.\]
+\end{proof}
+
+\begin{pro}%7
+	Omit
+\end{pro}
+
+\begin{pro}%8
+	Omit
+\end{pro}
+
+\begin{pro}%9
+	Prove that if $f$ is continuous in $[a,b]$ and $g$ is monotone increasing and continuous from the right, then
+	\[\int_a^b f\,dg=\int_{(a,b]} f\,dg,\]
+	where $dg=d\mu_g$, and $\mu_g$ is Lebesgue-Stieltjes measure induced by $g$.
+\end{pro}
+\begin{proof}
+	Add Proof here later.
+\end{proof}
+
+\begin{pro}%10
+	Let $f$ be continuous on $[a,b]$ and $g$ be of bounded variation, then
+	\[\bigg|\int_a^b f\,dg\bigg|\leq T(g)\sup_{a\leq x\leq b} |f(x)|,\]
+	where $T(g)$ is the total variation of $g$ over $[a,b]$.
+\end{pro}
+\begin{proof}
+	Let $M=\sup_{a\leq x\leq b} |f(x)|$, then
+	\begin{align*}
+	\bigg|\int_a^b f\,dg\bigg|&\leq \lim_{\la\to 0} \sum_{i=1}^n \Big|f(y_i)\big(g(x_i)-g(x_{i-1})\big)\Big|\\
+							  &\leq M\lim_{\la\to 0} \sum_{i=1}^n |g(x_i)-g(x_{i-1})|\\
+							  &=MT(g).
+	\end{align*}
+\end{proof}
+
+\begin{pro}%11
+	If $f$ is Lebesgue-integrable over $(-\infty,\infty)$ and if $-\infty<a<b<\infty$, then for any real number $h$,
+	\[\int_{[a,b]} f_h(x)\,dx=\int_{[a+h,b+h]} f(x)\,dx,\]
+	where $f_h(x)=f(x+h)$.
+\end{pro}
+\begin{proof}
+	By Problem $1.6.5$, easy to derive the conclusion when $f$ is simple, then use the definition of integral.
+\end{proof}
+
+\section{The Radon-Nikodym  Theorem}
+\begin{pro}%1
+	Prove that if $f$ is integrable w.r.t $\mu$ then it is also integrable w.r.t $\mu^+$ and $\mu^-$. 
+\end{pro}
+\begin{proof}
+	If $f$ is integrable w.r.t $|\mu|=\mu^+ + \mu^-$, then by Problem $2.7.1$ it is also integrable w.r.t $\mu^+$ and $\mu^-$.
+\end{proof}
+
+\begin{pro}%2
+	The Radon-Nikodym theorem remains true in case $\mu$ is a $\sigma$-finite singed measure.
+\end{pro}
+\begin{proof}
+	Add proof here later.
+\end{proof}
+
+\begin{pro}%3
+	If $\nu$ and $\mu$ are $\sigma$-finite singed measures and $\nu\ll \mu$, then the set $\{x\colon (d\nu/d\mu)(x)=0\}$ has $\nu$-measure zero.
+\end{pro}
+\begin{proof}
+	Let $E=\{x\colon (d\nu/d\mu)(x)=0\}$, then $\nu(E)=\int_E d\nu/d\mu\,d\mu=0$.
+\end{proof}
+
+\begin{pro}%4
+	Let $\nu$ be a $\sigma$-finite signed measure, $\mu$ be a $\sigma$-finite positive measure and let $\nu\ll\mu$. For any $\nu$-integrable function $g$, the function $g d\nu/d\mu$ is $\mu$-integrable and 
+	\[\int g\,d\nu=\int g\frac{d\nu}{d\mu}\,d\mu.\]
+\end{pro}
+\begin{proof}
+	\begin{description}
+	\item[(a)] First we prove the situation when $\nu$ and $\mu$ are both $\sigma$-finite positive measures.
+	Let $f$ be the derivative $d\nu/d\mu$, from the proof of R-N theorem we know $f$ can be chosen to be positive.
+	Assume $g$ is a simple function with form $g=a_i$ on $E_i$, then 
+	\begin{align*}
+		\int g\,d\nu&=\sum_i a_i \int_{E_i} f\,d\nu\\
+		&=\int \sum_i a_i\chi(E_i)f\,d\mu\\
+		&=\int gf\,d\mu.
+	\end{align*}
+	Thus $gf$ is $\mu$-integrable. Now assume $g$ is any $\nu$-integrable function, then there is some $\nu$-Cauchy in mean simple sequence $\{g_n\}$ such that $g_n\to g$ a.e., easy to know $g_nf\to gf$ a.e. and notice that $f\geq 0$, then
+	\[\int|g_nf-g_mf|\,d\mu=\int |g_n-g_m|\,d\nu\to0\quad(n,m\to \infty),\]
+	thus $gf$ is $\mu$-integrable and 
+	\[\int gf\,d\mu=\lim_n \int g_nf\,d\mu=\lim_n \int g_n\,d\nu=\int g\,d\nu.\]
+	\item[(b)] Now return to the original situation, where $\nu$ is signed measure and $\mu$ is positive measure.
+	Assume $X=A\cup B$ is the Jordan decomposition of $\nu$, with $A$ is the positive part and $B$ is the negative part. Thus there is some positive measurable function $f_1$, such that
+	\[\nu^+(E)=\nu(E\cap A)=\int_E f_1\,d\mu,\quad\forall E\in\ma{K}.\]
+	Let $E\subset B$, then $\int_E f_1\,d\mu=0$, thus we can choose $f_1(x)=0$ for all $x\in B$. Similarly, there is some positive measurable function $f_2$, such that $\nu^-(E)=\int_E f_2\,d\mu$ with $f_2(x)=0$ for all $x\in A$.
+	Now let $f=f_1-f_2$ we know for all $\nu$-integrable function $g$, $gf$ is $\mu$-integrable since $gf_1$ and $gf_2$ are both $\mu$-integrable by situation $(a)$ above, and finally
+	\begin{align*}
+	\int g\,d\nu&=\int g\,d\nu^+-\int g\,d\nu^-\\
+				&=\int gf_1\,d\mu-\int gf_2\,d\mu\\
+				&=\int gf\,d\mu,
+	\end{align*}
+	which finishes our proof.
+	\end{description}
+\end{proof} 
+
+\begin{pro}%5
+	Let $\la,\mu$ be $\sigma$-finite measures and let $\nu$ be $\sigma$-finite singed measures, assume that $\nu\ll\mu,\mu\ll\la$, then
+	\[\frac{d\nu}{d\la}=\frac{d\nu}{d\mu}\frac{d\mu}{d\la},\tag{1}\]
+	a.e. with respect to $\la$.
+\end{pro}
+\begin{proof}
+	For every $E$ with $|\nu|(E)<\infty$, by Problem $2.12.4$ we know
+	\begin{align*}
+	\nu(E)&=\int \chi(E) \frac{d\nu}{d\mu}\,d\mu\\
+		  &=\int \chi(E) \frac{d\nu}{d\mu}\frac{d\mu}{d\la}\,d\la.
+	\end{align*}
+	Thus $(1)$ is true a.e. $[\la]$.
+\end{proof}
+
+\begin{pro}%6
+	Let $\mu$ be a $\sigma$-finite measure and let let $\nu_1,\nu_2$ be $\sigma$-finite signed measures such that $\nu_1\ll\mu,\nu_2\ll\mu$. Then $\nu_1+\nu_2\ll\mu$ and
+	\[\frac{d(\nu_1+\nu_2)}{d\mu}=\frac{d\nu_1}{d\mu}+\frac{d\nu_2}{d\mu}.\]
+\end{pro}
+
+\begin{pro}%7
+	Let $\mu$ and $\nu$ be $\sigma$-finite measures and assume that $\mu-\nu$ is a measure. If $\nu\ll\mu-\nu$, then the set of points where $d\nu/d\mu=1$ has zero $\mu$-measure.
+\end{pro}
+
+\section{The Lebesgue Decomposition}
+\begin{pro}%1
+	For each signed measure $\mu$, we have $\mu^+\bot\mu^-$, $\mu^+\ll|\mu|$ and $\mu^-\ll|\mu|$.
+\end{pro}
+\begin{proof}
+	Give the Jordan decomposition $X=A\cup B$, then $|\mu^+|(B)=\mu(B\cap A)=0$ and $|\mu^-|(A)=-\mu(A\cap B)=0$, thus $\mu^+\bot\mu^-$. The last two are right since $|\mu|=\mu^+\mu^-$.
+\end{proof}
+
+\begin{pro}%2
+	If $\nu_1$ and $\nu_2$ are singular relative to $\mu$, then $\nu_1+\nu_2$ is singular relative to $\mu$.
+\end{pro}
+\begin{proof}
+	Assume $X=A_1\cup B_1=A_2\cup B_2$ are the singular decompositions of $\nu_1$ and $\nu_2$, then $|\nu_i|(B_1\cap B_2)=0$. Now suppose $X=P\cup N$ is the Jordan decomposition of $\nu=\nu_1+\nu_2$, then 
+	\[\nu^+(B_1\cap B_2)=\nu_1(B_1\cap B_2\cap P)+\nu_2(B_1\cap B_2\cap P)=0.\]
+	Similarly, we have $\nu^-(B_1\cap B_2)=0$, thus $|\nu|(B_1\cap B_2)=0$. Easy to know that $|\mu|((B_1\cap B_2)^c)=0$, thus $\nu\bot\mu$.
+\end{proof}
+
+\begin{pro}%3
+	If $\nu\ll\mu$ and $\nu\bot\mu$, then $\nu=0$.
+\end{pro}
+\begin{proof}
+	Assume $|\nu|(A)=0$ and $|\mu|(B)=0$, then $|\nu|(B)=0$ since $\nu\ll\mu$. Thus $|\nu|=0$ and $\nu=0$.
+\end{proof}
+
+\begin{pro}%4
+	Let $A$ be a sequence $\{X_m\}$ in the Euclidean space $\m{R}^n$, and let $\{p_m\}$ be a sequence of positive numbers. Denote by $\nu$ the $\sigma$-finite measure (cf. Problem $1.2.5$) given by
+	\[\nu(E)=\sum_{x_m\in E}p_m,\quad \forall E\subset \m{R}^n.\]
+	Find the Lebesgue decomposition of $\nu$ with respect to the Lebesgue measure $\mu$ of $\m{R}^n$.
+\end{pro}
+\begin{proof}
+	Let $N=\{x_m\colon m\geq 1\}$, then $\mu(N)=0$ and $\nu(N^c)=0$, thus $\nu\bot\mu$ and $\nu=0+\nu$ is the Lebesgue decomposition.
+\end{proof}
+
+\section{The Lebesgue Integral on The Real Line}
+\begin{pro}%5
+	A function $f(x)$ is called singular if $f'(x)=0$ a.e. Show that every function $g$ of bounded variation in $(a,b)$ can be written as a sum $f=f_1+f_2$, where $f_1$ is absolutely continuous and $f_2$ is singular. Show also that the decomposition is unique, except for an additive constant.
+\end{pro}
+\begin{proof}
+	First we prove a lemma
+	\begin{lem}
+	If $f$ is an increasing real value function on $[a,b]$, then $f$ can be written as a sum $f=f_1+f_2$ on $(a,b)$, where $f_1$ is absolutely continuous and $f_2$ is singular.
+	\end{lem}
+	\begin{proof}
+		Use Vitali Covering Lemma, we can prove that every increasing function on $[a,b]$ is differentiable a.e.[Lebesgue] on $(a,b)$, and the derivative is Lebesgue integrable, thus we write on Lebesgue integral
+		\[f(x)=\int_{(a,x)} f'(t)\,dt+r(x),\quad x\in(a,b).\tag{1}\]
+		Call the first part $g$, then by problem $2.8.2$, $g$ is absolutely continuous and by Theorem $2.14.1$, $g$ is differentiable a.e., thus $r$ is also differentiable a.e. with $r'=f'-g'=0$ a.e. on $(a,b)$ and $r$ is singular.
+		Thus $(1)$ is a decomposition.
+	\end{proof}
+	Now return to the question. Since $f$ is of bounded variation in $(a,b)$, it's easy to know that both $f(a^+)$ and $f(b^-)$ exist and are real number (not $\infty$), so we redefine $f$ on $[a,b]$ with $f(a)=f(a^+)$ and $f(b)=f(b^-)$. Thus by Problem $2.8.2$, $f=g-h$ on $[a,b]$, where $g$ and $h$ are increasing real value function on $[a,b]$. Now use the lemma, we can give the decompositions $g=g_1+g_2$ and $h=h_1+h_2$, where $g_1,h_1$ are absolutely continuous and $g_2,h_2$ are singular. So $f=(g_1-h_1)+(g_2-h_2)$ is a decomposition. As for the uniqueness, if $f=f_1+f_2=g_1+g_2$ are two decompositions, then $f_1-g_1=g_2-f_2$ are absolutely continuous and singular on $(a,b)$, easy to know that the value is constant.
+\end{proof}
+
+\begin{pro}%7
+	If $f(x)$ is a continuous function in $(a,b)$ and if $f'(x)$ exists everywhere in $(a,b)$ and is bounded, then
+	\[\int_{(a,x)} f'(t)\,dt=f(x)-f(a^+)\]
+	for any $a<x<b$.
+\end{pro}
+\begin{proof}
+	For any $a<x<b$, 
+	\[f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h},\]
+	since $f$ is continuous on $(a,b)$, we know $(f(x+h)-f(x))/h$ is also continuous for all $h$ small enough, thus $f'$ is measurable. Since $f'$ is also bounded, by DCT, $f'$ is Lebesgue integrable on $(a,b)$. Now for any $a<c<d<b$, since $f$ is continuous on $[c,d]$, we know $f$ is Riemann integrable on $[c,d]$ and 
+	\[\int_{(c,d)} f\,dt=\int_c^d f\,dt=(d-c)f(x_0),\]
+	where $c<x_0<d$. Now by Problem $2.10.11$, we know that for $h>0$,
+	\[\liminf_{h\to0}\int_{(c,d)} \frac{f(x+h)-f(x)}{h}\,dx\geq \int_{(c,d)} f'\,dx\geq \limsup_{h\to0}\int_{(c,d)} \frac{f(x+h)-f(x)}{h}\,dx,\]
+	thus \[\lim_{h\to0}\int_{(c,d)} \frac{f(x+h)-f(x)}{h}\,dx =\int_{(c,d)} f'\,dx.\]
+	Now by Problem $2.11.11$, we know
+	\begin{align*}
+	 \lim_{h\to0}\int_{(c,d)} \frac{f(x+h)-f(x)}{h}\,dx
+	 &=\lim_h \frac{1}{h}\bigg(\int_{(c+h,d+h)} f\,dx-\int_{(c,d)} f\,dx\bigg)\\
+	 &=\lim_h \frac{1}{h}\bigg(\int_{(d,d+h]} f\,dx-\int_{(c,c+h]} f\,dx\bigg)\\
+	 &=\lim_h \frac{1}{h}\bigg(\int_d^{d+h} f\,dx-\int_c^{c+h} f\,dx\bigg)\\
+	 &=\lim_h f(d+\theta_1 h)-f(c+\theta_2 h),\quad(0<\theta_1,\theta_2<1)\\
+	 &=f(d)-f(c).
+	 \end{align*}
+	 Thus we  know $\int_{(c,d)}f'(x)\,dx=f(d)-f(c)$.
+	 Now for any $a<x<b$ and $\ep>0$ small enough, we know
+	 \[\int_{(a+\ep,x)}f'(t)\,dt=f(x)-f(a+\ep).\]
+	 Since Lebesgue integral is a signed measure and absolutely continuous (c.f. Theorem $2.8.4$), we know that \
+	 \[\lim_{\ep\to0^+}\int_{(a+\ep,x)}f'(t)\,dt=\int_{(a,x)}f'(t)\,dt,\]
+	 Thus we know $f(a^+)$ exists (as a real number) and finally
+	 \[\int_{(a,x)} f'(t)\,dt=f(x)-f(a^+).\]
+\end{proof}
+
+\section{Product of Measures}
+\begin{pro}%1
+	A Borel set $E$ in $\m{R}^n$ is called a $G_{\delta}$ set if it is the form $E=\cap_{k=1}^{\infty} A_k$, where the $A_k$ are open sets. From Problem $1.9.7$, $1.9.8$ we have that every bounded Lebesgue set $F$ in $\m{R}^n$ has the form $F=E-N$, where $E$ is a $G_{\delta}$ set and $\mu(N)=0$. Verify $(2.15.1)$ for $m=\infty$, thereby concluding that if $A$ and $B$ are $G_{\delta}$ sets in $\m{R}^n$ and $\m{R}^k$, then $A\times B$ is a $G_{\delta}$ set in $\m{R}^{n+k}$.
+\end{pro}
+\begin{proof}
+	Easy to verify that $(2.15.1)$ still holds when $m=\infty$. Also notice that $A\times B$ is an open set if $A,B$ are open sets.
+\end{proof}
+
+\begin{pro}%2
+	Let $N$ be a set in $\m{R}^n$ having Lebesgue measure $0$. Then for any set $B$ in $\m{R}^k$, $N\times B$ is aLebesgue set in $\m{R}^{n+k}$ having Lebesgue measure zero.
+\end{pro}
+\begin{proof}
+	First we try to prove the situation when $B$ is any bounded open interval, then use it to prove the conclusion stil holds even in $N\times\m{R}^k$. Since $N$ is with Lebesgue measure zero, for any $m\geq 1$, there is some sequence of bounded open intervals $\{E_m^n\}_{n=1}^{\infty}$ such that $N\subset E_m=\cup_n E_m^n$ and $\sum_n \la(E_m^n)<1/m$. Thus
+	\begin{align*}
+	\mu^*(E_m\times B)&\leq \sum_n \la(E_m^n\times B)\\
+	&=\sum_n \la(E_m^n)\la(B)\\
+	&<\la(B)\frac{1}{m},
+	\end{align*}
+	and $\mu^*(N\times B)\leq \la(B)/m\to 0\;(m\to\infty)$ and $\mu^*(N\times B)=0$. Since Lebesgue measure is a complete measure, we know $N\times B$ is a Lebesgue set with measure zero. Now since $\m{R}^k$ can be a form of the union of countably many bounded open intervals $B_m$, i.e. $\m{R}^k=\cup_m B_m$, we can assume $B_m\subset B_{m+1}$, then easy to know $N\times \m{R}^k=\cup_m (N\times B_m)$ is indeed a Lebesgue set with measure zero.
+\end{proof}
+
+\begin{pro}%3
+	Denote by $\ma{L}^n$ and $\ma{L}^k$ the classes of the Lebesgue sets in $\m{R}^n$ and $\m{R}^k$, respectively. Then any bounded rectangle of $\ma{L}^n\times\ma{L}^k$ has the form $E-N$, where $E=E_1\times E_2$ is a $G_{\delta}$ set in $\m{R}^{n+k}$, N is a set of Lebesgue measure zero, and $E_1,E_2$ are $G_{\delta}$ sets of $\m{R}^n$ and $\m{R}^k$, respectively. It follows that $\ma{L}^n\times\ma{L}^k$ is contained in the $\sigma$-algebra $\ma{K}$ of all sets $E-N$, where $E$ is any Borel set in $\m{R}^{n+k}$ and $N$ is any set in $\m{R}^{n+k}$ having Lebesgue measure zero. Note (compare Problem 2.15.1) that $\ma{K}$ coincides with the class $\ma{L}^{n+k}$.
+\end{pro}
+\begin{proof}
+	Given bounded rectangle $A\times B$ in $A\in\ma{L}^n, B\in\ma{L}^k$, we know $A$ and $B$ are both bounded. By Problem $2.15.1$ $A=\cap_k A_k-N, B=\cap_k B_k-M$, where $A_k,B_k$ are all open sets and $N,M$ are null sets. Thus easy to verify that
+	\[A\times B=\bigcap_k A_k\times\bigcap_k B_k-\big((A\times M)\bigcup(N\times B)\big).\]
+	From Problem $2.15.2$ we know $\mu(A\times M)\cup(N\times B)=0$, thus every bounded rectangle can be the form $E_1\times E_2-N$, where $E_1,E_2$ are $G_{\delta}$ sets, $N$ is null set. Let $\beta$ be the Borel class of $\m{R}^{n+k}$, then by Theorem $1.5.1$ and Problem $1.5.2$, $\beta^*=\{E-N\colon E\in\beta,\mu(N)=0\}$ where $N$ is a Lebesgue null set, is a $\sigma$-algebra. Since $E_1\times E_2$ is a Borel set, we know every bounded rectangle $A\times B$ is contained in $\beta^*$, thus
+	\[\sigma_a\big(\{A\times B\colon A\in\ma{L}^n,B\in\ma{L}^k.\;A,B\;\mbox{are bounded}\;\}\big)\subset \beta^*.\]
+	Now we try to prove that the left part is $\ma{L}^n\times\ma{L}^k$, and the right part is $\ma{L}^{n+k}$.
+	Suppose $X=\m{R}^n=\cup_n X_n, Y=\m{R}^k=\cup_m Y_m$, where $X_n,Y_m$ are all disjoint sets with finite measures, then for any $A\in X, B\in Y$ (may not be bounded),
+	\begin{align*}
+		A\times B&=\bigcup_n (X_n\cap A)\times\bigcup_m(Y_m\cap B)\\
+				 &=\bigcup_{n,m} \big((X_n\cap A)\times (Y_m\cap B)\big).
+	\end{align*}
+	Thus $A\times B$ is contained in the left part and the left part is $\sigma_a\big(\{A\times B\colon A\in\ma{L}^n,B\in\ma{L}^k\}\big)=\ma{L}^n\times\ma{L}^k$. As for the right part, from Problem $1.9.8$ we know every Lebesgue set can be the form of the difference of a Borel set and a null set, thus $\beta^*=\ma{L}^{n+k}$ and finally we get
+	\[\ma{L}^n\times \ma{L}^k\subset \ma{L}^{n+k}.\]
+\end{proof}
+
+\begin{pro}%4
+	Every open set in $\m{R}^{n+k}$ is in $\ma{L}^n\times\ma{L}^k$. Hence $\ma{L}^n\times\ma{L}^k$ contains all the Borel set s of $\m{R}^{n+k}$.
+\end{pro}
+\begin{proof}
+	Since the Borel class of $\m{R}^{n+k}$ is the $\sigma$-algebra generated by all the bounded open intervals, in form of $\prod_{i=1}^{n+k} I_i$, it remains to prove that every bounded open interval in $\m{R}^{n+k}$ is in $\ma{L}^n\times\ma{L}^k$. Notice that $\prod_{i=1}^{n+k} I_i=\prod_{i=1}^{n} I_i\times\prod_{i=1}^k I_{n+i}$ and $\prod_{i=1}^{n} I_i\in\ma{L}^n$, $\prod_{i=1}^{k} I_{n+i}\in\ma{L}^k$, this finishes our proof.
+\end{proof}
+
+\begin{pro}%5
+	Prove that $\ma{L}^n\times\ma{L}^k\neq \ma{L}^{n+k}$.
+\end{pro}
+\begin{proof}
+	Let $N=\{x\}$ in $\m{R}^n$ and $B\subset\ma{R}^k$ and $B\notin\ma{L}^k$, by Problem $2.15.2$, $N\times B\in\ma{L}^{n+k}$ with measure 0. Assume $N\times B\in\ma{L}^n\times\ma{L}^k$, then the $\ma{L}^k$-section, i.e. $B\in \ma{L}^k$ by Lemma $2.15.1$, which is a contradiction.
+\end{proof}
+
+\begin{pro}%6
+	Denote by $[\m{R}^m,\ma{L}^m,(dx)^m]$ the Lebesgue measure space in $\m{R}^m$. Prove that the measure $(dx)^{n+k}$ and the product $(dx)^n\times(dx)^k$ coincide on rectangles with bounded sides, when (i) $A$ and $B$ are intervals; (ii) $A$ and $B$ are open sets; (iii) $A$ and $B$ are $G_{\delta}$ sets, and, finally, (iv) $A$ and $B$ are nay Lebesgue sets.
+\end{pro}
+\begin{proof}
+	Routine, just notice if $A$ is a bounded $G_{\delta}$ sets, then there is some sequence of open sets $\{E_m\}$, such that $E_m\downarrow A$ and each $E_m$ is also a bounded set.
+\end{proof}
+
+\begin{pro}%7
+	Prove that the measure space $[\m{R}^{n+k},\ma{L}^{n+k},(dx)^{n+k}]$ is the completion of the Cartesian product $[\m{R}^n,\ma{L}^n,(dx)^n]\times [\m{R}^k,\ma{L}^k,(dx)^k]$. Prove also that the latter product is an extension of the restriction of $[\m{R}^{n+k},\ma{L}^{n+k},(dx)^{n+k}]$ to the Borel $\sigma$-algebra of $\m{R}^{n+k}$.
+\end{pro}
+
+\section{Fubini's Theorem}
+\begin{pro}%1
+	If $E$ and $F$ are measurable sets of $X\times Y$ such that $\nu(E_x)=\nu(F_x)$ for all most all $x\in X$, then $\la(E)=\la(F)\;(\la=\mu\times\nu)$.
+\end{pro}
+\begin{proof}
+	Just notice that $\la(E)=\int \nu(E_x)\,d\mu$ and $\la(F)=\int \nu(F_x)\,d\mu$.
+\end{proof}
+
+\begin{pro}%2
+	Let $f(x)$ and $g(y)$ be integrable functions on $X$ and $Y$, respectively. Then the function $h(x,y)=f(x)g(y)$ is integrable on $X\times Y$, and
+	\[\int h\,d(\mu\times\nu)=\int f\,d\mu\;\int g\,d\nu.\]
+\end{pro}
+\begin{proof}
+	Let $\la=\mu\times \nu$, notice that $\iint |h|\,d\la=\int |f|\,d\mu\int |g|\,d\nu<\infty$, thus $h$ is integrable and 
+	\begin{align*}
+	\int h\,d(\mu\times \mu)&=\iint fg\,d\mu\,d\mu\\
+	&=\int g\int f\,d\mu\,d\nu\\
+	&=\int f\,d\mu\;\int f\,d\nu.
+	\end{align*}
+\end{proof}
+
+\begin{pro}%3
+	Show that
+	\[\int_0^1\int_0^1 f\,dx\,dy\neq \int_0^1\int_0^1 f\,dy\,dx\quad \mbox{if}\;f(x,y)=\frac{x^2-y^2}{(x^2+y^2)^2}.\]
+\end{pro}
+\begin{proof}
+	Notice that for $y>0$, $-x/(x^2+y^2)$ is the anti-derivative of $f$, thus for $\ep>0$ small enough
+	\[\int_{\ep}^1\int_0^1 f\,dx\,dy=-\int_{\ep}^1 \frac{1}{1+y^2}\,dy=-\frac{\pi}{4}+\arctan(\ep).\]
+	Thus the left part is $\lim_{\ep\to0^+} \int_{\ep}^1\int_0^1 f\,dx\,dy=-\pi/4$. Easy to know the sum of two part is exactly zero, thus the right part is $\pi/4$.
+\end{proof}
+
+\begin{pro}%4
+	If $f(x,y)$ is a nonnegative Borel-measurable function in $\m{R}^{n+k}\;(x\in\m{R}^n,y\in\m{R}^k)$, then $\int f\,dx$, $\int f\,dy$ are Borel-measurable and 
+	\[\int f\,dx\,dy=\int\,dy\int f\,dx=\int\,dx\int f\,dy.\]
+	Here $dx\,dy$ is the product of the Lebesgue measures $dx$ and $dy$.
+\end{pro}
+\begin{proof}
+	Direct application of Tonellis' Theorem and Problem $2.15.4$.
+\end{proof}
+
+\begin{pro}%5
+	Let $E$ be a planar domain bounded by two continuous curves, $y=\varphi_1(x),y=\varphi_2(x)$ for $a\leq x\leq b$, where $\varphi_1(x)<\varphi_2(x)$ if $a<x<b$. Prove that if $f$ is a Lebesgue-integrable, Borel-measurable function on $E$, then
+	\[\int_E f\,d\mu=\int_a^b\int_{\varphi_1(x)}^{\varphi_2(x)} f\,dy\,dx,\]
+	where $\mu$ is the Lebesgue measure in $\m{R}^2$.
+\end{pro}
+\begin{proof}
+	For large enough $n$, we let $a=x_0<x_1<\cdots<x_n=b$, where $x_{i}-x_{i-1}=(b-a)/n$ for $1\leq i\leq n$. Easy to know for any $\ep>0$, there is some $\delta_1>0$, such that for any $x$ and $|d-\varphi_2(x)|+|c-\varphi_1(x)|<\delta_1$, we have 
+	\[\bigg|\int_{\varphi_1(x)}^{\varphi_2(x)} f\,dy-\int_c^d f\,dy\bigg|\leq \frac{\ep}{b-a}.\tag{1}\]
+	Also, there is some $\delta_2>0$, such that if we call $E_i$ the domain bounded by $\varphi_1(x)$ and $\varphi_2(x)$ when $x_{i-1}\leq x\leq x_i$ and $F_i$ the domain bounded by $x_{i-1}\leq x\leq x_i$ and $c_i\leq y\leq d_i$ with $\mu(F_i\triangle E_i)<\delta_2$, we have 
+	\[\bigg|\int_{E_i\triangle F_i} f\,d\mu\bigg|<\frac{\ep}{n}.\tag{2}\]
+ 	Now notice that $\varphi_j$ are both continuous on $[a,b]$, we know for any $\delta>0$, there are large enough $N$, such that for all $n\geq N$, we have $|f(x)-f(y)|\leq \delta$ for all $x_{i-1}\leq x<y\leq x_i$ for $1\leq i\leq n$. 
+
+	Now we give any $\ep>0$, let $\delta=\min\{\delta_1,\delta_2/(b-a)\}$ and let $c_i=\min\{\varphi_1(x)\colon x_{i-1}\leq x\leq x_i\}$, $d_i=\max\{\varphi_2(x)\colon x_{i-1}\leq x\leq x_i\}$there is large enough $N$, such that for all $n
+	\geq N$, we have $0<d_i-c_i<\delta$. Thus we know both $(1)$ and $(2)$ hold. 
+
+	Then we notice that
+	\[\int_E f\,d\mu=\sum_{i=1}^n \int_{E_i} f\,d\mu\]
+	and let $F=\cup_i F_i$,
+	\[\bigg|\int_E f\,d\mu-\int_F f\,d\mu\bigg|\leq \sum_{i=1}^n \bigg|\int_{E_i\triangle F_i} f\,d\mu\bigg|<\ep,\]
+	which means $\lim_n \int_F f\,d\mu=\mbox{Left Part}\;(3).$
+	Also we know that for all $1\leq i\leq n$
+	\[\int_{F_i} f\,d\mu=\int_{x_{i-1}}^{x_i}\int_{c_i}^{d_i} f\,dy\,dx\]
+	and thus easy to verify that
+	\[\int_F f\,d\mu=\int_a^b\int_{g_1(x)}^{g_2(x)} f\,dy\,dx,\]
+	where $g_1(x)=c_i, g_2(x)=d_i$ when $x_{i-1}\leq x<x_i$.
+	Since
+	\[\bigg|\int_a^b\int_{g_1(x)}^{g_2(x)} f\,dy\,dx.-\int_a^b\int_{\varphi_1(x)}^{\varphi_2(x)} f\,dy\,dx\bigg|\leq\bigg|\int_a^b \frac{\ep}{b-a}\,dx\bigg|<\ep.\]
+	We know that $\lim_n\int_F f\,d\mu=\mbox{Right Part}\;(4).$ Together by $(3)$ and $(4)$ we derive the conclusion.
+\end{proof}
+
+\begin{pro}%6
+	The formula of Problem $2.16.5$ remains true (with the same proof, so you don't have to prove it) if $x$ varies in a bounded domain of $\m{R}^m$ instead of the interval $[a,b]$ of $\m{R}$. Using this formula, compute the volume of the unit ball in $\m{R}^m$.
+\end{pro}
+\begin{proof}
+	Let $V_n(x)$ be the volume of a ball with radio $x>0$ in $\m{R}^n$ for $n\geq 1$, and simply let $V_n=V_n(1)$.
+	Thus we know for $n\geq 2$,
+	\begin{align*}
+	V_n&=\int_{-1}^1 V_{n-1}(\sqrt{1-x^2})\,dx\\
+	   &=\int_{-1}^1 (1-x^2)^{(n-1)/2}V_{n-1}\,dx\\
+	   &=V_{n-1}\cdot 2\int_{0}^{\pi/2} \cos^n(t)\,dt\quad(x=\sin(t))\\
+	   &=V_{n-1}\cdot 2I_n.
+	\end{align*}
+	Easy to know for $n\geq 2$, 
+	\[I_n=\begin{cases}
+	\dfrac{(n-1)!!}{n!!}\dfrac{\pi}{2},&\mbox{if}\;n\;\mbox{is even},\\
+	\dfrac{(n-1)!!}{n!!},&\mbox{if}\;n\;\mbox{is odd}.\end{cases}\]
+	Thus we know that $V_2=\pi$ and for $n\geq 3$, $V_n=2\pi V_{n-2}/n$, which leads to that for $n\geq 1$,
+	\[V_n=(2\pi)^{\frac{n}{2}}/n!!,\quad\mbox{if}\;n\;\mbox{is even},\]
+	and
+	\[V_n=2^{\frac{n+1}{2}}\pi^{\frac{n-1}{2}}/n!!,\quad\mbox{if}\;n\;\mbox{is odd}.\]
+\end{proof}
+
+\begin{pro}%7
+	Consider the transformation $Tx=Ax+k$ in $\m{R}^n$, where $A$ is a nonsingular $n\times n$ matrix and $x,k$ are column $n$-vectors. Denote by $\la$ the Lebesgue measure in $\m{R}^n$. Prove the relation
+	\[\la[T(I_{a,b})]=|\det A|\la(I_{a,b})\]
+	for $n=2$.
+\end{pro}
+\begin{proof}
+	Easy to know $\la(E+k)=\la(E)$ for all measurable set $E$, and let $d_1,d_2$ be the eigenvalues of $A$, then $\det A=d_1d_2$, then by the formula of Problem $2.16.5$ we know $\la[T(I_{a,b})]=\int_a^b\int_{g_1}^{g_2}1\,dy\,dx$. we know that there is tow directions in $I_{a,b}$ such that $\la(I_{a,b})=\int_c^d\int_{h_1}^{h_2}1\,dv\,du$ (we have changed the axises) with $(x,y)=A(u,v)$ and
+	\[g_2(x)-g_1(x)=|d_1|[h_2(u)-h_1(u)],\;b-a=|d_2|(d-c).\]
+	Thus we finally get $\la[A(I_{a,b})]=|d_1d_2|\la(I_{a,b})=|\det A|\la(I_{a,b})$.
+\end{proof}
+
+\begin{pro}%8
+	Prove the formula in Problem $2.16.7$ for any $n\geq 2$.
+\end{pro}
+\begin{proof}
+	Completely similar to the proof of Problem $2.16.7$ by finding all eigenvalues and directions of $A$.
+\end{proof}
+
+\begin{pro}%9
+	Let $\Omega$ be a bounded open set in $\m{R}^n$. Let $Tx=Ax+k$ be a linear map of $\m{R}^n$ in to itself with $\det A\neq 0$. Denote by $\Omega'$ the image of $\Omega$ under the map $T$. Prove if $f(y)$ is Lebesgue-integrable for $y\in\Omega'$, then $f(Tx)$ is Lebesgue-integrable as a function of $x\in\Omega$, and
+	\[\int_{\Omega'} f(y)\,dy=\int_{\Omega} f(Tx)|\det A|\,dx.\]
+\end{pro}
+\begin{proof}
+	First assume $f=\sum_i a_i\chi(E_i)$ is a simple integrable function, then by Problem $1.9.11$ and if $x\in T^{-1}(E_i)$ then $f(Tx)=a_i$.
+	\begin{align*}
+		\int_{\Omega'} f(y)\,dy&=\sum_i a_i\mu(E_i\cap \Omega)\\
+							   &=\sum_i a_i|\det A|\mu(T^{-1}(E_i)\cap \Omega)\\
+							   &=|\det A|\int_{\Omega} f(Tx)\,dx.
+    \end{align*}
+    Now let $f$ by any integrable function, easy to know $f(T\cdot)$ is measurable. Let simple integrable functions $f_n\to f$ a.e. and Cauchy in mean, since $\int_{\Omega}|f_n(Tx)-f_m(Tx)|\,dx=\int_{\Omega'}|f_n(y)-f_m(y)|\,dy/|\det A|\to 0\;(n,m\to\infty)$, we know $f(T\cdot)$ is integrable and finally
+    \begin{align*}
+    \int_{\Omega} f(Tx)|\det A|\,dx&=\lim_n \int_{\Omega}f_n(Tx)|\det A|\,dx\\
+    &=\lim_n \int_{\Omega'} f_n(y)\,dy\\
+    &=\int_{\Omega'} f(y)\,dy.
+   	\end{align*}
+\end{proof}

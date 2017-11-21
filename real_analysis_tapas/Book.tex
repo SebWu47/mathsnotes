@@ -1,0 +1,47 @@
+\documentclass[UTF8]{book}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+%\usepackage{euler}
+\setlist[description,enumerate]{leftmargin=0pt}
+\usepackage{geometry}
+\geometry{paperwidth=169mm,paperheight=228mm,
+	inner=1.8cm,outer=2cm,top=2.2cm,bottom=2cm}
+\usepackage{fancyhdr}
+	\pagestyle{fancy}
+\usepackage[colorlinks,bookmarksnumbered]{hyperref}
+\hypersetup{linkcolor=[RGB]{0,51,113},urlcolor=[RGB]{0,51,113}}
+\DeclareMathOperator*{\esssup}{ess\;sup}
+\DeclareMathOperator*{\diag}{diag}
+%\let\cleardoublepage\relax
+
+\title{\bf Foundations of Modern Analysis}
+	\author{Seb Wu}
+	\date{\today}
+
+\begin{document}
+\frontmatter
+	\fancyhead{}
+	\fancyhead[OR,EL]{\thepage}
+	\fancyhead[OL,ER]{}
+	\fancyfoot{}
+\pdfbookmark[1]{Foundations of Modern Analysis}{title}
+\maketitle
+\chapter{Preface}
+	This answer book is mainly for \emph{Foundations of Modern Analysis} by Avner Friedman, Dover Publications. ISBN-13:  978-0-486-64062-4, ISBN-10: 0-486-64062-0. For more information, meet \url{https://book.douban.com/subject/3150077/}.
+\cleardoublepage
+\pdfbookmark[0]{Contents}{table}
+\tableofcontents
+\fancyhead[C]{\leftmark}
+
+\mainmatter
+	\fancyhead{}
+	\fancyhead[OR,EL]{\thepage}
+	\fancyhead[C]{\leftmark}
+	\fancyhead[OL,ER]{[SEC.\;\thesection]}
+	\fancyfoot{}
+\include{Newtheorem}
+\include{Chapter1}
+\include{Chapter2}
+\include{Chapter3}
+\end{document}

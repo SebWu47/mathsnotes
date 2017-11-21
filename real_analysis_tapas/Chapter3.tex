@@ -1,0 +1,462 @@
+\chapter{Metric Spaces}
+
+\section{Topological and Metric Spaces}
+\begin{pro}%1
+	Prove that if $(X,\rho)$ is a metric space, and if 
+	\[\rho'(x,y)=\frac{\rho(x,y)}{1+\rho(x,y)},\]
+	then also $(X,\rho')$ is a metric space.
+\end{pro}
+\begin{proof}
+	The proof of $(3.1.3)$.
+\end{proof}
+
+\begin{pro}%2
+	Let $X,\rho,\rho'$ be as in Problem $3.1.1$. Prove that $\rho(x_n,x)\to 0$ if and only if $\rho'(x_n,x)\to 0$. Give an example showing that $\rho$ and $\rho'$ are not equivalent in general.
+\end{pro}
+\begin{proof}
+	For the first part, if $\rho(x_n,x)\to 0$, then for big enough $n$, $\rho/2 \leq \rho'\leq \rho$, thus $\rho'\to 0$. Conversely, just notice that $1/(1+\rho)\to 1$. For the second part, we let $\rho(x,y)=|x-y|$ for all $x,y\in\m{R}$. Easy to know that $\sup|x-y|=+\infty$, thus $\rho$ and $\rho'$ are not equivalent.
+\end{proof}
+
+\begin{pro}%3
+	Prove that the Cartesian product $(X,\rho)$ defined in Example $7$ is a complete (separable) space if and only if each space $(X_i,\rho_i)$ is complete (separable).
+\end{pro}
+\begin{proof}
+	Notice below when we say $0\in X_i$, we mean any constant point.
+	\begin{description}
+		\item[(a)] If each $(X_i,\rho_i)$ is complete, then for any Cauchy sequence $\{x^n=(x_1^n,x_2^n,\dots,x_m^n)\}$ we have 
+		\[\rho(x^p,x^q)\to 0,\quad (p,q\to +\infty).\]
+		By the definition of $\rho$, we know $\rho_i(x_i^p,x_i^q)\to 0$ for all $1\leq i\leq m$ as $p,q\to +\infty$, thus $x_i^p \to y_i\in X_i$ as $p\to+\infty$. Let $y=(y_1,\dots,y_m)$, then $\rho(x^n,y)=\sum_i \rho_i(x_i^n,y_i)\to 0$ as $n\to+\infty$, thus $x^n\to y\in X$ which means $X$ is complete. Now conversely, assume $X$ is complete, then given any Cauchy sequence $\{x_n\}$ in $X_1$, just let $x^n=(x_n,0,\dots,0)\in X$ and $\{x^n\}$ is Cauchy since $\rho(x^p,x^q)=\rho_1(x_p,x_q)$. Say $x^n\to y$, easy to know $y$ is in the form of $y=(y_1,0,\dots,0)$ and $x_n\to y_1\in X_1$, which means $X_1$ is complete. Similarly, we know that for all $1\leq i\leq m$, $(X_i,\rho_i)$ is complete.
+		\item[(b)] If each $X_i$ is separable, each has a countable dense subset $S_i$. Let $S=S_1\times\dots\times S_m$, for any $x=(x_1,x_2,\dots,x_m)\in X$, there is a sequence $\{y_n^i\}$ in $S_i$ such that $y_n^i\to x_i$ and $y_n\neq x_i$ when $n\to+\infty$. Now let $y_n=(y_n^1,\dots,y_n^m)$, easy to know that $y_n\neq x$ and $y_n\to x$ when $n\to +\infty$, thus $S$ is a countable dense subset of $X$ and $X$ is separable. Conversely, if $X$ is separable while $S$ is a countable dense subset, we define 
+		\[S_1=\{x_1\in X_1\colon \exists\;x_2,\dots,x_m,\;\mbox{such that}\;(x_1,\dots,x_m)\in S\},\]
+		then obviously $S_1$ is not empty, at most countable and for any $x\in X_1\ba S_1$, we let $y=(x,0,\dots,0)\in X$, there is a sequence $y^n=(y_1^n,y_2^n,\dots,y_m^n)\in S$ such that $y^n\neq y$ and $y^n\to y$. Easy to know $y_1^n \in S_1$ for all $n$ and $y_1^n\neq x$ since $x\notin S_1$. Since $y_1^n\to x$, we know that $S_1$ is dense in $X_1$. Thus finally we have proven that $X_1$ is separable and similarly each $X_i$ is separable.
+	\end{description}
+\end{proof} 
+
+\begin{pro}%4
+	Prove that a sequence $\{x_m\}$, in the form of components $~x_m=(x_{m1},\dots,x_{mn},\dots)$ in the Cartesian product defined in Example $8$, is convergent if and only if, for each $n$, $\{x_{mn}\}$ is a convergent sequence in $(X_n,\rho_n)$. Prove also that $(X,\rho)$ is complete if and only if each space $(X_n,\rho_n)$ is complete.
+\end{pro}
+\begin{proof}
+	For the first part, if for all $n$, $\{x_{mn}\}$ is convergent, given any $\{x_m\}$ in $X$, we have $x_{mn}\to y_n$. Now define $y=(y_1,\dots,y_n,\dots)\in X$, then for any $\ep>0$, there is some $N$ such that $1/(2^{N-1})<\ep$, thus $\sum_{n>N} 1/(2^n)<\ep/2$. For any $1\leq i\leq N$, there is some $M_i>0$ such that for all $m\geq M_i$, we have $\rho_i(x_{mi},y_i)<\ep/2$. Thus
+	\begin{align*}
+		\rho(x_m,y)&=\sum_{n\leq N}\frac{1}{2^n}\frac{\rho_{n}(x_{mn},y_n)}{1+\rho_n(x_{mn},y_n)}+
+		\sum_{n> N}\frac{1}{2^n}\frac{\rho_{n}(x_{mn},y_n)}{1+\rho_n(x_{mn},y_n)}\\
+		&< \sum_{n\geq 1} \frac{1}{2^n}\frac{\ep}{2}+\sum_{n>N} \frac{1}{2^n}\\
+		&= \ep,
+	\end{align*}
+	for $m>\max\{M_1,\dots,M_{N}\}$. 
+	Conversely, suppose there is some $n$ and $\delta>0$ and infinitely many $m$, such that $\rho_n(x_{mn},y_n)\geq \delta$. Thus for these $m$-s, we know
+	\[\rho(x_m,y)\geq \frac{1}{2^n}\frac{\delta}{1+\delta}>0,\]
+	and this is a contradiction to $x_m$ converges to $y$. Obviously, we have proven the second part.
+\end{proof}
+
+\begin{pro}%5
+	Prove that the spaces $l^1,l^{\infty},s,c,c_0$, and $C[a,b]$ are complete metric spaces. 
+\end{pro}
+\begin{proof}
+	In order to prove the completeness of $c$ and $c_0$, we claim a lemma here.
+	\begin{lem}[Convergence of two dimensional sequence]
+		Suppose $\big(f(m,n)\big)$ is a $\aleph_0\times \aleph_0$ size matrix with $f(m,n)\in \m{R}$ where $m$ is the indicator of row and $n$ of the column, i.e,
+		\[\big(f(m,n)\big)=
+		\begin{pmatrix}
+		f(1,1)&f(1,2)&\cdots&f(1,n)&\cdots\\
+		f(2,1)&f(2,2)&\cdots&f(2,n)&\cdots\\
+		\vdots&\vdots&\vdots&\vdots&\vdots\\
+		f(m,1)&f(m,2)&\cdots&f(m,n)&\cdots\\
+		\vdots&\vdots&\vdots&\vdots&\ddots
+		\end{pmatrix}.\]
+		If for all $m$, $f(m,n)\to g(m)\in \m{R}$ when $n\to+\infty$, and $f(m,n)\to h(n)\in\m{R}$ \textbf{uniformly} on $\m{N}^+$ when $m\to+\infty$. Then $\lim_m g(m)$, $\lim_n h(n)$ and $\lim_{m,n} f(m,n)$ all exist. Moreover,
+		\[\lim_{m,n} f(m,n)=\lim_n\lim_m f(m,n)=\lim_m\lim_n f(m,n)\in\m{R}.\]
+	\end{lem}
+	\begin{proof}
+		In order to prove this, we first show $\{g(m)\}$ has a limit. Since $f(m,n)$ converges to $h(n)$ uniformly, we know $\{f(m,n)\}_m$ is uniformly Cauchy due to the completeness of $\m{R}$. Thus we give any $\ep>0$, there is some $N$, such that for any $p>q>N$, $\sup_n|f(p,n)-f(q,n)|<\ep$. Easy to know that $|g(p)-g(q)|=\lim_n|f(p,n)-f(q,n)|$, thus for $p>q>N$, 
+		\[|g(p)-g(q)|\leq \sup_n|f(p,n)-f(q,n)|<\ep,\]
+		which means $\{g(m)\}$ is Cauchy pointwise and thus converges pointwise. 
+
+		Now we show that $\{h(n)\}$ also converges pointwise. For any $p,q,m$, we have
+		\[|h(p)-h(q)|\leq|h(p)-f(m,p)|+|f(m,p)-f(m,q)|+|f(m,q)-h(q)|.\]
+		Since $f(m,n)$ converges to $h(n)$ uniformly, therefore given any $\ep>0$, there is some $m_0$, such that for all $p,q$, $|h(p)-f(m_0,p)|<\ep/3$, $|f(m_0,q)-h(q)|<\ep/3$. For the $m_0$ above, we know there is some $N$, such that for all $p>q>N$, we have $|f(m_0,p)-f(m_0,q)|<\ep/3$, thus for $p>q>N$,
+		\begin{align*}
+		|h(p)-h(q)|&\leq|h(p)-f(m_0,p)|+|f(m_0,p)-f(m_0,q)|+|f(m_0,q)-h(q)|\\
+				   &<\frac{\ep}{3}+\frac{\ep}{3}+\frac{\ep}{3}\\
+				   &=\ep,
+		\end{align*}
+		which means $\{h(n)\}$ converges pointwise. Which left to prove is the equality of the two orders of mixed limits. Notice that 
+		\[|\lim_n f(m,n)-\lim_n h(n)|=\lim_n |f(m,n)-h(n)|.\]
+		For any $\ep>0$, there is some $M>0$, such that $\sup_n|f(m,n)-h(n)|<\ep$, thus for all $m>M$,
+		\[|\lim_n f(m,n)-\lim_n h(n)|\leq \sup_n|f(m,n)-h(n)|<\ep,\]
+		which means $\lim_m\lim_n f(m,n)=\lim_n h(n)=\lim_n \lim_m f(m,n)\in\m{R}$.
+
+		As for the last part, for any $\ep>0$, there is some $N_1>0$, such that for all $n>N_1$, $|h(n)-\lim_n h(n)|<\ep/2$. For all these $n>N_1$, there is some $N_2>0$, such that for all $m>N_2$, $|f(m,n)-h(n)|<\ep/2$. Thus if we let $N=\max\{N_1,N_2\}$, and for all $m>N, n>N$, we have
+		\[|f(m,n)-\lim_n h(n)|\leq |f(m,n)-h(n)|+|h(n)-\lim_n h(n)|<\ep,\]
+		which means $\lim_{m,n} f(m,n)=\lim_m\lim_n f(m,n)=\lim_n\lim_m f(m,n)\in\m{R}$.
+	\end{proof}
+	Now go back to the original questions.
+	\begin{description}
+	\item[(a)] As for $l^1$, given any Cauchy sequence $\{x^m\}$ where $x^m=(x_1^m,x_2^m,\dots,x_n^m,\dots)$, we let $\mu$ be the counting measure on $\m{N}$ and define $f^m$ as
+	\[f^m(n)=x_n^m,\quad\forall m,n\in\m{N}.\]
+	Then $f^m$ is integrable by $\mu$ for all $m$ and
+	\[\int_{\m{N}} |f^m-f^p|\,d\mu=\sum_{n\geq 1} |x_n^m-x_n^p|\to 0,\quad (m>p\to+\infty)\]
+	since $\{x^m\}$ is Cauchy. This means $\{f^m\}$ is Cauchy in mean and by Theorem $2.8.3$ (cf Page $52$), there is some integrable function $f$ defined on $\m{N}$, such that $\{f^m\}$ converges to $f$ in mean, which means
+	\[\int_{\m{N}} |f^m-f|\,d\mu=\sum_{n\geq 1} |x_n^m-f(n)|\to 0,\quad (m\to+\infty).\]
+	Now we let $y=(f(1),\dots,f(n),\dots)$, easy to know $y\in l^1$ since $f$ is integrable, thus $\{x^m\}$ converges to $y$ and $l^1$ is complete.
+	\item[(b)] As for $l^\infty$, just notice that uniformly Cauchy is equivalent to uniformly converges.
+	\item[(c)] As for $s$, use Problem $3.1.4$.
+	\item[(d)] As for $c$ and $c_0$, $c$ is complete since $\{h(n)\}$ converges and $c_0$ is complete since $\lim h(n)=\lim g(m)=0$.
+	\item[(e)] As for $C[a,b]$, also notice that uniformly Cauchy is equivalent to uniformly converges, and the lemma that the limit function by uniformly convergence of a sequence of continuous functions is also continuous, which will be shown below. Suppose $\{f_n\}$ is a sequence of continuous functions defined on metric space $X$, and $f_n\to f$ uniformly on $X$, then for any $x,y\in X$ and any $n\geq 1$,
+	\[|f(x)-f(y)|\leq |f(x)-f_n(x)|+|f_n(x)-f_n(y)|+|f_n(y)-f(y)|.\]
+	Given any $\ep>0$, there is some $n_0$, such that $\sup_X|f-f_{n_0}|<\ep/3$. For the $n_0$ above, there is some $\delta>0$, such that if $|x-y|<\delta$, then $|f_{n_0}(x)-f_{n_0}(y)|<\ep/3$ since $f_n$ is continuous for all $n$. Thus for $|x-y|<\delta$,
+	\begin{align*}
+		|f(x)-f(y)|&\leq |f(x)-f_{n_0}(x)|+|f_{n_0}(x)-f_{n_0}(y)|+|f_{n_0}(y)-f(y)|\\
+				   &<\frac{\ep}{3}+\frac{\ep}{3}+\frac{\ep}{3}\\
+				   &=\ep,
+	\end{align*}
+	thus $f$ is continuous. 
+
+	Notice that if $f_n\to f$ pointwise, then $f$ can be continuous, also can be not continuous. For example, if we let $f_n(x)=x^n\in C[0,1]$, then $f=\chi(\{1\})$. If we let $f_n(x)=x^n\in C[0,1)$, then $f_n\to f=0$ pointwise but not uniformly. If we let $f_n(x)=nx(1-x^2)^n\in C[0,1]$, then $f_n\to f=0$ pointwise but not uniformly.
+	\end{description}
+\end{proof}
+
+\begin{pro}%6
+	Prove that the spaces $l^1,s,c,c_0$ are separable metric spaces.
+\end{pro}
+\begin{proof}
+	\begin{description}
+	\item[(a)] As for $l^1(\m{R})$, given any $n\geq 1$ we let 
+	\[S_n=\{(x_1,\dots,x_n,0,\dots,0,\dots)\colon x_1,\dots,x_n\in \m{Q}\},\]
+	easy to know $S_n$ is countable. Now define $S=\cup_n S_n$, also $S$ is countable. Given any $x\in l^1\ba S$, we give a sequence $\{y^m\}$ as
+	\[y^m=(y_1^m,\dots,y_m^m,0,\dots,0,\dots)\in S\]
+	where $y_j^m\in \m{Q}$ and $|y_j^m-x_j|< 1/m^2$ for all $1\leq j\leq m$. Given any $\ep>0$, there is some $N>0$, such that $\sum_{n\geq N}|x_n|<\ep/2$, thus for $m>\max\{N,2/\ep\}$, 
+	\[\sum_{j\leq m} |y_j^m-x_j|<\ep/2,\quad\mbox{and}\quad \sum_{j>m} |x_j|<\ep/2.\]
+	Thus $\rho(y^m,x)<\ep$ and we know $\overline{S}=l^1$. Similarly we can show $l^1(\m{C})$ is also separable.
+	\item[(b)] As for $s,c,c_0$, we define $S$ the same as that in $(a)$, one can easily prove that $\overline{S}=s,c,c_0$.
+	\end{description}
+\end{proof}
+
+\begin{pro}%7
+	Prove that $l^\infty$ is not separable.
+\end{pro}
+
+\begin{pro}%8
+	Construct, in each of the spaces $l^1,l^\infty,s,c,c_0$ and $C[a,b]$, bounded closed sets that are not sequentially compact.
+\end{pro}
+\begin{proof}
+	\begin{description}
+	\item[(a)] As for $l^1$, easy to know $l^1$ itself is a bounded closed set. We let
+	\[x^n=(0,\dots,1,\dots,0,\dots)\]
+	where the $n$-th component is $1$ and others are all $0$. Easy to know that $\{x^n\}$ does not have any convergent subsequence since $l^1$ is complete but $\{x^n\}$ is not Cauchy.
+	\item[(b)] As for $l^\infty$, we let $S=[0,1]\times[0,1]\times\cdots$, then $S$ is a bounded set. Given any $y\in S$, we
+	let
+	\[y=(y_1,y_2,\dots,y_n,\dots)\]
+	where $y_j\in[0,1]$. Define
+	\[z^m=(y_1,y_2,\dots,y_m\pm \frac{1}{m},y_{m+1},\dots)\]
+	where we assume $y_m+1/m\in[0,1]$ or $y_m-1/m\in[0,1]$, easy to know $y^m\not x$ for all $m$ and $y^m\to x$, thus $S$ is closed. Now let $\{x^n\}$ the same as that in $(a)$, we know $\{x^n\}$ again is not Cauchy and thus $S$ is not sequentially compact.
+	\item[(c)] As for $s$, easy to know $s$ itself is bounded and closed. Let
+	\[x(n)=(n,n+1,n+2,\dots,n+m,\dots)\]
+	when $n\in\m{N}$. For any $n,p$, we know $\rho(x^n,x^{n+p})=p/(1+p)$. Chose any subsequence
+	\[x(p_1),x(p_2),x(p_3),\dots,\]
+	where $p_1<p_2<\cdots$. We have $\rho(x(p_n),x(p_m))=|p_n-p_m|/(1+|p_n-p_m|)\geq 1/2$ for all $n\neq m$, thus the subsequence is not Cauchy and thus not convergent. 
+	\item[(d)] As for $c$ and $c_0$, we let $S$ the same as that in $(b)$ and $\{x^n\}$ the same as that in $(a)$. Easy to know that for all $n$, $\lim_m x_m^n=0$ but $\{x^n\}$ not Cauchy.
+	\item[(e)] As for $C[0,1]$, we just let
+	\[S=\{f\in C[0,1]\colon 0\leq f(x)\leq 1,\;\forall x\in[0,1]\},\]
+	one can easily show that $S$ is bounded. Given any $h(x)\in S$, we just let $h_n$ be a continuous function where 
+	\[\max\{0,f(x)-1/n\}\leq h_n(x)\leq \min\{1,f(x)+1/n\},\quad(0\leq x\leq 1)\]
+	and different from $h$ for all $n\geq 1$, then easy to know $h_n\to h$ uniformly and thus $S$ is closed. Define $f_n=x^n$ where $0\leq x\leq 1$, easy to know $f_n\to f=\chi(\{1\})$. Given any subsequence of $\{f_n\}$, say $\{f_{n_k}\}$, if there is any function $g$ such that $\lim_k f_{n_k}(x)=g(x)$ for all $0\leq x\leq 1$, since $\lim_k f_{n_k}(x)=f(x)$, easy to know $g(x)=f(x)$ at every point in $[0,1]$. Thus $g(x)\notin C[0,1]$ and thus $S$ itself is not sequentially compact.
+	\end{description}
+\end{proof}
+
+\begin{pro}%9
+	Suppose $(X,\rho,\ma{K})$ is a metric space where $\ma{K}$ is the topology induced by $\rho$. For any non empty set $Y\subset X$, we call $(Y,\rho|_Y,\ma{H})$ is the subspace of $X$ where $\ma{H}$ is the topology induced by $\rho|_Y$, prove that $\ma{H}=Y\cap\ma{K}$. 
+\end{pro}
+\begin{proof}
+	For any open ball centered at $x\in Y$ with radio $r$ and metric $\rho|_Y$, say $B(x,r)$, define $D(x,r)$ is the open ball centered at $x$ with radio $r$ and metric $\rho$, easy to know $B(x,r)\subset D(x,r)$ and $B(x,r)\subset Y$. For any $y\in D(x,r)\cap Y$, we know $\rho|_Y(y,x)=\rho(y,x)<r$, thus $y\in B(x,r)$ and finally $B(x,r)=D(x,r)\cap Y$. Chose any set $B\in\ma{H}$, since $B=\cup_{x\in B} B(x,r)$ where $r>0$ and depends on $x$, we know
+	\[B=\bigcup_{x\in B} B(x,r)=\bigcup_{x\in B}\big(D(x,r)\cap Y\big)=Y\cap \bigcup_{x\in B} D(x,r).\]
+	Since $\cup_{x\in B} D(x,r)\in\ma{K}$, we have $\ma{H}\subset Y\cap\ma{K}$. 
+
+	For any open ball centered at $x\in X$ with radio $r$ and metric $\rho$, say $D\big(x,r(x)\big)\subset X$. We let  
+	\[Z(x)=D\big(x,r(x)\big)\cap Y,\quad\mbox{and}\quad I=\{x\in D\colon Z(x)\neq\emptyset\}.\]
+	Given any $x\in I,\;z\in Z(x)$, let $r_0(z)=\rho(z,x)<r(x)$, define $r_1(z)=\big(r(x)-r_0(z)\big)/2>0$, for any point $y\in B\big(z,r_1(z)\big)$ with metric $\rho|_Y$, i,e, $\rho(y,z)<r_1(z)$ where $y\in Y$, we know 
+	\begin{align*}
+		\rho(y,x)&\leq \rho(y,z)+\rho(z,x)\\
+				 &< \big(r+r_0(z)\big)/2\\
+				 &<r.
+	\end{align*}
+	Thus $B\big(z,r_1(z)\big)\subset D(x,r)$ and we know $Z(x)=\cup_{z\in Z(x)} B\big(z,r_1(z)\big)$ where $r_1(z)$ is defined as above pointwise by $z$. Given any $D\in\ma{K}$, since
+	\[D\cap Y=\bigcup_{x\in D} D(x,r)\cap Y=\bigcup_{x\in I} Z(x)=\bigcup_{x\in I} \bigcup_{z\in Z(x)} B\big(z,r_1(z)\big),\]
+	thus $D\cap Y\in \ma{H}$ and $Y\cap \ma{K}\subset\ma{H}$. Finally we know $\ma{H}=Y\cap\ma{K}$.
+\end{proof}
+
+\begin{pro}%10
+	If $\rho(x_n,x)\to 0$ and $\rho(y_n,y)\to 0$, then $\rho(x_n,y_n)\to\rho(x,y)$.
+\end{pro}
+\begin{proof}
+	Notice we have
+	\[\rho(x,y)-\rho(x,x_n)-\rho(y_n,y)\leq \rho(x_n,y_n)\leq \rho(x_n,x)+\rho(x,y)+\rho(y,y_n),\]
+	then the conclusion immediately follows by taking limit both sides.
+\end{proof}
+
+\begin{pro}%11
+	For what values of $p$ is $\rho(x,y)=|x-y|^p\;(0<p<+\infty)$ a metric on the real line?
+\end{pro}
+\begin{proof}
+	Well know that $p=1$ is true, we now show $p>1$ is not true, for this let $x=0,y=1/2,z=1$, then 
+	\[\rho(x,z)=1>\frac{1}{2^p}+\frac{1}{2^p}=\rho(x,y)+\rho(y,z).\]
+	For $0<p<1$, for any $x<z$, if $y\leq x$ or $y\geq z$, easy to know the inequality of metric holds, thus we only need to prove the case of $x<y<z$. For this we let $a=y-x$ and $b=z-y$, and equivalent to prove $(a+b)^p\leq a^p+b^p$, let $t=a/b>0$, we try to prove $(1+t)^p\leq 1+t^p$. Let $f(t)=(1+t)^p-t^p$ for $-\delta<t<+\infty$, since
+	\[f'(t)=p\bigg(\frac{1}{(1+t)^{1-p}}-\frac{1}{t^{1-p}}\bigg)\leq 0,\]
+	where the equality holds if and only if $t=0$. Thus $f(t)<f(0)=1$ for all $t>0$. Thus we know $\rho$ is a metric if and only if $0<p\leq 1$.
+\end{proof}
+
+\begin{pro}%12
+	If $K$ is a closed subset of a topological space $X$, and if $L$ is a closed subset of the topological subspace $K$, then $L$ is a closed subset of $X$.
+\end{pro}
+\begin{proof}
+	For any point of accumulation $x$ of $L$ in $X$, easy to know $x\in K$ since $L\subset K$ and $K$ is closed in $X$. Now notice that $L$ is closed in $K$, we know $x\in L$ and thus $L$ is closed in $X$.
+\end{proof}
+
+\section{$L^p$ Spaces}
+\begin{pro}%1
+	Prove that any function $f$ in $L^p(x,\mu)\;(1\leq p<+\infty)$ is the limit, in the metric of $L^p(X,\mu)$, of a sequence of simple functions.
+\end{pro}
+\begin{proof}
+	For any function $f\in L^p$, we know $f=f^+-f^-$, thus we only need to consider the case o $f\geq 0$ in $X$. For $f$ nonnegative and bounded, we let
+	\[f_n(x)=\begin{cases}
+	\dfrac{i-1}{2^n},&\mbox{if}\;\dfrac{i-1}{2^n}\leq f(x)< \dfrac{i}{2^n},\;i=1,2,\dots,n2^n,\\
+	n,&\mbox{if}\;f(x)\geq n.\end{cases}\]
+	as in Theorem $2.2.5$. Easy to know $f_{n+1}(x)\geq f_n(x)$ for all $x\in X$ and 
+	\[0\leq f(x)-f_n(x)\leq \frac{1}{2^n},\quad\mbox{if}\;n>f(x).\]
+	Since $f$ is bounded, then for large enough $n$, $f(x)< n$ for all $x\in X$. Thus for $1\leq p<+\infty$
+	\[\int (f-f_n)^p\,d\mu\leq \int (f-f_n)\,d\mu\to 0,\quad(n\to+\infty),\]
+	since $0\leq f_n\uparrow f$ pointwise, $p\geq 1$ and the convergence by MCT. Thus
+	\[\rho(f,f_n)=\|f-f_n\|_p\to 0,\quad (n\to +\infty).\]
+	For $f$ is not bounded, since $f$ is in $L^p$, we know $f^p$ is essentially bounded in $X$. We define $f_n$ as above, then if we define $E$ where $f^p$ bounded, then $\mu(X\ba E)=0$ and thus
+	\[\int (f-f_n)^p\,d\mu=\int_E (f-f_n)^p\,d\mu\leq \int_E (f-f_n)\,d\mu\to 0,\quad(n\to+\infty),\]
+	which completes our proof.
+\end{proof}
+
+\begin{pro}%2
+	Let $\mu$ be the Lebesgue measure on $\m{R}^n$. Prove that if $1\leq p<+\infty$, then $L^p(\m{R}^n,\mu)$ is separable.
+\end{pro}
+\begin{proof}
+	Let the following $E_i$-s are bounded open intervals in $\m{R}^n$ with rational ends, i.e., $E_i=(a_1,b_1)\times\cdots\times(a_n,b_n)$ where $a_i,b_i\in \m{Q}$ and $I$ be the class of all such $E_i$-s. Let 
+	\[S=\bigg\{f=\sum_{i=1}^m c_i\chi(E_i)\colon m\in\m{N}^+,\;c_i\in\m{Q},\;E_i\in I\bigg\}.\]
+	Now we prove that for any $\mu(E)<+\infty$, $\chi(E)\in\overline{S}$. By Problem $1.9.7$, for any $\ep>0$, there is some measurable set $F\in E$ with $\mu(E)<\mu(F)+\ep$ where $F$ is an open set in $\ma{R}^n$, i.e., $F$ is a countable union of open bounded intervals. Easy to know that $F$ can also be a countable union of sets in $I$. Thus we have
+	\[F_n\subset E,\;\mu(E)<\mu(F_n)+\frac{1}{n},\;F_n=\bigcup_{m=1}^{\infty}G_m^n,\;G_m^n\in I.\]
+	Now for all $n$, let $H_n=\sum_{m=1}^{t(n)} G_m^n$ such that $t(n)\in\m{N}^+$ and $\mu(F_n)<\mu(H_n)+1/n$, then $\mu(E)<\mu(H_n)+2/n$. Easy to know that $H_n\in S$ for all $n$. Notice that
+	\[\|\chi(E)-\chi(H_n)\|_p=\int_{E\ba H_n}\,d\mu=\mu(E\ba H_n)\to 0,\quad (n\to+\infty),\]
+	thus we get $\chi(E)\in\overline{S}$. Given any simple bounded functions where the non-zero value set is with finite measure, i.e., give
+	\[T=\bigg\{f=\sum_{i=1}^m a_i\chi(A_i)\colon m\in\m{N}^+,\;a_i\in\m{R}\ba\{0\},
+	\;\mu(A_i)<+\infty\bigg\},\]
+	one can easily show that $T\subset\overline{\overline{S}}=\overline{S}$. Now by problem $3.2.1$, we have shown that 
+	$L^p\subset \overline{T}$, thus we finally know $L^p\subset \overline{S}$. Since $S$ is easy to know an countable set, we know $L^p$ is separable.
+\end{proof}
+
+\begin{pro}%3
+	If $f\in L^p(\m{R}^n,\mu)$ where $\mu$ is the Lebesgue measure and $1\leq p<+\infty$, then there is a sequence of continuous functions $f_m$ on $\m{R}^n$ such that $\|f-f_m\|_p\to 0$.
+\end{pro}
+\begin{proof}
+	Similar to Problem $2.5.5,\;2.5.6,\;2.15.9,\;2.15.10,\;2.15.11$, if $f$ is defined over a bounded interval in $\m{R}^n$, and $f\in L^p$, then there is a sequence of step functions $f_m$ defined on the same interval such that $\|f-f_m\|_p\to 0$. Now give any $f\in L^p$, then similar to Problem $3.1.2$, there is a sequence of step functions defined on bounded interval with $\|f-f_m\|_p\to 0$. Now we just need to make all $f_m$-s continuous by redefine its values on the edges of all intervals.
+\end{proof}
+
+\begin{pro}%4
+	Prove that $l^p$ is separable if $1\leq q<+\infty$.
+\end{pro}
+\begin{proof}
+	We shall only prove $l^p(\m{R})$, the truth for $l^p(\m{C})$ is completely similar. Given any $n\geq 1$ we let 
+	\[S_n=\{(x_1,\dots,x_n,0,\dots,0,\dots)\colon x_1,\dots,x_n\in \m{Q}\},\]
+	easy to know $S_n$ is countable. Now define $S=\cup_n S_n$, also $S$ is countable. Given any $x\in l^p\ba S$, we give a sequence $\{y^m\}$ as 
+	\[y^m=(y_1^m,\dots,y_m^m,0,\dots,0,\dots)\in S\]
+	where $y_j^m\in \m{Q}$ and $|y_j^m-x_j|<1/m^2$ for all $1\leq j\leq m$. Given any $\ep>0$, there is some $N>0$, such that $\sum_{n\geq N} |x_n|^p<\ep/2$, thus for $m>\max\{N,2/\ep\}$,
+	\[\sum_{j\leq m} |y_j^m-x_j|^p<\ep/2,\quad\mbox{and}\quad \sum_{j>m} |x_j|^p<\ep/2,\]
+	since $p\geq 1$. Thus $\rho(y^m,x)<\ep$ and we know $\overline{S}=l^p$.
+\end{proof}
+
+\begin{pro}%5
+	Prove that $l^p$ is not a metric space if $0<p<1$.
+\end{pro}
+\begin{proof}
+	Let $x=(0,0,\dots)$, $y=(0,1,0,\dots)$ and $z=(1,1,0,\dots)$ then 
+	\[\rho(x,y)=\rho(y,z)=1,\quad \rho(x,z)=2^{1/p}.\]
+	Thus $\rho(x,y)+\rho(y,z)<\rho(x,z)$.
+\end{proof}
+
+\begin{pro}%6
+	Prove that the space $C[a,b]$ with the metric 
+	\[\rho(f,g)=\int_a^b |f(t)-g(t)|\,dt\]
+	is not a complete metric space. (If we call the space above $\ma{C}[a,b]$, with some more effort, one can prove that $L^1[a,b]$ is the completion of $\ma{C}[a,b]$.)
+\end{pro}
+\begin{proof}
+	We only prove the situation of $[a,b]=[-1,1]$ and the following functions are all defined on $[-1,1]$. Define 
+	\[S_n=1+\frac{1}{2}+\dots+\frac{1}{n},\quad f_1(x)=1-|x|,\]
+	and for $n\geq 1$,
+	\[f_{n+1}(x)=
+	\begin{cases}
+		S_{n+1}-(n+1)\big(S_{n+1}-f_n(\frac{1}{n+1})\big)|x|,&\mbox{if}\;0\leq |x|\leq \frac{1}{n+1},\\
+		f_n(x),&\mbox{if}\;\frac{1}{n+1}<|x|\leq 1.
+	\end{cases}\]
+	Easy to know $f_n$ continuous, increasing and by some routine computation
+	\[\int_{-1}^1|f_n-f_m|\,d\mu=\frac{1}{(m+1)^2}+\dots+\frac{1}{n^2}\to 0,\quad (n>m\to+\infty),\]
+	and thus $\{f_n\}$ is Cauchy by $\rho$.
+
+	Now for any bounded function $f$, let $M=\max\{|f(x)|\colon 0\leq x\leq 1\}$, then there is some $N>0$ large enough such that $f_{N-1}(1/N)\geq M$, thus
+	\[\int_{-1}^1 |f_n-f|\,d\mu\geq \frac{1}{N^2},\quad \forall n\geq N.\]
+	Let $\ep_0=1/N^2$, then for $n\geq N$, $\rho(f_n,f)\geq \ep_0$, which tells us $f$ is not a limit of $\{f_n\}$ by metric $\rho$. Since any continuous function in $C[-1,1]$ must be bounded, $\ma{C}[-1,1]$ is not complete.
+\end{proof}
+
+\begin{pro}%8
+	Let $f_1,\dots,f_m,g_1,\dots,g_m$ belong to $L^p(X,\mu),\;1\leq p< +\infty$. Prove that
+	\[\bigg(\sum_{i=1}^m \int|f_i+g_i|^p\,d\mu\bigg)^{1/p}\leq 
+	\bigg(\sum_{i=1}^m \int |f_i|^p\,d\mu\bigg)^{1/p}+
+	\bigg(\sum_{i=1}^m \int |g_i|^p\,d\mu\bigg)^{1/p}.\]
+\end{pro}
+\begin{proof}
+	Let $A=\{1,2,\dots,m\}$ and $\nu$ is the counting measure on $A$, i.e., $\nu(\{i\})=1$ for $1\leq i\leq m$. 
+	Thus we can build the product measure space $(X\times A,\nu\times \mu)$. Also for any $i\in A,x\in X$, $h_i\in L^p(X,\mu)$, define $h\colon X\times A\to [-\infty,+\infty]$ as $h(i,x)=h_i(x)$ and notice that
+	\begin{align*}
+	\sum_{i=1}^m \int_X |h_i(x)|^p\,d\mu
+	&=\int_A\bigg(\int_X |h(i,x)|^p\,d\mu\bigg)\,d\nu\\
+	&=\int_{X\times A} |h(i,x)|^p\,d(\mu\times\nu).
+	\end{align*}
+	The last $=$ is true since $h_i\in L^p(X,\mu)$, $|h(i,x)|^p\geq 0$ and Tonelli's Theorem, and this also tells us that $h\in L^p(X\times A,\mu\times \nu)$. Thus what we need to prove is
+	\begin{align*}
+	\bigg(\int_{X\times A}&|f(i,x)+g(i,x)|^p\,d(\mu\times \nu)\bigg)^{1/p}\\
+	&\leq \bigg(\int_{X\times A}|f(i,x)|^p\,d(\mu\times \nu)\bigg)^{1/p}+
+	\bigg(\int_{X\times A}|g(i,x)|^p\,d(\mu\times \nu)\bigg)^{1/p},
+	\end{align*}
+	which can be easily shown by applying Minkowski's inequality in $L^p(X\times A,\mu\times \nu)$.
+\end{proof}
+
+\begin{pro}%9
+	If $f_n\to f$ in $L^p(X,\mu)$ (that is, if $f_n,f\in L^p$ and $\|f_n-f\|_p\to 0$) and if $g_n\to g$ in $L^q(X,\mu)$, where $1\leq p,q\leq +\infty$, $1/p+1/q=1$, then $f_ng_n\to fg$ in $L^1(X,\mu)$.
+\end{pro}
+\begin{proof}
+	By H\"older's inequality, we know $f_ng_n,\;f_ng,\;fg\in L^1$ for all $n$, now we only need to prove the convergence. By H\"older's and Minkowski's inequalities, 
+	\begin{align*}
+		\|f_ng_n-fg\|&= \|(f_ng_n-f_ng)+(f_ng-fg)\|\\
+					 &\leq \|f_n(g_n-g)\|+\|(f_n-f)g\|\\
+					 &\leq \|f_n\|_p\cdot\|g_n-g\|_q+\|f_n-f\|_p\cdot\|g\|_q,
+	\end{align*}
+	here $\|\cdot\|$ means $\|\cdot\|_1$. Since $f_n\to f$ in $\|\cdot\|_p$, there is some $N>0$, such that 
+	\[\|f_n\|_p\leq \|f_n-f\|_p+\|f\|_p\leq 1+\|f\|_p,\quad \forall n>N,\]
+	since $\|f_n-f\|_p<1$ for all those $n$-s. Now let $M=\max\{1+\|f\|_p,\|g\|_p\}<+\infty$, we have
+	\[\|f_ng_n-fg\|\leq M(\|g_n-g\|_q+\|f_n-f\|_p),\quad \forall n>N,\]
+	which will derive $\|f_ng_n-fg\|\to 0$ when $n\to+\infty$.
+\end{proof}
+
+\section{Completion of Metric Spaces; $H^{m,p}$ Spaces}
+\begin{pro}%1
+	Let $A$ be a compact subset of $\m{R}^n$ and let $B$ be an open set containing $A$. Prove that there exists a $C^{\infty}$ function $h$ on $\m{R}^n$ such that $h=1$ on $A$, $h=0$ outside $B$, and $0\leq h\leq 1$ in $B-A$.
+\end{pro}
+\begin{proof}
+	We shall prove a lemma first.
+	\begin{lem}
+		In $\m{R}^n$, for a non-empty compact set $A\subset B$ where $B$ is an open set, there is some compact set $K$ such that 
+		\[A\subsetneqq K \subsetneqq B,\quad d(A,\partial K)>0.\]
+	\end{lem}
+	\begin{proof}
+		Since $A\subset B$ and $B$ is open, for any $x\in \partial A$, there is some $r(x)>0$, such that the closure $\overline{O\big(x,r(x)\big)}\subset B$ and all these open balls, i.e., $\{x\in \partial A\colon O\big(x,r(x)\big)\}$ constructs a cover of $\partial A$. By Heine-Borel 
+		open covering theorem, there is a finite sub-cover, say $\{x\in I\subset \partial A\colon O\big(x,r(x)\big)\}$ where $I$ is a finite set. Now let
+		\[K=A\cup \bigcup_{x\in I} \overline{O\big(x,r(x)\big)},\]
+		easy to know $A\subset K\subset B$ and $K$ is compact. If $K=B$, then $K$ is both open and closed, thus $K=\emptyset$ or $K=\m{R}^n$, which contradicts to that $K$ is bounded. For any $x\in \partial A$, there is some $y\in I$ such that $x\in O\big(y,r(y)\big)$ and some $\delta(x)>0$ such that $O\big(x,\delta(x)\big)\subset O\big(y,r(y)\big)\subset K$. Since $O\big(x,\delta(x)\big)\ba A\neq \emptyset$, we know $K\ba A\neq \emptyset$ or $A\neq K$. As for the distance, 
+		suppose $d(A,\partial K)=0$, since both $A$ and $\partial K$ are compact, we know $A\cap \partial K\neq \emptyset$. Since $\partial K$ is outside part of $\partial\,\Big\{\bigcup_I\overline{O\big(x,r(x)\big)}\Big\}$ with respect to $A$ (Imagine that $\partial K$ ``containing'' $A$), we know there is some $x$ such that $x\in \partial A\cap \partial\,O\big(y,r(y)\big)$ where $y\in I$, and $x\notin O\big(z,r(z)\big)$ for all $y\neq z\in I$, this will tell us that $x\notin \cup_I O\big(y,r(y)\big)$ and thus $x\notin K$, which is a contradiction.
+	\end{proof} 
+	Now suppose $B$ is bounded, then by lemma we know $d(A,\partial B)=d(A,B^c)=r>0$. For any $0<3\ep<r$, let
+	\[G=\{x\in \m{R}^n\colon d(x,B^c)>\ep\},\tag{1}\]
+	Then $\overline{G}=\{x\in \ma{R}^n\colon d(x,B^c)\geq \ep\}$. For any $x\in \overline{G}$, we know $x\notin B^c$, thus $\overline{G}\subsetneqq B$. (As for the $\neq$, one can similarly prove as $K\neq B$ in the lemma.) Given any $x\in A$, by lemma we know $d(x,B^c)\geq r>3\ep$, thus $A\subsetneqq G$. Moreover, we shall prove that for any $x\in A$, the open ball $O(x,\ep)\subset G$. Given any $x\in A$, $y\in \overline{O(x,\ep)}$ and $z\in B^c$, 
+	\begin{align*}
+		d(y,z)&\geq d(x,z)-d(x,y)\\
+			  &\geq r-\ep\\
+			  &>2\ep,
+	\end{align*}
+	and this tells us $y\in G$. Thus we have shown that for $0<3\ep<r$ we can construct an open set $G$ by $(1)$ and get
+	\[A\subsetneqq G\subsetneqq\overline{G}\subsetneqq B,\quad \overline{O(x,\ep)}\subset G,\quad\forall x\in A.\tag{2}\]
+	Now let 
+	\[f(x)=\begin{cases}
+	0,&\mbox{if}\;|x|\geq 1,\\
+	c\exp\big(-(1-|x|^2)^{-1}\big),&\mbox{if}\;|x|<1.\end{cases}\]
+	where $c$ is a real constant such that $\int_{\m{R}^n} f(x)\,dx=1$ and $|x|=\sqrt{\sum_{i=1}^n x_i^2}$. Now let
+	\[h(x)=\ep^{-n}\int_G f\big((x-y)/\ep\big)\,dy,\]
+	where $G,\ep$ defined as above. Routine to show this $h$ is what we need here.
+\end{proof}
+
+\section{Complete Metric Spaces}
+\begin{pro}%1
+	Prove that $C^m(\overline{\Om})$ is a complete metric space with the metric 
+	\[\rho(u,v)=|u-v|_m.\]
+	When $m=0$, we call this metric the \textbf{maximum metric}, or the \textbf{uniform metric}.
+\end{pro}
+
+\begin{pro}%3
+	Give an example of a sequence of monotone decreasing closed sets $F_n$ in a complete metric space such that $d(F_n)=+\infty$ for all $n$ and $\cap_n F_n=\emptyset$.
+\end{pro}
+\begin{proof}
+	Let $F_n=\cup_{m\geq n} [m-\tfrac{1}{3},m+\tfrac{1}{3}]$ in $\m{R}$, the Euclidean real line. 
+\end{proof}
+
+\begin{pro}%4
+	Give an example of a sequence of monotone decreasing closed sets $F_n$ in a complete metric space such that $d(F_1)<+\infty$, $\lim_n d(F_n)>0$, and $\cap_n F_n=\emptyset$.
+\end{pro}
+
+\begin{pro}%6
+	A countable union of subsets (of $X$) of the first category in $X$ is again a set of the first category in $X$.
+\end{pro}
+\begin{proof}
+	Suppose $Y=\cup_n X_n$, where $X_n$ is a subset of $X$ in the form of $X_n\subset \cup_m Y_n^m$ and $Y_n^m$ is nowhere dense, then $Y\subset \cup_{n,m} Y_n^m$.
+\end{proof}
+
+\begin{pro}%7
+	Let $f(x)$ be a real valued function on the real line. Prove that there is a nonempty interval $(a,b)$ and a positive number $c$ such that for any $x\in (a,b)$ there is a sequence $\{x_n\}$ such that $x_n\to x$ and $|f(x_n)|<c$. (Similarly, the case of $|f(x_n)|\leq c$, $|f(x_n)|> c$ or $|f(x_n)|\geq c$ is also true).
+\end{pro}
+\begin{proof}
+	Let $E_n=\{x\in\m{R}\colon |f(x)|<n\}$, then $\m{R}=\cup_n E_n$. Since $\m{R}$ is of second category, there is some $m$ such that $(\overline{E_m})^{\circ}\neq \emptyset$, i.e., there is some $(a,b)\subset \overline{E_m}$. 
+	Now given any $x\in (a,b)$, if $x\in \overline{E_m}\ba E_m$, then there is some $\{x_p\}$ such that $x_p\in E_m$ and $x_p\to x$, thus there are infinitely many $x_p$ such that $x_p\in E_m\cap(a,b)$. If $x\in E_m$, then for any small enough $x\in (c,d)\subset (a,b)$, there must be at least one point of $E_m$ in $(c,d)\ba \{x\}$. Since if not, all points in $(c,d)\ba \{x\}$ belong to $\overline{E_m}\ba E_m$, then any point in $(c,d)\ba \{x\}$ can not be a limit of a sequence in $E_m$, which is a contradiction. Thus $x\in (a,b)\cap E_m$ can also be an accumulation point of $E_m$, which completes our proof.
+\end{proof}
+
+\section{Compact Metric Spaces}
+\begin{pro}%1
+	A subset $Y$ of a metric space $X$ is separable if there exists a sequence of points in $X$ whose closure contains $Y$.
+\end{pro}
+\begin{proof}
+	Suppose the sequence $\{x_n\}_{n=1}^{+\infty}$ has the property that $x_n\in X$ and its closure contains $Y$, i.e., for any $y\in Y$, there is some subsequence $x_{n_k}$ such that $\{x_{n_k}\}\to y$ as $k\to +\infty$. Call $d_n$ the distance between $x_n$ and $Y$, then for all $n$ there is some $y_n\in Y$ such that $\rho(x_n,y_n)<2d_n$. Now we say the closure (in $X$) of the new sequence $\{y_n\}$ (some $y_n$-s may be the same but does not matter) contains $Y$. For any $y\in Y$, we know $\rho_k:=\rho(x_{n_k},y)\to 0$ as $k\to +\infty$ where $\{x_{n_k}\}$ defined above. Since $d_{n_k}\leq \rho_k$, we have
+	\begin{align*}
+	\rho(y_{n_k},y)&\leq \rho(y_{n_k},x_{n_k})+\rho(x_{n_k},y)\\
+				   &\leq 2d_{n_k}+\rho_k\\
+				   &\leq 3\rho_k
+	\end{align*}
+	and thus $y_{n_k}\to y$ as $k\to +\infty$, which means $Y$ is separable.
+\end{proof}
+
+\begin{pro}%3
+	Let $Y,Z,U$ be subsets of a metric space $X$. If $Y$ is dense in $Z$ and $Z$ is dense in $U$, then $Y$ is dense in $U$.
+\end{pro}
+\begin{proof}
+	Just notice that
+	\[\overline{Y}=\overline{\overline{Y}}\supset \overline{Z}\supset U.\]
+\end{proof}
+
+\begin{pro}%4
+	A subset $F$ of a compact space $X$ is compact if and only if it is closed.
+\end{pro}
+\begin{proof}
+	Suppose $F$ is compact but not closed, then there is some sequence $\{x_n\}\subset F$ such that $x_n\to x\in X\ba F$ and $0<d_n:=\rho(x_n,x)\to 0$. Define 
+	\[F_n=\{y\in X\colon \rho(y,x)>d_n\},\]
+	then easy to see $\{F_n\}$becomes an open covering of $F$ since given any $z\in F$, there is some $d_n<\rho(z,x)$ and thus $z\in F_n$. On the other hand, For any finite number $N$, there is some $n$ such that $\rho(x_n,x)<\min\{d_j\colon 1\leq j\leq N\}$, which means $x_n\notin \cup_{j=1}^N F_j$ and is a contradiction.
+
+	Now suppose $F$ is closed, then $F^c$ is open. Since $X$ itself is compact, given any open covering of $F$, say $\{F_{\la}\colon \la\in I\}$, we know $\{F_\la,F^c\colon \la\in I\}$ is an open covering of $X$. Thus $X$ can be covered by a finite class $\{F_\la,F^c\colon \la\in J\}$ where $J$ is a finite index set. (Notice here we can put $F^c$ in this covering regardless whether it was in the original finite covering or not.) Now easy to see that $\{F_\la\colon \la\in J\}$ is already a finite covering of $F$, i.e. $F$ is compact.
+\end{proof}
+
+\begin{pro}%5
+	A subset $Y$ of a metric space is totally bounded if and only if its closure $\overline{Y}$ is totally bounded.
+\end{pro}
+\begin{proof}
+	Just notice that for any $\ep>0$, if $Y$ can be covered by $\{B(x_n,\ep)\}$, then $\overline{Y}$ can be covered by $\{B(x_n,2\ep)\}$.
+\end{proof}
+
+\begin{pro}%6
+	The intersection of a compact subset and any number of closed subsets of a metric space is a compact set.
+\end{pro}
+\begin{proof}
+	Just notice a compact subset is closed and then use Problem $3.5.4$.
+\end{proof}
+
+\begin{pro}%8
+	Show that a metric space is compact if and only if it has the following property: for every collection of closed subsets $\{F_\la\}$, if any finite sub-collection has a non-empty intersection, then the whole collection a non-empty intersection.
+\end{pro}
