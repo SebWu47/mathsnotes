@@ -1,0 +1,70 @@
+\section{复(实)方阵(准)上三角化}
+事实上，任何的复矩阵都可以正交上三角化，任何的实矩阵都可以准上三角化，这可以帮助解决很多的问题(例如和正定性，行列式，交换性相关的问题). 为记号简单，用$\uptri(A_1,\dots,A_n)$表示准对角线元素从上到下依次为$A_1,\dots,A_n$的准上三角阵，其中$A_j$均为方阵. 当然，当$A_j$全是数时就表示上三角阵. 这里我们先证明复的结果.
+\begin{thm}
+	对任何$n$级复矩阵$A$, 都存在酉阵$U$，使得
+	\[U^*AU=\uptri(\la_1,\dots,\la_n),\]
+	其中$\la_1,\dots,\la_n$为$A$全部的特征值.
+\end{thm}
+\begin{proof}
+	取$\la_1$为$A$特征值，$\eta_1$为对应的单位特征向量，扩展为标准正交基$P=(\eta_1,\dots,\eta_n)$, 则
+	$PP^*=I$且
+	\[P^*AP=\begin{pmatrix}\la_1 & \al\\0 & B\end{pmatrix}.\]
+	显然$B$的全部特征值为$\la_2,\dots,\la_n$, 由归纳假设，存在酉阵$P_1$，
+	\[P_1^*B P_1=\uptri(\la_2,\dots,\la_n).\]
+	只要令$U=P\diag(1,P_1)$就结束战斗.
+\end{proof}
+再来看实的结果. 从实正规阵的正交准对角化过程可以看出，引理\ref{lem:2sob}是能同时取得标准正交基和矩阵块
+\[\block{a}{b}\]
+的关键，故而猜测对一般的实方阵两者无法兼顾.
+\begin{thm}
+	对任何$n$级实矩阵$A$，设$\la_{\pm 1},\dots,\la_{\pm r},\mu_1,\dots,\mu_{n-2r}$为
+	其全部特征复根，其中
+	\[\mu_j\in\ma{R},\;\la_{\pm j}=a_j\pm i b_j,\;a_j\in\ma{R},\;0\neq b_j\in \ma{R},\]
+	那么
+	\begin{description}
+	\item[(a)] 存在正交矩阵$U$,
+	\begin{equation}\label{eq:rup_1}
+	U^T A U=\uptri(\mu_1,\dots,\mu_{n-2r},A_1,\dots,A_r).
+	\end{equation}
+	其中$A_j$为特征复根为$\la_{\pm j}$的$2$级实阵.
+	\item[(b)] 存在可逆实矩阵$P$,
+	\begin{equation}\label{eq:rup_2}
+	P^{-1} AP=\uptri\left(\mu_1,\dots,\mu_{n-2r},
+	\block{a_1}{b_1},\dots,\block{a_r}{b_r}\right).
+	\end{equation}
+	\end{description}
+\end{thm}
+\begin{proof}
+	\begin{description}
+	\item[(1)]
+	设$A$有特征值$\mu_1$，取单位特征向量$\eta_1$, 扩充为标准正交基$Q=(\eta_1,\dots,\eta_n)$,
+	则$QQ^T=I$且
+	\[Q^T AQ=\begin{pmatrix} \mu_1 & \al\\ 0 & B\end{pmatrix}.\]
+	显然$B$的全部特征值为$\mu_2,\dots,\la_{\pm r}$，故按归纳假设存在正交矩阵$U_1$和可逆矩阵$P_1$,
+	\begin{align*}
+		U_1^T B U_1&=\uptri(\mu_2,\dots,\mu_{n-2r},A_1,\dots,A_r),\\
+		P_1^T B P_1&=\uptri\left(\mu_1,\dots,\mu_{n-2r},
+		\block{a_1}{b_1},\dots,\block{a_r}{b_r}\right).
+	\end{align*}
+	此时分别令$U=Q\diag(1,U_1),\;P=Q\diag(1,P_1)$即分别得到\eqref{eq:rup_1}, \eqref{eq:rup_2}.
+	\item[(2)]
+	若$A$无特征值，取特征复根$\la_1$，和相应的特征向量$\beta=\beta_1+i\beta_2$, 容易知道$\beta_{1,2}$线性无关且
+	\begin{equation}\label{eq:blbase}
+	A(\beta_1,\beta_2)=(\beta_1,\beta_2)\block{a_1}{b_1}.
+	\end{equation}
+	\begin{description}
+		\item[(a)] 将$\beta_{1,2}$ Schmidt正交归一化为$\eta_{1,2}$, 再扩充为标准正交基$U_1=(\eta_1,\dots,\eta_n)$, 则$QQ^T=I$且
+		\[U_1^T AU_1=\begin{pmatrix} A_1 & \al\\ 0 & B\end{pmatrix}\]
+		由\eqref{eq:blbase}和Schimidt正交归一化的过程可知$A_1$的特征复根为$\la_{\pm 1}$. 
+		由归纳假设存在正交矩阵$U_2$,
+		\[U_2^T B U_2=\uptri(\mu_1,\dots,\mu_{n-2r},A_2,\dots,A_r).\]
+		令$U=U_1\diag(1,U_2)R$, 其中$R$为某对换行(列)初等阵即可得到\eqref{eq:rup_1}.
+		\item[(b)] 将$\beta_{1,2}$ 扩充成基$P_1=(\beta_1,\dots,\beta_n)$，则
+		\[P_1^{-1} A P_1=\uptri\left(\block{a_1}{b_1},B\right).\]
+		由归纳假设存在可逆矩阵$P_2$, 
+		\[P_2^{-1} B P_2=\uptri\left(\mu_1,\dots,\mu_{n-2r},
+		\block{a_2}{b_2},\dots,\block{a_r}{b_r}\right).\]
+		令$P=P_1\diag(1,P_2)R$, 其中$R$为某对换行(列)初等阵即可得到\eqref{eq:rup_2}.
+	\end{description}
+	\end{description}
+\end{proof}

@@ -1,0 +1,150 @@
+\section{线性变换与相似对角化}
+假设有一个域$F$上的$n$维线性空间$V$，$f$为上面的某一线性变换。如果仅要研究$V$本身，只需要任意找到一个基，就可以有分解
+\[
+    V=\Span{\alpha_1,\alpha_2,\dots,\alpha_n}\\
+    =\Span{\alpha_1} \oplus \Span{\alpha_2}
+    \oplus \dots \oplus \Span{\alpha_n},
+\]
+但这并没有多少意义，因为在每个小空间上$f$的性质并不清楚。因而我们要借助$f$来分解$V$,也就是要研究$(V,f)$这个共同体，或者更简洁的主要就是要研究$f$.
+
+假设空间已有直和分解
+\[V=W_1\oplus W_2\oplus\dots\oplus W_m,\]
+为了清楚$f$在每个$W_i$上的行为，我们希望$W_i$均	为$f$的不变子空间，这个条件是必要的，因为这样才能让每个$f|W_i$仍然为$W_i$的线性变换，而不是其他什么东西。
+
+不变子空间并不是随意构造出来的，然而幸运的是，$f$的任何一个特征子空间(如果存在)都是不变子空间，而且不同特征值的特征空间还一定恰好能够做直和。另外，在每个特征子空间里面，$f$限制在其上后的表示矩阵一定是对角化的，这样$f$在所有特征子空间的直和空间上也就有对角表示，形式十分简单。
+
+为了达到这样的目的，就要考虑这个直和是否是$V$本身，因而总结出下面的一些引理或定理。下面用$p_F(\la),m_F(\la)$分别表示$f$在$F[\la]$中的特征与最小多项式，下标在不引起混乱时省略。用$V_{\la_i}$表示特征值$\la_i$所代表的特征子空间，在不致混淆时记为$V_i$
+\begin{thm}\label{thm:vidrt}
+    不论$f$是否可对角化，不论$p(\la),m(\la)$在$F[\la]$中是否能分解成一次式的乘积，若$f$有一些不同的特征值$\la_1,\la_2,\dots,\la_m\in F$，其中$\la_i\neq \la_j\;(i\neq j)$，那么
+    \[V_1+V_2+\dots +V_m=V_1\oplus V_2\oplus \dots \oplus V_m,\]
+    即若$\{\al_1^i,\al_2^i,\dots,\al_{r_i}^i\}\;(1\leq i\leq m)$分别为$V_i$的线性无关组，则他们的并集仍线性无关。这说明$f$可对角化等价于
+    \begin{equation}
+    V=V_1\oplus V_2\oplus\dots\oplus V_m.\label{drtbreak}
+    \end{equation}
+    其中$\la_1,\dots,\la_m$为$f$所有不同特征值。
+\end{thm}
+\begin{proof}
+    假设$0=\al_1+\dots+\al_k$，其中$k\leq m, \al_i\in V_i$. 那么用$f$作用两边得$0=\la_1\la_1+\dots+\la_k\al_k$，从而有
+    \[(\la_1-\la_2)\al_2+\dots+(\la_1-\la_k)\al_k=0.\]
+    假设$k-1$的时候已经为直和分解，则有$\al_2=\dots\al_k=0$, 从而最终$\al_1=0$，故为直和。而线性无关的叙述是直和的等价定义方式。
+    
+    若\eqref{drtbreak}成立, 则任取$V_i$的基，将他们合成$V$的基，$f$在这个基下的矩阵一定是
+    $\diag(\la_1,\dots,\la_m)$其中$\la_i$出现$\dim V_i$次。反过来，若$f$可对角化，则可假设
+    \begin{align*}
+    f(\al_1^1,\al_2^1,&\dots,\al_{r_1}^1,\dots,\al_1^m,\al_2^m,\dots,\al_{r_m}^m)\\
+    &=(\al_1^1,\al_2^1,\dots,\al_{r_1}^1,\dots,\al_1^m,\al_2^m,\dots,\al_{r_m}^m)\diag(\la_1,\dots,\la_m)
+    \end{align*}
+    其中括号中为$V$的基，因而$r_1+\dots+r_m=n$。注意到显然有
+    $\{\al_i^1,\dots,\al_{r_i}^i\}$为$V_i$中的线性无关组，从而$r_1\leq \dim V_i$, 故
+    \[n=r_1+\dots+r_n\leq \dim V_1+\dots +\dim V_m\leq n,\]
+    立刻得到\eqref{drtbreak}.
+\end{proof}
+
+\begin{thm}\label{thm:pla}
+    不论$f$是否可对角化，假设$p(\la)$在$F[\la]$中有分解
+    \begin{equation}
+    	p(\la)=(\la-\la_1)^{r_1} \dots (\la-\la_m)^{r_m} g(\la),\label{pla}
+    \end{equation}
+    其中$\la_i\in F$且两两不同，$r_i\geq 1$且$g(\la)$在$F[\la]$中无一次因式，那么$\la_1,\dots,\la_m$为$f$在$F$中所有的特征值且
+    \[1\leq \dim V_i\leq r_i.\]
+    进一步的，$f$在$(V,F)$上可对角化等价于$g(\la)=1$且$\dim V_i=r_i$. 并且这个条件是最优的，即$g(\la)=1$和$\dim V_i=r_i$相互独立，谁也不蕴含对方。
+\end{thm}
+\begin{proof}
+	设$(\al_1,\dots,\al_n)$为$V$的一个基，$f$在其上的矩阵为$A$, 那么
+	\begin{align*}
+		&\la_0 \mbox{为} f \mbox{在} F \mbox{中的特征值}\\
+		&\lefr\la_0\in F, \exists 0\neq \al \in V, f(\al)=\la_0 \al\\
+		&\lefr\la_0\in F, \exists 0\neq x \in F^n, f(\al_1,\dots,\al_n)x=\la_0 (\al_1,\dots,\al_n)x\\
+		&\lefr\la_0\in F, \exists 0\neq x\in F^n, Ax=\la_0 x\\
+		&\lefr\la_0\in F, p(\la_0)=\det(\la_0 I-A)=0.
+	\end{align*}
+	在注意到$g(\la)$在$F[\la]$中无一次因式，说明$\la_1,\dots,\la_m$为$f$在$F$中的全部特征值，因而$\dim V_i\geq 1$.
+
+	现在假设$s_i=\dim V_i$, 取$\{\al_1^i,\al_2^i,\dots,\al_{s_i}^i\}\;(1\leq i\leq m)$分别为$V_i$的基，将他们扩展为$V$的一个基
+	\[[\al]:=\al_1^1,\dots,\al_{s_1}^1,\dots,\al_m^1,\dots,\al_{s_m}^m,\beta_1,\dots,\beta_t\]
+	其中$s_1+\dots+s_m+t=n,\;t\geq 0$. 则$f$在这个基上有
+	\[f([\al])=[\al]
+	\begin{pmatrix}
+		\diag(\la_1,\dots,\la_m) & B\\
+		0 & C
+	\end{pmatrix},\]
+	其中$B\in F^{(n-t)\times t)},\; C\in F^{t\times t}$且$\diag(\la_1,\dots,\la_m)$中$\la_i$出现$s_i$次。从而有
+	\[p(\la)=(\la-\la_1)^{s_1} \dots (\la-\la_m)^{s_m} \det(\la I_t-C),\]
+	与\eqref{pla}比较，由于$g$在$F[\la]$中已无一次因式，而$\det(\la I_t-C)$可能还有，因而$s_i\leq r_i$.
+
+	假设$f$在$F$中可对角化，由定理\ref{thm:vidrt}，有$s_1+\dots+s_m=n$，从而
+	\[n=s_1+\dots+s_m\leq r_1+\dots +r_m\leq r_1+\dots+r_m+\deg g=n.\]
+	立即得到$r_i=s_i$ 并且$\deg g=0$, 也就是$g=1$. 反过来由于$g=1$，有$r_1+\dots+r_m=n$, 从而
+	\[s_1+\dots+s_m=r_1+\dots+r_m=n,\]
+	再次利用定理\ref{thm:vidrt}, $f$就可对角化。
+
+	最后来说明两个条件的独立性.
+	\begin{description}
+		\item[(a)] $F=\mathbb{C}$, 考虑矩阵$A=I_2+E_{21}$, $p(\la)=(\la-1)^2$, 这说明$g(\la)=1$, 但是
+		\[\dim V_1=2-\rank(I_2-A)=2-\rank(E_{21})=1<2,\]
+		此时$A$不可对角化.
+		\item[(b)] $F=\mathbb{R}$, 考虑矩阵
+		\[B=\begin{pmatrix}
+		  1 & &\\
+		  &0&-1\\
+		  &1&0\end{pmatrix},\]
+		有$p(\la)=(\la-1)(\la^2+1)\in \mathbb{R}[\la]$, 有$g(\la)=\la^2+1$. 由于$1\leq \dim V_1=1$, 知的确有
+		$\dim V_1$恰为$\la-1$在$p(\la)$中的次数，此时$B$不可对角化。
+	\end{description}
+\end{proof}
+注意定理\ref{thm:pla}中最重要的是$p(\la)$恰好包含$f$在$F$中的全部特征值，正是这一特性使得我们将$p(\la)$称为$f$的特征多项式，也有了通过它判别所有特征子空间的和是否是原空间的可能性，也就是对角化$f$的可能性. 但这就衍生出三个问题：
+
+一是随意给出$f$在$F[\la]$中的一个零化多项式，它是否包含$f$在$F$中的全部特征值. 这个问题的答案是肯定的，这由我们下面关于最小多项式的定理保证。
+
+二是既然任意一个零化多项式包含全部特征值，那么它能不能通过它来判定是否能对角化$f$。很不幸，这一问题的答案是否定的。观察$p(\la)$的定义与定理$\ref{thm:pla}$的证明过程可以知道，除了包含全部特征值之外，$p(\la)$还有一个性质，那就是
+\[r_1+\dots+r_m+\deg g=n,\quad r_i\geq \dim V_i\geq 1.\]
+正是这一性质使得$p(\la)$可以将$V_i$的直和与$V$联系起来，也就使得$p(\la)$最终可以用来判定$f$的对角化。但是，这个条件是可以修改的，也就是利用最小多项式来判定。
+
+三是对于一般的零化多项式，虽然不能用来判定$f$的对角化，那它能否反映出来$f$的某些次一级的特性。这个问题的答案是肯定的(它的答案就是空间的准素分解)，而它能成功的原因就在于对于任何一个$h(\la)\in F[\la]$, $\ker h(f)$均为$f$的不变子空间。
+
+为了空间分解的方便，准素分解引理是重要的.
+\begin{lem}\label{lem:prime}
+	对任何的$g(\la)\in F[\la]$与它在$F[\la]$中的分解
+	\[g(\la)=g_1(\la)g_2(\la)\dots g_m(\la),\]
+	其中$\gcd(g_1,\dots,g_m)=1$, 那么
+	\[\ker g(f)=\ker g_1(f)\oplus \ker g_2(f)\oplus\dots\oplus\ker g_m(f).\]
+\end{lem}
+\begin{thm}
+	不论$f$是否可对角化，假设$p(\la),m(\la)$在$F[\la]$中有分解\
+	\begin{align*}
+    	m(\la)=(\la-\la_1)^{r_1} \dots (\la-\la_m)^{r_m} g(\la),
+    \end{align*}
+    其中$\la_i\in F$且两两不同，$r_i\geq 1$且$g(\la)$在$F[\la]$中无一次因式，那么$\la_1,\dots,\la_m$为$f$在$F$中所有的特征值. 注意此时$r_i$与$\dim V_i$的大小关系无法确定。
+
+    进一步的，$f$在$(V,F)$上可对角化等价于
+    \[g(\la)=1\quad\mbox{且}\quad r_1=r_2=\dots=r_m=1.\]
+    并且这个条件是最优的，即$g(\la)=1$和$r_1=\dots=r_m=1$相互独立，谁也不蕴含对方。
+\end{thm}
+\begin{proof}
+	显然$p(\la_i)=m(\la_i)=0$, 因而$\la_i$均为$f$特征值。反过来，假设$\la_0\in F$为$f$特征值，那么存在$0\neq \al\in V$，使得$f(\al)=\la_0\al$. 容易知道$m(f)\al=m(\la_0)\al=0$, 因而$m(\la_0)=0$。 故而$\la_1,\dots,\la_m$的确为$f$在$F$中的全部特征值。
+
+	现在假设$f$可对角化，即\eqref{drtbreak}成立，任取$\al\in V$, 做分解
+	\[\al=\al_1+\al_2+\dots+\al_m,\quad f(\al_i)=\la_i \al_i.\]
+	再试着用全一次的多项式来作用它，即记$h(\la)=(\la-\la_1)\dots(\la-\la_m)$, 有
+	\begin{align*}
+		h(f)\al_i&=\prod_{j\neq i}(f-\la_j)(f-\la_i)\al\\
+		&=\prod_{j\neq i}(f-\la_j)0\\
+		&=0,
+	\end{align*}
+	从而$h(f)\al=0$. 由于$m(\la)$为最小多项式，故$m(\la)|h(\la)$. 又由于$m(\la)$包含$f$在$F$中的全部特征值，因而就有$m(\la)=h(\la)$. 反过来，假设$m(\la)=h(\la)$，利用引理\ref{lem:prime}立知$V$可分解为全部特征子空间的直和，因而$f$可对角化.
+
+	最后来说明$g(\la)=1$与$r_1=\dots=r_m=1$的独立性, $r_1$与$\dim V_i$的关系, 依然使用定理\ref{thm:pla}中类似的例子，
+	\begin{description}
+		\item[(a)] $F=\mathbb{C}$, 考虑矩阵$A=I_2+E_{21}$, $p(\la)=(\la-1)^2$. 由于$A-I\neq 0$, 因而$\la-1$不是零化多项式，从而$m(\la)=(\la-1)^2$, 此时$A$不可对角化。此时$\dim V_1=1<2$.
+		\item[(b)] $F=\mathbb{R}$, 考虑矩阵
+		\[B_1=\begin{pmatrix}
+			0 & -1\\
+			1 & 0
+		  \end{pmatrix},\quad
+		  B=\diag (1,B_1,B_1).\]
+		  对于$B$有$p(\la)=(\la-1)(\la^2+1)^2\in \mathbb{R}[\la]$, 因而$B$不可对角化，从而$m(\la)\neq \la-1$. 另一方面，容易验证$(\la-1)(\la^2+1)$已经是零化多项式，从而$m(\la)=(\la-1)(\la^2+1)$. 从这个例子还可以看出，最小多项式的不为一次的不可约式与特征多项式的不一定相等。
+		\item[(c)] 考虑$I_2$, 显然$m(\la)=\la-1$, $\dim V_1=2-\rank(I_2-I_2)=2$.
+	\end{description}
+\end{proof}
+
+从上面可以看出特征与最小多项式用起来十分方便，然而注意到，一个多项式在一个域与它的扩域中的最终分解形式不一定相等，也就使得在大域中可以对角化的矩阵不一定在小域中也能对角化，例如定理\ref{thm:pla}中例子(b)中的$B$, 容易知道$p_{\ma{R}}(\la)=(\la-1)(\la^2+1)$, 从而$B$不可实对角化，但是$p_{\ma{C}}(\la)=(\la-1)(\la+i)(\la-i)$, 所以$B$可复对角化为$\diag(1,i,-i)$. 当然，幸运的是$p_{\ma{R}}(\la)=p_{\ma{C}}(\la)$, 这就使得我们无需计算两次$p(\la)$(这由$p(\la)$的定义显然得到). 更幸运的是，最小多项式也有同样的性质，即虽然分解式不同，但大小域上的最小多项式本身相同.

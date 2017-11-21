@@ -1,0 +1,47 @@
+\documentclass[a4paper]{article}
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi}]
+{SimSun}
+%\setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi}]{SimSun}
+\setCJKsansfont{SimHei}
+\setCJKmonofont{SimFang}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+%\usepackage{euler}
+\setlist[description,enumerate]{leftmargin=0pt}
+\usepackage{geometry}
+\geometry{top=3cm,bottom=3cm}
+\usepackage{fancyhdr}
+	\pagestyle{fancy}
+\usepackage[colorlinks,bookmarksnumbered]{hyperref}
+\hypersetup{urlcolor=[RGB]{0,51,113}}
+\DeclareMathOperator*{\diag}{diag\,}
+\DeclareMathOperator*{\rank}{rank\,}
+\DeclareMathOperator{\sbs}{sba\,,}
+\DeclareMathOperator*{\tr}{tr\,}
+\DeclareMathOperator*{\Ker}{Ker\,}
+\DeclareMathOperator*{\IM}{Im\,}
+\DeclareMathOperator*{\uptri}{uptri\,}
+\DeclareMathOperator*{\lcm}{lcm\,}
+%\let\cleardoublepage\relax
+
+\title{\bf 线性代数总结与证明}
+	\author{Seb Wu}
+	\date{}
+\begin{document}
+\pdfbookmark[1]{Title}{title}
+\maketitle
+%\tableofcontents
+	\fancyhead[C]{}
+	\fancyhead[OL]{Seb Wu}
+	\fancyhead[OR]{线性代数}
+	%\fancyfoot{}
+\include{Newtheorem}
+\include{poly}
+\include{diago}
+\include{Jordan}
+\include{norm}
+\include{uptri}
+%\include{eigeninq}
+\end{document}

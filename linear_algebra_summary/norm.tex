@@ -1,0 +1,131 @@
+\section{实复正规矩阵的通性与特性}
+\subsection{实正规矩阵正交准对角化}
+实对称阵，实斜对称阵，实正交阵都是广泛应用的矩阵，他们都可以正交准对角化，事实上所有的实规范矩阵都可以正交准对角化. 复矩阵也有类似的概念，定义$A^*=\overline{A}^T,\, A\in \ma{C}^{n\times n}$, 称$A$为Hermite阵(复对称)若$A=A^*$, 为
+斜Hermite阵(复斜对称)若$A^*=-A$，为酉阵(复正交)若$AA^*=A^*A=I$, 为复正规阵若$AA^*=A^*A$. 为方便，若省略实复，都指实阵，又称复阵$A$的特征多项式的复根为其特征复根，下面先给出实阵的特性. 为了能将实正规阵做准对角分解，下面的引理是必要的.
+\begin{lem}\label{lem:2sob}
+	设$A$为实正规阵，把它看成复正规阵，设$\la\in\ma{C},\al\in\ma{C}^n$为$A$的任一特征值与相应的特征向量，又拆$\al=\beta+i\gamma,\;\beta,\gamma\in \ma{R}^n$, 则
+	\[A^T\al=\overline{\la}\al,\quad (\beta,\gamma)=0,\quad \|\beta\|=\|\gamma\|,\]
+	其中$(x,y)=x^Ty,\,\|x\|=\sqrt{(x,x)},\,\forall x,y\in\ma{R}^n$.
+\end{lem}
+\begin{thm}
+	设$\la_{\pm 1},\dots,\la_{\pm r},\mu_1,\dots,\mu_{n-2r}$为$n$级实规范阵$A$的全部特征复根，其中
+	\[\mu_j\in\ma{R},\;\la_{\pm j}=a_j\pm i b_j,\;a_j\in\ma{R},\;0\neq b_j\in \ma{R},\]
+	则存在实正交矩阵$U$,
+	\begin{equation}\label{eq:norm}
+	U^T A U=\diag\left(\mu_1,\dots,\mu_{n-2r},
+	\block{a_1}{b_1},\dots,\block{a_r}{b_r}\right).
+	\end{equation}
+\end{thm}
+\begin{proof}
+	用归纳法证明最方便，$n=1$已经成立，现在归纳$n$. 
+	\begin{description}
+		\item[(a)] 如果$A$有特征值(即有特征复根恰为实数)$\mu_1\in\ma{R}$, 则取单位向量$\eta_1$使得$A\eta_1=\mu_1 \eta_1$. 将$\eta_1$扩展为$\ma{R}^{n\times n}$的一组标准正交基
+		\[P=(\eta_1,\eta_2,\dots,\eta_n)\]
+		则$PP^T=I$且
+		\[AP=(\mu_1\eta_1,A\eta_2,\dots,A\eta_n)=(\eta_1,\eta_2,\dots,\eta_n)
+		\begin{pmatrix} \mu_1 & \al\\ 0 & B\end{pmatrix}.\]
+		化为
+		\begin{equation}\label{eq:norminduction}
+		P^T AP=\begin{pmatrix} \mu_1 & \al\\ 0 & B\end{pmatrix}.
+		\end{equation}
+		由于$A$实正规，故$P^T AP$实正规，猜想\eqref{eq:norminduction}的右端可以解出$\al,B$的性质.
+		事实上由于
+		\begin{align*}
+		\begin{pmatrix} \mu_1 & \al\\ 0 & B\end{pmatrix}
+		\begin{pmatrix} \mu_1 & 0\\ \al^T & B^T\end{pmatrix}&=
+			\begin{pmatrix} \mu_1^2+|\al|^2 & \al B^T\\ B\al^T & BB^T\end{pmatrix},\\
+		\begin{pmatrix} \mu_1 & 0\\ \al^T & B^T\end{pmatrix}
+		\begin{pmatrix} \mu_1 & \al\\ 0 & B\end{pmatrix}&=
+		\begin{pmatrix} \mu_1^2 & \mu_1\al\\ \mu_1\al^T & \al^T\al+B^T B\end{pmatrix}.
+		\end{align*}
+		比较可知$\al=0,\, BB^T=B^TB$. 显然$B$的所有特征复根为
+		\[\la_{\pm 1},\dots,\la_{\pm r},\mu_2,\dots,\mu_{n-2r},\]
+		故按假设$B$可以靠正交阵$P_1$准对角化为
+		\[P_1^T B P_1=\diag\left(\mu_2,\dots,\mu_{n-2r},
+		\block{a_1}{b_1},\dots,\block{a_r}{b_r}\right).\]
+		只要令$U=P\diag(1,P_1)$就得到\eqref{eq:norm}.
+		\item[(b)]
+		如果$A$没有特征值，取$0\neq \beta\in \ma{C}^n$满足$A\beta=\la_1 \beta$. 拆$\beta=\beta_1+i\beta_2$, 其中$\beta_j\in\ma{R}^n$. 则由引理\ref{lem:2sob}知$\beta_{1,2}$相互正交，等长且
+		\[A(\beta_1,\beta_2)=(\beta_1,\beta_2)\block{a_1}{b_1}.\]
+		这已经有了雏形，不同在于$\beta_{1,2}$不是单位长，这可以通过同时除以$\|\beta_{1,2}\|$来实现. 即记
+		$\eta_{1,2}=\beta_{1,2}/\|\beta_{1,2}\|$，将其扩展成一个标准正交基$P=(\eta_1,\eta_2,\dots,\eta_n)$
+		，则$PP^T=I$且
+		\[
+		AP=(\eta_1,\eta_2,\dots,\eta_n)
+		\begin{pmatrix} C & \al\\ 0 & B\end{pmatrix},\quad C=\block{a_1}{b_1}.
+		\]
+		化为
+		\begin{equation}\label{eq:2sobform}
+		P^TAP=\begin{pmatrix} C & \al\\ 0 & B\end{pmatrix}.
+		\end{equation}
+		同样需要利用$P^TAP$的正规性,
+		\begin{equation}\label{eq:break}
+		\begin{aligned}
+			\begin{pmatrix} C & \al\\ 0 & B\end{pmatrix}
+			\begin{pmatrix} C^T & 0\\ \al^T & B^T\end{pmatrix}&=
+			\begin{pmatrix} CC^T+\al\al^T & \al B^T\\ B\al^T & BB^T\end{pmatrix},\\
+			\begin{pmatrix} C^T & 0\\ \al^T & B^T\end{pmatrix}
+			\begin{pmatrix} C & \al\\ 0 & B\end{pmatrix}&=
+			\begin{pmatrix} C^TC & C^T\al\\ \al^TC & \al^T\al+B^TB\end{pmatrix}
+		\end{aligned}
+		\end{equation}
+		比较可知$\tr(\al\al^T)=0$, 从而$\al=0$并且$BB^T=B^TB$. 显然$B$的所有特征复根为
+		\[\la_{\pm 2},\dots,\la_{\pm r},\mu_1,\dots,\mu_{n-2r},\]
+		故按假设$B$可以靠正交阵$P_1$准对角化为
+		\[P_1^T B P_1=\diag\left(\mu_1,\dots,\mu_{n-2r},
+		\block{a_2}{b_2},\dots,\block{a_r}{b_r}\right).\]
+		只要令$U=P\diag(I_2,P_1)Q$其中$Q$为合适的两行(列)对换初等阵，就得到\eqref{eq:norm}.
+		\item[(c)] 事实上若不直接用引理\ref{lem:2sob}，也可以由$\beta_{1,2}$线性无关去作Schmidt正交归一化为$\eta_{1,2}$. 再记$A$作用其上的矩阵为$C$，写出\eqref{eq:2sobform}和\eqref{eq:break}，再解出$\al=0$. 至于$C$的具体形式，可以把它的四个元素都设出来，再利用$CC^T=C^TC$和$C$的特征复根为$\la_1$去暴力解，就可解出.
+	\end{description}
+\end{proof}
+终于，对于具体的实正规阵，有了下面的定理
+\begin{thm}
+	设$A$为实规范矩阵，则
+	\begin{description}
+	\item[(1)] $A=A^T$当且仅当$A$的全部特征复根为实数，当且仅当$A$能够实正交对角化.
+	\item[(2)] $A=-A^T$当且仅当$A$的全部复特征根的实部为$0$，当且仅当存在实正交阵$U$,
+	\[U^T A U=\diag\left(0,\dots,0,
+	\block{0}{b_1},\dots,\block{0}{b_r}\right),\]
+	其中$b_j\neq 0$.
+	\item[(3)] $AA^T=I$当且仅当$A$的全部特征复根的模为$1$，当且仅当存在实正交阵$U$,
+	\[U^T A U=\diag\left(\pm 1,\dots,\pm 1,
+	\block{\cos\cta_1}{\sin\cta_1},\dots,\block{\cos\cta_r}{\sin\cta_r}\right),\]
+	其中$0<\cta_j<\pi$.
+	\end{description}
+\end{thm}
+\subsection{复正规矩阵正交对角化}
+用和实正规阵类似的办法，可以得到任意的复正规阵都可复正交对角化，之所以能有这么河蟹的结果当然还是因为我们的代数学基本定理. (其实任意复矩阵都可以复正交上三角化也归功于它)
+\begin{thm}
+	设$A$为复正规阵，则存在酉阵$U$使得
+	\[U^* AU=\diag(\la_1,\la_2,\dots,\la_n)\]
+	其中$\la_j$为$A$全部特征值. 进一步的
+	\begin{description}
+	\item[(1)] $A=A^*$当且仅当$A$的特征值都是实数.
+	\item[(2)] $A=-A^*$当且仅当$A$的特征值的实部都为$0$.
+	\item[(3)] $AA^*=I$当且仅当$A$的特征值的模都为$1$.
+	\end{description}
+\end{thm}
+\begin{proof}
+	任取$A$的特征值$\la_1\in\ma{C}$, 则取单位向量$\eta_1$使得$A\eta_1=\la_1 \eta_1$. 将$\eta_1$扩展为$\ma{C}^{n\times n}$的一组标准正交基
+	\[P=(\eta_1,\eta_2,\dots,\eta_n)\]
+	则$PP^*=I$且
+	\[AP=(\la_1\eta_1,A\eta_2,\dots,A\eta_n)=(\eta_1,\eta_2,\dots,\eta_n)
+	\begin{pmatrix} \la_1 & \al\\ 0 & B\end{pmatrix}.\]
+	化为
+	\[
+	P^* AP=\begin{pmatrix} \la_1 & \al\\ 0 & B\end{pmatrix}.
+	\]
+	由于$A$复正规，故$P^* AP$复正规，就有
+	\begin{align*}
+	\begin{pmatrix} \la_1 & \al\\ 0 & B\end{pmatrix}
+	\begin{pmatrix} \overline{\la_1} & 0\\ \al^* & B^*\end{pmatrix}&=
+		\begin{pmatrix} |\la_1|^2+|\al|^2 & \al B^*\\ B\al^* & BB^*\end{pmatrix},\\
+	\begin{pmatrix} \overline{\la_1} & 0\\ \al^* & B^*\end{pmatrix}
+	\begin{pmatrix} \la_1 & \al\\ 0 & B\end{pmatrix}&=
+	\begin{pmatrix} |\la_1|^2 & \la_1\al\\ \overline{\la_1}\al^* & \al^*\al+B^* B\end{pmatrix}.
+	\end{align*}
+	比较可知$\al=0,\, BB^*=B^*B$. 显然$B$的所有特征复根为$\la_{2},\dots,\la_{n}$,
+	故按假设$B$可以靠酉阵$P_1$准对角化为
+	\[P_1^* B P_1=\diag(\la_2,\dots,\la_n)\]
+	只要令$U=P\diag(1,P_1)$就结束战斗.
+\end{proof}
