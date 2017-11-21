@@ -1,0 +1,220 @@
+\chapter{Jordan Form}
+
+\section{Generalized Eigenspaces}
+\begin{pro}%5
+	Suppose $A,B\in\m{C}^{3\times 3}$, then $A$ is similar to $B$ if and only if the characteristic polynomial $\varphi_A,\varphi_B$ and the smallest polynomials $d_A,d_B$ of $A,B$ are equal respectively, i.e.,
+	\[\varphi_A(\la)=\varphi_B(\la),\quad d_A(\la)=d_B(\la).\]
+\end{pro}
+
+\begin{pro}[Fitting]%7
+	Suppose $f$ is a linear transportation on $n$ dimensional space $(V,F)$, where $F$ is any arbitrary field. Prove that there are invariant spaces $V_1,V_2$ due to $f$, such that $V=V_1\oplus V_2$, $f|_{V_1}$ is invertible while $f|_{V_2}$ is nilpotent (power to zero). Surely this can be shown by \emph{Space 1st Decomposition Theorem\;(1st De.)}, here we search for another proof.
+\end{pro}
+\begin{proof}
+	We first give a proof for general fields by space method, then a primary proof by matrix method but only in the case of $F=\m{C}$. 
+
+	Easy to know that there is some positive number $1\leq k\leq n$ such that 
+	\[\IM(f^k)=\IM(f^{k+1})=\cdots=\IM(f^{2k})=\cdots,\]
+	then by Problem $5.5.9$ (c.f. Textbook Page $223$), we know 
+	\[V=\Ker(f^k)\oplus \IM (f^k).\]
+	Let $V_1=\IM (f^k),\; V_2=\Ker (f^k)$, since $V_1,V_2$ are both invariant to $f$ and $V_2$ is already nilpotent, it remains to show that $f|_{V_1}$ is invertible, i.e., is onto. Given any $f^k(a)$ where $a\in V$, since $\IM (f^k)=\IM (f^{k+1})$, then there is some $b\in V$ such that
+	\[f^k(a)=f^{k+1}(b)=f|_{V_1}\big(f^k(b)\big),\]
+	thus $f|_{V_1}$ is indeed an isomorphism.
+
+	Now for the second proof. We already know that the complex matrix under $f$ can be upper triangle, and if $V_1,V_2$ are both invariant, the matrix should be quasi diagonal, thus we try to combine these two properties together and construct a matrix both triangle and quasi diagonal. Suppose the characteristic polynomial of $f$ is
+	\[\varphi(\la)=(\la-\la_1)^{e_1}(\la-\la_2)^{e_2}\cdots(\la-\la_t)^{e_t}\la^r,\]
+	where $e_1,e_2,\dots,e_t\geq 1, r\geq 0$ and $\la_1,\dots,\la_t,0$ are mutually different. Thus there is some bases of $V$ under which the matrix of $f$ is like
+	\[A=\uptri(\underbrace{\la_1\cdots\la_1}_{e_1}\cdots\underbrace{\la_t\cdots\la_t}_{e_t}
+	\cdots\underbrace{0\cdots0}_{r}),\]
+	where $e_1+\dots+e_t+r=n$. In order to change $A$ to be quasi diagonal, we suppose $A$ is like 
+	\[A=\begin{pmatrix}
+    \la_1&	&	&a	&	&*	\\
+		&\ddots&	&	&	&	\\
+		&	&\la_t&	&	&	\\
+		&	&	&0	&	&	\\
+		&	&	&	&\ddots	&	\\
+	   0&	&	&	&	&0	
+	\end{pmatrix},\quad
+	P=\begin{pmatrix}
+   		1&	&	&-a/\la_1&	&	\\
+		&\ddots&	&	&	&	\\
+		&	&1&	&	&	\\
+		&	&	&1	&	&	\\
+		&	&	&	&\ddots	&	\\
+	    &	&	&	&	&1	
+	\end{pmatrix},\]
+	then easy to know 
+	\[P^{-1}AP=\begin{pmatrix}
+   	\la_1&	&	&0	&	&*	\\
+		&\ddots&	&	&	&	\\
+		&	&\la_t&	&	&	\\
+		&	&	&0	&	&	\\
+		&	&	&	&\ddots	&	\\
+	   0&	&	&	&	&0	
+	\end{pmatrix}.\]
+	Similarly, we can gradually change all non-quasi-diagonal part to $0$, i.e, there is some invertible matrix $Q$, thus that
+	\[Q^{-1}AQ=\diag\big(\uptri(\la_1\cdots\la_t),\uptri(0\cdots0)\big).\]
+	Thus now there is some base of $V$ such that 
+	\[f\big(\al(1),\dots,\al(\sum_{j=1}^t e_j),\beta_1,\dots,\beta_r\big)=\big(\al(1),\dots,\al(\sum_{j=1}^t e_j),\beta_1,\dots,\beta_r\big)Q^{-1}AQ.\]
+	Now let $V_1=\Span{\al(1),\dots,\al(e_1+\dots+e_t)}$ and $V_2=\Span{\beta_1,\dots,\beta_r}$, easy to know these subspaces are what we need.
+\end{proof}
+
+\begin{pro}%8
+	Reprove 1st De. by the problem above.
+\end{pro}
+\begin{proof}
+	All symbols are the same as 1st De. on page $257$. We consider $f_1=\ma{A}-\la_1 I$ working on $V$, then $W_1$ is the nilpotent subspace due to $f_1$ as above, $V_1$ is the subspace where $f_1$ is invertible there, i.e, $\Ker f_1\cap V_1=\{0\}$, and $V=V_1\oplus W_1$.  Now consider $f_2=\ma{A}-\la_2 I$ working on $V_1$, then we shall prove $V_1$ is an invariant space of $f_2$. This is routine since $V_1$ is invariant for $f_1$ and $f_2=f_1+(\la_1-\la_2)I$. Thus there is $W_2$ is the nilpotent subspace due to $f_2$, $V_2$ is the subspace where $\Ker f_2\cap V_2=\{0\}$ and $V_1=W_2\oplus V_2$. Easy to know that $\Ker f_1\cap V_2=\{0\}$. Similarly we define $f_j=\ma{A}-\la_j I$ for all $1\leq j\leq t$ and get $W$-s, then we will derive 
+	\[V=W_1\oplus W_2\oplus\cdots\oplus W_t\oplus V_t,\]
+	where $W_j$ is the nilpotent space to $f_j$, i.e,
+	\[W_j=\Ker (\ma{A}-\la_j I)^{r_j},\quad r_j\geq 1,\;1\leq j\leq t,\]
+	and $\Ker f_j\cap V_t=\{0\}$, and thus $f_j$-s are all invertible on $V_t$. Now we prove that $V_t=\{0\}$. Suppose $0\neq \al\in V_t$, then $f_j(\al)\neq 0$ for all $j$ but
+	\[0=\varphi(\ma{A})=(\ma{A}-\la_1 I)^{e_1}\cdots(\ma{A}-\la_t I)^{e_t}\al\neq 0,\]
+	which is a contradiction. From the proof of the problem above, we know $\dim W_j=r_j=e_j$ for $1\leq j\leq t$, thus finally we get
+	\[V=\Ker(\ma{A}-\la_1 I)^{e_1}\oplus\cdots\oplus\Ker(\ma{A}-\la_t I)^{e_t}.\]
+	From the problem below we will see $\Ker(\ma{A}-\la_j)^{e_j}=W_j^{\la}$. As for the last part of 1st De, we just notice that $\dim W_j=\dim W_j^{\la}=e_j$, thus we choose base of $W_j$ and put them together to build a base of $V$. The matrix of $\ma{A}$ under this base is like
+	\[\diag(\underbrace{\la_1\cdots\la_1}_{e_1}\cdots\underbrace{\la_t\cdots\la_t}_{e_t}),\]
+	and thus the matrix of $\ma{A}|W_j^{\la}$ is
+	\[\diag(\underbrace{\la_j\cdots\la_j}_{e_j}).\]
+	From this we know the characteristic polynomial of $\ma{A}|W_j^{\la}$ is indeed $(\la-\la_j)^{e_j}$. 
+\end{proof}
+
+\begin{pro}%9
+	Suppose the linear transform $f$ on $V$ has a minimum polynomial $d(\la)=(\la-\la_1)^{m_1}\cdots(\la-\la_t)^{m_t}$, where $\la_1,\dots,\la_t$ are all mutually different eigenvalues of $f$. Also let $W_j=\Ker (f-\la_j I)^{m_j}$ for all $1\leq j\leq t$, then for $1\leq j\leq t$,
+	\begin{description}
+	\item[(a)] The root spaces $W_j^{\la}=W_j$, 
+	\item[(b)] The minimum polynomial of $f|W_j$ is $(\la-\la_j)^{m_j}$.
+	\end{description}
+\end{pro}
+\begin{proof}
+	\begin{description}
+	\item[(a)] Since there is some $u(\la),v(\la)$ such that $1=u(\la)(\la-\la_j)+v(\la)(\la-\la_2)\cdots(\la-\la_t)$, we know 
+	\[(\la-\la_j)^{m_j}=u(\la)(\la-\la_j)^{m_j+1}+v(\la)d(\la),\]
+	 from this we immediately know $(f-\la_j I)^{m_j}\al=0$ if $(f-\la_j I)^{m_j+1}\al=0$.
+	\item[(b)] Suppose the minimum polynomial of $f|W_j$ is $(\la-\la_j)^{n_j}$, then the minimum polynomial of $f$ is
+	\[d_f(\la)=(\la-\la_1)^{n_1}\cdots(\la-\la_t)^{n_t},\]
+	from this we immediately know $n_j=m_j$.
+	\end{description}
+\end{proof}
+
+\begin{pro}%10
+	Suppose the minimum polynomial of $f$ is $d(\la)=p_1^{m_1}(\la)\cdots p_t^{m_t}(\la)$, where $p_1(\la),\dots,p_t(\la)$ are mutually different first-one unbreakable polynomials. Also let $W_j=\Ker p_j^{m_j}(f)$, then
+	\begin{description}
+	\item[(a)] $V=W_1\oplus W_2\oplus\cdots\oplus W_t$.
+	\item[(b)] The minimum polynomial of $f|W_j$ is $d_j(\la)=p_j^{m_j}(\la)$.
+	\end{description}
+\end{pro}
+\begin{proof}
+	Part (b) is just like the problem above, we only prove (a). Notice that 
+	\[\gcd\big(d/p_1,d/p_2,\dots,d/p_t\big)=1,\]
+	we know $\al\in\Span{d/p_1(\al),\dots,d/p_t(\al)}$, which means $V=W_1+\dots+W_t$. As for the direct sum, we let $0=\sum_j \al_j$, and work $d(f)/p_1^{m_1}(f)$ on both sides, then we will get $d(f)/p_1^{m_1}(f)\al_1=0$. Since $p_1^{m_1}(f)\al_1=0$ and $\gcd(d/p_1^{m_1},p_1^{m_1})=1$, one will derive $\al_1=0$. Similarly, $\al_j=0$ for all $j$.
+\end{proof}
+
+\section{Cyclic Spaces}
+\begin{pro}%4
+	Suppose $f$ is a nilpotent linear transformation on $n$ dimensional space $(V,\m{C})$, and $V$ can be the direct sum of several cyclic spaces, say $C_1,\dots,C_k$, where there are $n_j$ many subspaces with dimension $j$ for $1\leq j\leq k$. Then
+	\begin{description}
+	\item[(a)] $\rho(f)=n_2+2n_3+\dots+(k-1)n_k$,
+	\item[(b)] $n_j=\rho(f^{j+1})+\rho(f^{j-1})-2\rho(f^j)$ for $1\leq j\leq k$,
+	\end{description}
+\end{pro}
+\begin{proof}
+	\begin{description}
+	\item[(a)] For any space in these $C$-s in dimension $j$, assume $\al,f(\al),\dots,f^{j-1}(\al)$ is a base of $U$, working $f$ on this base,
+	\[f\big(\al,f(\al),\dots,f^{j-1}(\al)\big)=f(\al),\dots,f^{j-1}(\al),f^j(\al).\]
+	Easy to know $f(\al),\dots,f^{j-1}(\al)$ is a base of $f(V)$. Since every cyclic space is invariant for $f$, we know
+	\[f(V)=f(C_1)\oplus f(C_2)\oplus\dots\oplus f(C_k).\]
+	Consider the dimension of both sides, we get (a).
+	\item[(b)] Similar to (a), we get
+	\[\rho(f^j)=n_{j+1}+2n_{j+2}+\dots+(k-j)n_k.\]
+	Similarly we have the formula for $\rho(f^{j-1}),\rho(f^{j+1})$.
+	\end{description}
+\end{proof}
+
+\section{Jordan Norm Form}
+\begin{pro}%3
+	Suppose $V$ is a complex $n$ dimensional space and $f$ is a linear transportation on it. $\varphi(\la)$ and $d(\la)$ are its characteristic and minimum polynomials respectively,
+	\begin{align*}
+	\varphi(\la)&=(\la-\la_1)^{e_1}(\la-\la_2)^{e_2}\cdots(\la-\la_t)^{e_t},\\
+	d(\la)&=(\la-\la_1)^{m_1}(\la-\la_2)^{m_2}\cdots(\la-\la_t)^{m_t},
+	\end{align*}
+	then $\Ker (f-\la_jI)^{e_j}=\Ker (f-\la_j I)^{m_j}$ for $1\leq j\leq t$.
+\end{pro}
+\begin{proof}
+	Just notice that
+	\[\Ker (f-\la_jI)^{e_j}\subset W_j^{\la}=\Ker (f-\la_jI)^{m_j}\subset \Ker (f-\la_jI)^{e_j},\]
+	by Problem $6.1.9$.
+\end{proof}
+
+\section{Equivalence of $\la$ Matrices}
+\begin{pro}%
+	Suppose $H_1$ and $H_2$ are both Hermite square matrices, then the invariant factors of $\la$ matrix $H_1+\la H_2$ are all polynomials with real number coefficients.
+\end{pro}
+\begin{proof}
+	First we shall define $\overline{g}$ the conjugate of polynomial $g\in \m{C}[x]$, where $\overline{g}$ is with coefficients which are conjugate of those of $g$ respectively, i.e., 
+	\begin{align*}
+		g(x)&=a_0+a_1x+\cdots+a_n x^{n+1},\\
+		\overline{g}(x)&=\overline{a_0}+\overline{a_1}x+\cdots+\overline{a_n} x^{n+1}.
+	\end{align*}
+	Now we consider any $k$-th sub-matrix of $H(\la)=H_1+\la H_2$, say 
+	\[S=H\begin{pmatrix}
+	i_1&i_2&\dots&i_k\\
+	j_1&j_2&\dots&j_k
+	\end{pmatrix},\]
+	and consider the ``transpose'' of $S$, say
+	\[T=H\begin{pmatrix}
+	j_1&j_2&\dots&j_k\\
+	i_1&i_2&\dots&i_k
+	\end{pmatrix}.\]
+	Since $H(\la)$ itself is also Hermite, if $\det S=f(\la)$ then $\det T=\overline{f}(\la)$. Now since $f(\la)+\overline{f}(\la)\in \m{R}[\la]$ and $\big(f(\la)-\overline{f}(\la)\big)/i\in \m{R}[\la]$, easy to derive that the $k$-th determinant factor $D_k$ is also in $\m{R}[\la]$ and so are all invariant factors.
+\end{proof}
+
+\section{Another Approach to Jordan Form}
+In order to treat Lemma $1$ (c.f. Textbook Page $287$) rigorously, we shall consider polynomials whose coefficients are matrices. For any field $F$, define the class of all $x$ matrices on $F$ to be
+\[F(n,x)=\Big\{A(x)=\big(a_{ij}(x)\big)_{n\times n}\colon a_{ij}(x)\in F[x]\Big\},\]
+and for any $A(x)\in F(n,x)$ define the degree of it to be
+\[\deg A(x)=\max\{\max\{\deg a_{ij}(x)\colon 1\leq i,j\leq n\},0\}.\]
+Lemma $1$ tells us that for any $A(x)\in F$, if $m=\deg A(x)$, then there are matrices $A_k \in F^{n\times n}$ such that 
+\[A(x)=\sum_{k=0}^m A_k(x^k I_n).\]
+Also let $G=F^{n\times n}$ and we can naturally build polynomials on $G$, and define their additions and multiplications. 
+Now we build a mapping (one will see this mapping is indeed well defined) between these two classes (more precisely, they are two non-commutative rings), i.e.,
+\begin{align*}
+	\sigma\colon G[x]&\to F(n,x)\\
+				\sum_{k=0}^m A_kx^k&\mapsto \sum_{k=0}^m A_k(x^k I_n),
+\end{align*}
+then easy to show $\sigma$ is an isomorphism. 
+
+Moreover, for any $f(x)=\sum_{k} A_kx^k\in G[x]$ and for any $A\in G$, we define $f(A)=\sum_{k} A_k A^k\in G$. If $f(x)+g(x)=h(x)$, then for any $A\in G$, we have $f(A)+g(A)=h(A)$. But if $f(x)g(x)=p(x)$, it may happens $f(A)g(A)\neq p(A)$. For this, just let $f(x)=x-A$, $g(x)=Bx$, then $p(x)=Bx^2-ABx$ and 
+\[f(A)g(A)=(A-A)(BA)=0\neq (BA-AB)A=BA^2-ABA=p(A).\]
+The reason for this phenomenon is that $G$ is not commutative.
+\begin{pro}%2
+	Suppose $J\in F^{n\times n}$ (here $\la\in F$ and $F$ is a commutative ring) is
+	\[J=\begin{pmatrix}
+	\la & 1 & 0 & \cdots & 0 & 0\\
+	0   &\la& 1 & \cdots & 0 & 0\\
+	\vdots   &\vdots& \vdots & \ddots & \vdots & \vdots\\
+	0   &0& 0 & \cdots & \la & 1\\
+	0   &0& 0 & \cdots & 0 & \la
+	\end{pmatrix}\]
+	and $f(x)\in F[x]$, then 
+	\[f(J)=\begin{pmatrix}
+	f(\la) & f'(\la) & \dfrac{f''(\la)}{2!} & \cdots & \dfrac{f^{(n-2)}(\la)}{(n-2)!} &
+	\dfrac{f^{(n-1)}(\la)}{(n-1)!}\\
+	0 & f(\la) & f'(\la) & \cdots & \dfrac{f^{(n-3)}(\la)}{(n-3)!} &
+	\dfrac{f^{(n-2)}(\la)}{(n-2)!}\\
+	\vdots & \vdots & \vdots & \ddots & \vdots& \vdots\\
+	0 & 0 & 0 & \cdots & f(\la) & f'(\la)\\
+	0 & 0 & 0 & \cdots & 0 & f(\la)\end{pmatrix}.\]
+	Moreover, any matrix which is communicative to $J$ has the form of $f(J)$.
+\end{pro}
+\begin{proof}
+	Suppose $f(x)=\sum_{k=0}^{\infty} a_k x^k$ where at most finite of $a_k$-s are non-zero, then for any $j\geq 0$, 
+	\[\frac{f^{(j)}(x)}{j!}=\sum_{k=j}^{\infty} C_k^j\,a_k\,x^{k-j}.\]
+	Since if we let $J=\la I+A$, then $A^n=0$ and 
+	\begin{align*}
+		f(\la I+A)&=\sum_{k=0}^{\infty} a_k\sum_{j=0}^k C_k^j\,(\la^{k-j} I)A^j\\
+		&=\sum_{j=0}^{\infty}\big(\sum_{k=j}^{\infty} C_k^j\,a_k\,\la^{k-j}\big) A^j\\
+		&=\sum_{j=0}^{n-1}\frac{f^{(j)}(\la)}{j!} A^j,
+	\end{align*}
+	which is the form above. Suppose $B=(b_{ij})$ is communicative to $J$, then from $AB=BA$ easy to know
+	\[B=\sum_{j=1}^n b_{1j} A^{j-1}=\sum_{j=1}^n (J-\la I)^{j-1}.\]
+	Thus if we let $f(x)=\sum_{j=0}^{n-1} a_j (x-\la)^j$ where $a_j\in F$, then any matrix which is communicative to $J$ can be the form of $f(J)$.
+\end{proof}

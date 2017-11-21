@@ -1,0 +1,269 @@
+\chapter{Euclid Spaces}
+\section{Inner Product}
+\begin{pro}%1
+	For any real symmetric matrix $A\in\m{R}^{2\times 2}$, let $f_A(x,y)=xAy^T$ for any row vectors $x,y\in \m{R}^2$. Then $f_A$ is an inner product if and only if $a_{11}>0,\;a_{22}>0$ and $\det A>0$.
+\end{pro}
+\begin{proof}
+	Suppose 
+	\[A=\begin{pmatrix} a_{11} & a\\ a & a_{22}\end{pmatrix},\]
+	if $f_A$ is an inner product then there is standard base $\ep_1=(1,0),\;\ep_2=(0,1)$ and $A$ is the Gram matrix under it. Let $(\;,\;)=f_A(\;,\;)$, then 
+	\[a_{11}=(\ep_1,\ep_1),\;a_{22}=(\ep_2,\ep_2),\;a=(\ep_1,\ep_2).\]
+	By Cauchy-Schwartz inequality we have $\det A=a_{11}a_{22}-a^2>0$, since $\ep_1,\ep_2$ is not linear independent. By definition of inner product, $a_{11},a_{22}>0$. Conversely, easy to know
+	\begin{description}
+		\item[(a)]Symmetric: $(x,y)=xAy^T=(xAy^T)^T=yAx^T=(y,x)$,
+		\item[(b)]Positive: If $x=(u,v)\neq 0$, then $(x,x)=a_{11}u^2+2auv+a_{22}v^2$. In the case of $u=0,v\neq 0$ or the case of $u\neq 0,v=0$, easy to know $(x,x)>0$. Now assume $u\neq 0,v\neq 0$, then since $|auv|<\sqrt{a_{11}a_{22}}|uv|$, we know 
+		\[(x,x)>(\sqrt{a_{11}}|u|-\sqrt{a_{22}}|v|)^2.\]
+		Thus $(x,x)>0$ for all $x\neq 0$,
+		\item[(c)]Linear: Routine.
+	\end{description}
+	Thus $f_A$ is an inner product.
+\end{proof}
+
+\begin{pro}%6
+	Suppose $V$ is an Euclid space in $\dim n$, then $\al_1,\dots,\al_n$ are linear independent if and only if their Gram square matrix is $G(\al_1,\dots,\al_n)=\big((\al_i,\al_j)\big)_{n\times n}$ is invertible, where $(\al,\beta)$ is the inner product of $V$.
+\end{pro}
+
+\section{Orthogonality}
+\begin{pro}[Bessel Inequality]%1
+	Suppose $\al_1,\al_2,\dots,\al_k$ are mutually orthogonal unit vectors in $n$ dimensional Euclid space $V$, for any $\al\in V$ define $a_i=(\al,\al_i)$ for $1\leq i\leq k$, then
+	\[\sum_{i=1}^k |a_i|^2\leq \|\al\|^2.\]
+	Moreover, $\beta=\al-\sum_{i=1}^k a_k\al_i$ is orthogonal to every $\al_i$.
+\end{pro}
+\begin{proof}
+	Expand $\al_1,\dots,\al_k$ to be a sob (standard orthogonal base) of $V$, say $\al_1,\dots,\al_n$. For any $\al\in V$, let
+	\[\al=b_1\al_1+\dots+b_k\al_k+b_{k+1}\al_{k+1}+\dots+b_n\al_n,\]
+	then $b_i=(\al,\al_i)=a_i$ for all $1\leq i\leq n$, and thus $(\beta,\al_i)=0$ for all $1\leq i\leq k$. Now notice that
+	\[(\al,\al)=\sum_{i=1}^n a_i^2\geq \sum_{i=1}^k a_i^2,\]
+	which completes our proof.
+\end{proof}
+
+\begin{pro}%2
+	Suppose $\al_1,\dots,\al_n\in V$ where $V$ is $n$ dimensional Euclid space then the following statements are equivalent
+	\begin{description}
+	\item[(a)] $\{\al_1,\al_2,\dots,\al_n\}$ is a sob,
+	\item[(b)] (Parseval) For any $\al,\beta\in V$,
+	\[(\al,\beta)=\sum_{i=1}^n (\al,\al_i)(\al_i,\beta),\]
+	\item[(c)] For any $\al\in V$,
+	\[\|\al\|^2=\sum_{i=1}^n (\al,\al_i)^2.\]
+	\end{description}
+\end{pro}
+\begin{proof}
+	The proof is as follows.
+	\begin{description}
+	\item[(a)$\Rightarrow$(b)] From problem above we have known that $\al=\sum_i (\al,\al_i)\al_i$ and $\beta=\sum_i(\beta,\al_i)\al_i$.
+	\item[(b)$\Rightarrow$(c)] Just let $\al=\beta$.
+	\item[(c)$\Rightarrow$(a)] First we prove that $\{\al_1,\dots,\al_n\}$ is a base of $V$, for this we let 
+	\[U=\Span{\al_1,\al_2,\dots,\al_n}\subset V,\]
+	if $U\neq V$, then we can find $V=U\oplus U^{\perp}$ where $U^{\perp}\neq \{0\}$. Thus we choose $0\neq \al\in U^{\perp}$ and will get
+	\[0<(\al,\al)=\sum_{i=1}^n (\al,\al_i)^2=0,\]
+	which is a contradiction. Now since $\rank(\al_1,\dots,\al_n)=\dim V=n$, we know $\{\al_1,\dots,\al_n\}$ is linear independent and thus a base of $V$. Certainly that $W=\Span{\al_2,\dots,\al_n}\neq V$, thus we can find a unit vector from $W^{\perp}$, say $\beta$. Then 
+	\[1=(\beta,\beta)=\sum_{i=1}^n (\beta,\al_i)^2=(\beta,\al_1)^2\leq (\al_1,\al_1),\tag{1}\]
+	where the last $\leq$ is due to $\|\beta\|=1$ and Cauchy-Schwartz inequality. Also notice that 
+	\[0<(\al_1,\al_1)=\sum_{i=1}^n (\al_1,\al_i)^2\geq (\al_1,\al_1)^2,\]
+	we know $\|\al_1\|\leq 1$. Together with (1) we get $\|\al_1\|=1$ and similarly $\|\al_i\|=1$ for all $1\leq i\leq n$. Now again we have 
+	\[1=(\al_i,\al_i)=\sum_{j=1}^n (\al_i,\al_j)^2=1+\sum_{j\neq i}(\al_i,\al_j)^2,\]
+	which tells us that $(\al_i,\al_j)=0$ for all $1\leq i<j\leq n$ and completes our proof finally.
+	\end{description}
+\end{proof}
+
+\begin{pro}%5
+	Suppose $\{\ep_1,\dots,\ep_n\}$ is a sob of Euclid space $V$, the vector $\al_j\in V$ has the coordinate under this base, $x_j=(x_{j1},\dots,x_{jn})^T$ for $1\leq j\leq n$. Assume $\{\al_1,\dots,\al_n\}$ has the Gram matrix $G=\big((\al_i,\al_j)\big)$, then $\det G=\big(\det(x_{ij})\big)^2$.
+\end{pro}
+\begin{proof}
+	For any $1\leq j\leq n$ we have $\al_j=\sum_{k=1}^n x_{jk}\ep_k$, thus for any $i,j$,
+	\[(\al_i,\al_j)=\big(\sum_k x_{ik}\ep_k,\sum_k x_{jk}\ep_k\big)=\sum_k x_{ik}x_{jk}.\]
+	From this we know $G=XX^T$ where $X=(x_{ij})$ and finally get $\det G=(\det X)^2$.
+\end{proof}
+
+\begin{pro}%6
+	Suppose $\{\al_1,\dots,\al_n\}$ is a base of Euclid space $V$ and $\{\beta_1,\dots,\beta_n\}$ be the orthogonal vectors of $\{\al_1,\dots,\al_n\}$ after Gram-Schmidt orthogonalization, then for $1\leq j\leq n$,
+	\[\|\beta_j\|^2=\frac{\det G(\al_1,\dots,\al_j)}{\det G(\al_1,\dots,\al_{j-1})},\tag{1}\]
+	where we let the Gram matrix with no vector has determinant $1$.
+\end{pro}
+\begin{proof}
+	First we write the Gram-Schmidt orthogonalization,
+	\begin{align*}
+		\beta_1&=\al_1,\\
+		\beta_2&=\al_2-\frac{(\al_2,\beta_1)}{(\beta_1,\beta_1)}\beta_1,\\
+		&\cdots\\
+		\beta_k&=\al_k-\frac{(\al_k,\beta_{k-1})}{(\beta_{k-1},\beta_{k-1})}\beta_{k-1}-\dots-
+		\frac{(\al_k,\beta_1)}{(\beta_1,\beta_1)}\beta_1,\\
+		\beta_n&=\al_n-\frac{(\al_n,\beta_{n-1})}{(\beta_{n-1},\beta_{n-1})}\beta_{n-1}-
+		\frac{(\al_n,\beta_{n-2})}{(\beta_{n-2},\beta_{n-2})}\beta_{n-2}-\dots-
+		\frac{(\al_n,\beta_1)}{(\beta_1,\beta_1)}\beta_1.
+	\end{align*}
+	From this we know
+	\[(\al_1,\dots,\al_n)=(\beta_1,\dots,\beta_n)\begin{pmatrix}
+	1 & & &*\\
+	  &1& & \\
+	  & &\ddots&\\
+	0 & & &1\end{pmatrix}.\]
+	Thus if we let $G_j=G(\al_1,\dots,\al_j)$ and $P_j$ is the sub-matrix consisting of the $1,2,\dots,j$ rows and $1,2,\dots,j$ columns of $P$, we have $(\al_1,\dots,\al_j)=(\beta_1,\dots,\beta_j)P_j$, $\det P_j=1$ and for $1\leq j\leq n$,
+	\[G_j=P_j^T\diag\big(\|\beta_1\|^2,\|\beta_2\|^2,\dots,\|\beta_j\|^2\big)P_j,\]
+	which tells us that $\det G_j=\|\beta_1\|^2\cdots\|\beta_j\|^2$. Since $\det G_0=1$, one can derive (1).
+\end{proof}
+
+\begin{pro}%7
+	Suppose $\al_1,\dots,\al_n$ are vectors from $n$ dimensional Euclid space $V$, then
+	\[\det G(\al_1,\dots,\al_n)\leq \|\al_1\|^2\|\al_2\|^2\cdots\|\al_n\|^2,\tag{1}\]
+	where the $=$ is true if and only if $\al_1,\dots,\al_n$ are mutually orthogonal or there is zero vector in them. Moreover, if $A=(a_{ij})\in \m{R}^{n\times n}$, then
+	\[(\det A)^2\leq \prod_{i=1}^n\sum_{j=1}^n a_{ij}^2.\tag{2}\]
+\end{pro}
+\begin{proof}
+	First we prove a lemma.
+	\begin{lem}
+		The Gram matrix of $\{\al_1,\dots,\al_m\}$ has zero determinant if and only if it is linear dependent.
+	\end{lem}
+	\begin{proof}
+		Suppose it is linear dependent, then there is some not all zero $k$-s such that $k_1\al_1+\dots+k_m\al_m=0$, thus for all $1\leq j\leq n$, $k_1(\al_j,\al_1)+\dots+k_m(\al_j,\al_m)=0$. Thus if we let $G$ be the Gram matrix of $\{\al_1,\dots,\al_m\}$ and $k=(k_1,\dots,k_m)^T\neq 0$, we have $Gk=0$, which tells us that $\det G=0$. Conversely, if $\det G=0$, we can find some column vector $0\neq k\in \m{R}^m$ such that $Gk=0$. Now let $\al=k_1\al_1+\dots+k_n\al_n$, we get 
+		\[(\al,\al)=(\sum k_j \al_j,\sum_j k_j \al_j)=\sum_{ij} k_i(\al_i,\al_j)k_j=k^TGk=0.\]
+		Thus $\al=0$ and $\{\al_1,\dots,\al_m\}$ is linear dependent.
+	\end{proof}
+	Now suppose $\al_1,\dots,\al_n$ is linear dependent. then $\det G=0$ and (1) is surely true. Here the $=$ is true if and only if there is some $\al_i=0$. While $\al_1,\dots,\al_n$ is linear independent, we can do Gram-Schmidt orthogonalization on it and get the conclusion of the problem just above. Easy to know that $\|\beta_j\|^2\leq \|\al_j\|^2$ for all $j$. Now if $=$ is true if and only if $\al_k=\beta_k$ for all $1\leq k\leq n$, i.e., $\al_1,\dots,\al_n$ are mutually orthogonal already. As for the last part, assume $\{\ep_1,\dots\ep_n\}$ is a sob of $V$, then let
+	\[(\al_1,\al_2,\dots,\al_n)=(\ep_1,\ep_2,\dots,\ep_n)A^T,\]
+	i.e., $\al_i=\sum_{j=1}^n a_{ij} \ep_j$, then $(\al_i,\al_i)=\sum_j a_{ij}^2$. Now just use the two problems above and (1), we get  
+	\[(\det A)^2=\det G(\al_1,\dots,\al_n)\leq \prod_{i=1}^n \|\al_i\|^2=\prod_{i=1}^n\sum_{j=1}^n a_{ij}^2,\]
+	which completes our proof. Moreover, the $=$ of (2) is true if and only if there is some zero column in $A$ or 
+	\[AA^T=\diag(c_1,c_2,\dots,c_n),\tag{3}\]
+	where $c_j>0$ for all $1\leq j \leq n$.
+\end{proof}
+
+\begin{pro}%9
+	Suppose $O\in \m{R}^{n\times n}$ is orthogonal and $A=\diag(a_1,\dots,a_n)\in\m{C}^{n\times n}$, then the eigenvalue $\la_0$ of $OA$ has the property that $m\leq |\la_0|\leq M$, where
+	\[m=\min\{|a_j|\colon 1\leq j\leq n\},\quad M=\max\{|a_j|\colon 1\leq j\leq n\}.\]
+\end{pro}
+\begin{proof}
+	Suppose $x=(x_1,x_2,\dots,x_n)^T\in \m{C}^n$ is an eigenvector for $\la_0$ of $OA$, then 
+	\[OAx=\la_0 x,\quad (OAx)^*=x^*\overline{A} O^T=\overline{\la_0} x^*.\]
+	Thus $(x^*\overline{A} O^T)(OAx)=x^*\overline{A}Ax=|\la_0|^2x^*x$, i.e.,
+	\[|a_1|^2|x_1|^2+\dots+|a_n|^2|x_n|^2=|\la_0|^2|x_1|^2+\dots+|\la_0|^2|x_n|^2,\]
+	from which the conclusion follows.
+\end{proof}
+
+\begin{pro}%10
+	Suppose $O$ is real orthogonal and $M$ is any square sub matrix of $O$, then any eigenvalue of $M$ has module less or equal to one.
+\end{pro}
+\begin{proof}
+	Suppose $M$ is constructed by $i_1<\dots<i_r$ rows and $j_1<\dots<j_r$ columns of $O$, i.e.,
+	\[M=O\begin{pmatrix} i_1 &i_2 &\dots &i_r\\
+	j_1 & j_2 & \dots & j_r\end{pmatrix},\]
+	then let $\al_k$ be the $k$-th column of $O$, we have
+	\[(\beta_1,\beta_2,\dots,\beta_n)=O\diag(a_1,a_2,\dots,a_n),\tag{1}\]
+	where if we let $J=\{j_1,\dots,j_r\}$, then 
+	\[\beta_j=\begin{cases}
+	\al_j,&\mbox{if}\;j\in J,\\
+	0,&\mbox{otherwise}.\end{cases}\quad
+	a_j=\begin{cases}
+	1,&\mbox{if}\; j\in J,\\
+	0,&\mbox{otherwise}.\end{cases}\] 
+	Now suppose $\la\in \m{C}$ is any eigenvalue of $M$ and $x=(x_{j_1},\dots,x_{j_r})^T\in \m{C}^n\ba\{0\}$ is an eigenvector for $\la$ of $M$, then $Mx=\la x$ and
+	\[By=(\beta_1,\beta_2,\dots,\beta_n)y=\la y,\]
+	where $B=(\beta_1,\dots,\beta_n)$ and $y=(y_1,y_2,\dots,y_n)^T\in \m{C}^n$ with
+	\[y_j=\begin{cases}
+	x_j,&\mbox{if}\; j\in J,\\
+	0,&\mbox{otherwise}.\end{cases}.\]
+	Since $x\neq 0$, we have $y\neq 0$ and thus $\la$ is an eigenvalue of $B$ and $y$ is an eigenvector for $\la$ of $B$. Now let $A=\diag(a_1,\dots,a_n)$, then from (1), $B=OA$. By the problem just above we know $|\la|\leq \max\{|a_1|,\dots,|a_n|\}=1$. 
+\end{proof}
+
+\begin{pro}%12
+	Suppose $O$ is an real orthogonal, $\beta,\gamma$ are real vectors and $\al=\beta+i\gamma$ is an eigenvector for the eigenvalue $\la$ of $O$, then $|\la|=1$. Moreover, $\beta\perp \gamma$ and $\|\beta\|=\|\gamma\|$ when $\la\notin\m{R}$.
+\end{pro}
+
+\begin{pro}%15
+	Suppose $U$ and $W$ are two subspaces of the $n$ dimensional space $V$, then
+	\[(U+W)^{\perp}=U^{\perp}\cap W^{\perp},\quad (U\cap W)^{\perp}=U^{\perp}+W^{\perp}.\]
+\end{pro}
+\begin{proof}
+	Choose any $\al\in U^{\perp}\cap W^{\perp}$ and give any element $u+w\in U+W$ where $u\in U,\; w\in W$, then 
+	\[(\al,u+w)=(\al,u)+(\al,w)=0,\]
+	which means $\al\in U+W$ and thus $U^{\perp}\cap W^{\perp}\subset (U+W)^{\perp}$. Conversely, give any $\al\in (U+W)^{\perp}$ and any $u\in U$, $w\in W$, then
+	\[(\al,u)=(\al,u+0)=0,\quad (\al,w)=(\al,0+w)=0,\]
+	which means $\al\in U^{\perp}\cap W^{\perp}$ and thus $(U+W)^{\perp}\subset U^{\perp}\cap W^{\perp}$. Now for the second conclusion, it is equivalent to
+	\[(U^{\perp}+W^{\perp})^{\perp}=U\cap W,\]
+	and notice $U^{\perp\,\perp}=U,\; W^{\perp\,\perp}=W$.
+\end{proof}
+
+\section{Linear Function and Adjoint Transformation}
+\begin{pro}%1
+	Suppose $f$ is a linear transformation of $n$ dimensional Euclid space $V$, then
+	\[f^*(V)=(\Ker f)^{\perp}.\]
+\end{pro}
+\begin{proof}
+	Choose any $\al\in\Ker f$ and $\beta \in V$, then
+	\[\big(\al,f^*(\beta)\big)=\big(f(\al),\beta\big)=(0,\beta)=0,\]
+	which tells us $f^*(V)\subset (\Ker f)^{\perp}$. Now since
+	\[V=\Ker f\oplus (\Ker f)^{\perp},\quad V/\Ker f^*\cong f^*(V),\]
+	we just need to prove $\Ker f\cong \Ker f^*$. Suppose $\ep=\{\ep_1,\dots,\ep_n\}$ is a sob of $V$ and $A$ is the matrix of $f$ under $\ep$, then $A^T$ is the matrix of $f^*$ under $\ep$. Thus for column vector $x\in\m{R}^n$,
+	\[\Ker f=\{\ep x\colon Ax=0\},\quad \Ker f^*=\{\ep x\colon A^T x=0\},\]
+	which tells us $\dim\Ker f=n-\rank A=n-\rank A^T=\dim\Ker f^*$. Thus
+	\[\dim f^*(V)=n-\dim\Ker f^*=n-\dim\Ker f=\dim (\Ker f)^{\perp},\]
+	or simply, $f^*(V)=(\Ker f)^{\perp}$.
+\end{proof}
+
+\section{Gauge Transformation}
+\begin{pro}%6
+	Suppose $\al=\beta+i\gamma$ is an eigenvector for $\la$ of real gauge square matrix $A$, where $\beta,\gamma$ are real vectors, then with the standard inner product $(\al,\beta)=\al^T\beta$,
+	\begin{description}
+	\item[(a)] $\al$ is an eigenvector for $\overline{\la}$ of $A^T$,
+	\item[(b)] $\beta\perp\gamma$ and $\|\beta\|=\|\gamma\|$ when $\la\notin \m{R}$.
+	\end{description}
+\end{pro}
+\begin{proof}
+	Write $\la=\la_1+i\la_2$ where $\la_1,\la_2\in\m{R}$, then
+	\begin{description}
+	\item[(a)] Since $A$ is a matrix with real number elements and $AA^T=A^TA$, 
+	\begin{align*}
+		(A-\la I)\al=0&\Leftrightarrow \al^*(A^T-\overline{\la}I)(A-\la I)\al=0\\
+		&\Leftrightarrow\al^*(A-\la I)(A^T-\overline{\la}I)\al=0\\
+		&\Leftrightarrow (A^T-\overline{\la}I)\al=0.
+	\end{align*}
+	\item[(b)] From (a) we know
+	\begin{align*}
+		A\beta&=\la_1\beta-\la_2\gamma,\quad A^T\beta=\la_1\beta+\la_2\gamma,\\
+		A\gamma&=\la_2\beta+\la_1\gamma,\quad A^T\gamma=-\la_2\beta+\la_1\gamma.\tag{1}
+	\end{align*}
+	Thus by the standard inner product,
+	\begin{align*}
+		\beta^TA^TA\gamma&=\la_1\la_2(\beta,\beta)+(\la_1^2-\la_2^2)(\beta,\gamma)-\la_1\la_2(\gamma,\gamma),\\
+		\beta^TAA^T\gamma&=-\la_1\la_2(\beta,\beta)+(\la_1^2-\la_2^2)(\beta,\gamma)+\la_1\la_2(\gamma,\gamma),\\
+		\beta^TA^TA\beta&=\la_1^2(\beta,\beta)-2\la_1\la_2(\beta,\gamma)+\la_2^2(\gamma,\gamma),\\
+		\beta^TAA^T\beta&=\la_1^2(\beta,\beta)+2\la_1\la_2(\beta,\gamma)+\la_2^2(\gamma,\gamma).\tag{2}
+	\end{align*}
+	Since $\la_2\neq 0$ and $AA^T=A^TA$, we know from (2)
+	\[\la_1(\beta,\gamma)=0,\quad \la_1(\|\beta\|^2-\|\gamma\|^2)=0.\]
+	If $\la_1\neq 0$, it is done. Now suppose $\la_1=0$, then (1) becomes
+	\begin{align*}
+		A\beta&= -\la_2\gamma,\quad A^T\beta=\la_2\gamma,\\
+		A\gamma&=\la_2\beta,\quad A^T\gamma=-\la_2\beta.\tag{3}
+	\end{align*}
+	Thus we have 
+	\[A^TA\gamma=A^T(\la_2\beta)=\la_2^2\gamma,\quad A^TA\beta=A^T(-\la_2\gamma)=\la_2^2\beta,\tag{4}\]
+	and thus
+	\[\beta^TA^TA\gamma=\la_2^2(\beta,\gamma),\quad \beta^TA^TA\beta=\la_2^2(\beta,\beta).\tag{5}\]
+	Also the first and third equations of (2) tells us
+	\[\beta^TA^TA\gamma=-\la_2^2(\beta,\gamma),\quad \beta^TA^TA\beta=\la_2^2(\gamma,\gamma).\tag{6}\]
+	Compare (5) and (6) we know $(\beta,\gamma)=0$ and $\|\beta\|=\|\gamma\|$.\qedhere
+	\end{description}
+\end{proof}
+
+\section{Orthogonal Transformation}
+\begin{pro}%1
+	Suppose $V$ is $n$ dimensional Euclid space and $f\colon V\to V$ is a mapping such that for any $\al,\beta\in V$, $\big(f(\al),f(\beta)\big)=(\al,\beta)$, then $f$ is a linear transformation and therefore an orthogonal one.
+\end{pro}
+\begin{proof}
+	For any $\al,\beta\in V$ and $\la\in\m{R}$, easy to show 
+	\[\|f(\al+\beta)-f(\al)-f(\beta)\|=0,\quad \|f(\la\al)-\la f(\al)\|=0,\]
+	which tells us $f$ is linear. Since $\big(f(\al),f(\al)\big)=(\al,\al)$ for any $\al\in V$, $f$ is orthogonal. 
+
+	Moreover, we shall notice that for a mapping $g\colon V\to V$ with $\|g(\al)\|=\|\al\|$ for any $\al\in V$, $g$ may not be linear. For example, we use the polar coordinate to describe $\m{R}^2$, then for any $r>0$ and $0\leq \theta<2\pi$, let
+	\[g(r\cos\theta,r\sin\theta)=\Big(r\cos\frac{\theta^2}{2\pi},r\sin\frac{\theta^2}{2\pi}\Big),\quad g(0,0)=(0,0).\]
+	Then $g$ is surely an bijection and holds the standard norm in $\m{R}^2$ for any vector, but not a linear one since $g(1,0)=(1,0)$ and $g(-1,0)=(0,1)$.
+
+	In fact, given any strictly monotone fuction $h:[0,2\pi]\to\m{R}$ like 
+	\[h=\exp(x),\,\sin(x/4),\,x^n\;(n\geq 1),\]
+	we can build a bijection $H:[0,2\pi]\to [0,2\pi]$ as
+	\[H(\theta)=2\pi\frac{h(\theta)-h(0)}{h(2\pi)-h(0)}.\]
+	Easy to verify that many $h$-s as mentioned above will make the bijection $g$ from $\m{R}^2$ to $\m{R}^2$  NOT a linear map but hold $\|g(v)\|=\|v\|$ by letting 
+	\[g(r\cos\theta,r\sin\theta)=(r\cos H(\theta),r\sin H(\theta)),\;g(0,0)=(0,0).\]
+	and $v=(r\cos\theta,r\sin\theta)\in\m{R}^2$ where $r>0,0\leq \theta<2\pi$.
+\end{proof}

@@ -1,0 +1,60 @@
+\documentclass{book}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\setlist[description,enumerate]{leftmargin=0pt}
+\usepackage{geometry}
+\geometry{paperwidth=169mm,paperheight=228mm,
+	inner=1.8cm,outer=2cm,top=2.2cm,bottom=2cm}
+\usepackage{fancyhdr}
+	\pagestyle{fancy}
+\usepackage[colorlinks,bookmarksnumbered]{hyperref}
+\usepackage{circuitikz}
+\hypersetup{linkcolor=[RGB]{0,51,113},urlcolor=[RGB]{0,51,113}}
+\DeclareMathOperator*{\esssup}{ess\;sup}
+\DeclareMathOperator*{\diag}{diag}
+\DeclareMathOperator*{\tr}{tr}
+\DeclareMathOperator*{\rank}{rank}
+\DeclareMathOperator*{\Ker}{Ker}
+\DeclareMathOperator*{\IM}{Im}
+\DeclareMathOperator*{\lowtri}{lowtri\;}
+\DeclareMathOperator*{\uptri}{uptri\;}
+%\let\cleardoublepage\relax
+\title{\bf Linear Algebra}
+	\author{Seb Wu}
+	\date{\today}
+%BibTeX
+\bibliographystyle{unsrt}
+
+\begin{document}
+\frontmatter
+	\fancyhead{}
+	\fancyhead[OR,EL]{\thepage}
+	\fancyhead[C,OL,ER]{}
+	\fancyfoot{}
+\pdfbookmark[1]{Linear Algebra}{title}
+\maketitle
+\chapter{Preface}
+	This answer book is mainly for \emph{Linear Algebra} by Jiongsheng Li, the 2nd edition, USTC Press. ISBN 978-7-312-02298-2. For more information, meet \url{https://book.douban.com/subject/4200433/}.
+\cleardoublepage
+\pdfbookmark[0]{Contents}{table}
+\tableofcontents
+\fancyhead[C]{\leftmark}
+
+\mainmatter
+	\mainmatter
+	\fancyhead{}
+	\fancyhead[OR,EL]{\thepage}
+	\fancyhead[C]{\leftmark}
+		\fancyhead[OL,ER]{[SEC.\;\thesection]}
+	\fancyfoot{}
+\include{Newtheorem}
+\include{Chapter1}
+\include{Chapter3}
+\include{Chapter4}
+\include{Chapter5}
+\include{Chapter6}
+\include{Chapter7}
+\bibliography{Maths_Library}
+\addcontentsline{toc}{chapter}{References}
+\end{document}
