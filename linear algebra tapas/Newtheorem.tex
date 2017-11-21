@@ -1,0 +1,30 @@
+\newcommand{\seq}[3]{#1_#2,\ldots,#1_#3}
+\newcommand{\iseq}[3]{d#1_#2\cdots d#1_#3}
+\newcommand{\ma}[1]{\mathcal{#1}}
+\newcommand{\m}[1]{\mathbb{#1}}
+\newcommand{\p}[1]{\Pr\left\{#1\right\}}
+\newcommand{\Span}[1]{\left\langle #1\right\rangle}
+\newcommand{\flo}[1]{\lfloor #1 \rfloor}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\al}{\alpha}
+\newcommand{\ep}{\epsilon}
+\newcommand{\la}{\lambda}
+\newcommand{\ba}{\backslash}
+\newtheorem{pro}{Problem}[section]
+\newtheorem{sta}{Statement}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}{Lemma}[pro]
+\newcommand{\mat}[3]{
+	\begin{bmatrix}
+		#1_{11}&\cdots&#1_{1#3}\\
+		\vdots&\ddots&\vdots\\
+		#1_{#2 1}&\cdots&#1_{#2#3}
+	\end{bmatrix}
+}
+\newcommand{\Hermit}[1]{
+	\begin{pmatrix}
+	I_{#1}& 0\\
+	0 & 0
+	\end{pmatrix}
+}
+\renewcommand{\bibname}{References}
